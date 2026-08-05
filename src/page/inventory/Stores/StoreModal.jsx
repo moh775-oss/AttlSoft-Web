@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Modal, Form, Input, Switch, Select } from 'antd';
 import { useTranslate } from '@/hooks/useTranslate';
-import { fetchBranches } from '@/api/branch';
+import { fetchBranches } from '@/api/Branch';
 
 const StoreModal = ({
   visible,
