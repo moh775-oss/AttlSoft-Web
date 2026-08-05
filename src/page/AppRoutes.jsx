@@ -14,6 +14,7 @@ import StorePage from './inventory/Stores/index.jsx';
 
 
 
+
 export default function AppRoutes() {
   return (
     <Routes>

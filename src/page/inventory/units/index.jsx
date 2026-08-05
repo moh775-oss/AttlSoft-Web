@@ -11,7 +11,7 @@ import {
   MoreOutlined,
 } from '@ant-design/icons';
 import ReportGenerator from "@/utils/ReportGenerator";
-import UnitModal from './UnitModal';
+import UnitModal from './unitModal.jsx';
 import { fetchUnits, addUnit, updateUnit, deleteUnit } from '@/api/unit';
 import { useTranslate } from '@/hooks/useTranslate';
 import notify from "@/utils/notify.jsx";
