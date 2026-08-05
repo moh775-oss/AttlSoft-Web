@@ -1,0 +1,928 @@
+{
+  "success": {
+    "general": {
+      "operationCompleted": "Operation completed successfully",
+      "dataSaved": "Data saved successfully",
+      "dataUpdated": "Data updated successfully",
+      "dataDeleted": "Data deleted successfully",
+      "dataRestored": "Data restored successfully",
+      "dataArchived": "Data archived successfully",
+      "dataExported": "Data exported successfully",
+      "dataImported": "Data imported successfully",
+      "dataSynced": "Data synced successfully",
+      "fileUploaded": "File uploaded successfully",
+      "fileDownloaded": "File downloaded successfully",
+      "fileDeleted": "File deleted successfully",
+      "fileRenamed": "File renamed successfully",
+      "emailSent": "Email sent successfully",
+      "smsSent": "SMS sent successfully",
+      "notificationSent": "Notification sent successfully",
+      "printDone": "Print completed successfully",
+      "pdfGenerated": "PDF generated successfully",
+      "excelGenerated": "Excel file generated successfully"
+    },
+    "warehouses": {
+      "created": "Warehouse created successfully",
+      "updated": "Warehouse updated successfully",
+      "deleted": "Warehouse deleted successfully",
+      "restored": "Warehouse restored successfully",
+      "transferred": "Stock transferred between warehouses successfully",
+      "capacityUpdated": "Warehouse capacity updated successfully",
+      "activated": "Warehouse activated successfully",
+      "deactivated": "Warehouse deactivated successfully",
+      "stockMoved": "Stock moved successfully"
+    },
+    "items": {
+      "created": "Item created successfully",
+      "updated": "Item updated successfully",
+      "deleted": "Item deleted successfully",
+      "restored": "Item restored successfully",
+      "priceUpdated": "Item price updated successfully",
+      "costUpdated": "Item cost updated successfully",
+      "barcodePrinted": "Barcode printed successfully",
+      "labelPrinted": "Label printed successfully",
+      "serialAssigned": "Serial number assigned successfully",
+      "serialGenerated": "Serial numbers generated successfully",
+      "activated": "Item activated successfully",
+      "deactivated": "Item deactivated successfully",
+      "stockIn": "Stock added successfully",
+      "stockOut": "Stock issued successfully",
+      "stockAdjusted": "Stock adjusted successfully",
+      "stockTransferred": "Item transferred between warehouses successfully"
+    },
+    "groups": {
+      "created": "Group created successfully",
+      "updated": "Group updated successfully",
+      "deleted": "Group deleted successfully",
+      "restored": "Group restored successfully",
+      "itemsAdded": "Items added to group successfully",
+      "itemsRemoved": "Items removed from group successfully"
+    },
+    "units": {
+      "created": "Unit created successfully",
+      "updated": "Unit updated successfully",
+      "deleted": "Unit deleted successfully",
+      "conversionSet": "Conversion factor set successfully"
+    },
+    "sales": {
+      "invoiceCreated": "Sales invoice created successfully",
+      "invoiceUpdated": "Sales invoice updated successfully",
+      "invoiceDeleted": "Sales invoice deleted successfully",
+      "invoiceCancelled": "Sales invoice cancelled successfully",
+      "invoicePrinted": "Sales invoice printed successfully",
+      "invoiceSent": "Sales invoice sent to customer successfully",
+      "invoicePaid": "Invoice payment recorded successfully",
+      "invoicePartiallyPaid": "Partial payment recorded successfully",
+      "returnCreated": "Sales return created successfully",
+      "returnUpdated": "Sales return updated successfully",
+      "returnDeleted": "Sales return deleted successfully",
+      "quotationCreated": "Quotation created successfully",
+      "quotationUpdated": "Quotation updated successfully",
+      "quotationDeleted": "Quotation deleted successfully",
+      "quotationConverted": "Quotation converted to invoice successfully",
+      "deliveryCreated": "Delivery order created successfully",
+      "deliveryUpdated": "Delivery order updated successfully",
+      "deliveryDeleted": "Delivery order deleted successfully"
+    },
+    "purchases": {
+      "invoiceCreated": "Purchase invoice created successfully",
+      "invoiceUpdated": "Purchase invoice updated successfully",
+      "invoiceDeleted": "Purchase invoice deleted successfully",
+      "invoiceCancelled": "Purchase invoice cancelled successfully",
+      "invoicePrinted": "Purchase invoice printed successfully",
+      "invoiceSent": "Purchase invoice sent to supplier successfully",
+      "invoicePaid": "Invoice payment recorded successfully",
+      "returnCreated": "Purchase return created successfully",
+      "returnUpdated": "Purchase return updated successfully",
+      "returnDeleted": "Purchase return deleted successfully",
+      "orderCreated": "Purchase order created successfully",
+      "orderUpdated": "Purchase order updated successfully",
+      "orderDeleted": "Purchase order deleted successfully",
+      "orderConverted": "Purchase order converted to invoice successfully",
+      "receiveCreated": "Purchase receipt recorded successfully",
+      "receiveUpdated": "Purchase receipt updated successfully",
+      "receiveDeleted": "Purchase receipt deleted successfully"
+    },
+    "banks": {
+      "created": "Bank account created successfully",
+      "updated": "Bank account updated successfully",
+      "deleted": "Bank account deleted successfully",
+      "deposited": "Bank deposit completed successfully",
+      "withdrawn": "Bank withdrawal completed successfully",
+      "transferred": "Bank transfer completed successfully",
+      "checkIssued": "Check issued successfully",
+      "checkCleared": "Check cleared successfully",
+      "checkRejected": "Check rejected",
+      "reconciled": "Bank reconciliation completed successfully",
+      "statementImported": "Bank statement imported successfully"
+    },
+    "branches": {
+      "created": "Branch created successfully",
+      "updated": "Branch updated successfully",
+      "deleted": "Branch deleted successfully",
+      "restored": "Branch restored successfully",
+      "activated": "Branch activated successfully",
+      "deactivated": "Branch deactivated successfully",
+      "settingsUpdated": "Branch settings updated successfully",
+      "warehouseAssigned": "Warehouse assigned to branch successfully",
+      "cashierAssigned": "Cashier assigned to branch successfully"
+    },
+    "cashiers": {
+      "opened": "Cashier opened successfully",
+      "closed": "Cashier closed successfully",
+      "deposited": "Cash deposited successfully",
+      "withdrawn": "Cash withdrawn successfully",
+      "transferred": "Transferred between cashiers successfully",
+      "reconciled": "Cashier reconciled successfully",
+      "cashIn": "Cash added to cashier successfully",
+      "cashOut": "Cash removed from cashier successfully"
+    },
+    "taxes": {
+      "created": "Tax created successfully",
+      "updated": "Tax updated successfully",
+      "deleted": "Tax deleted successfully",
+      "calculated": "Tax calculated successfully",
+      "reported": "Tax report generated successfully",
+      "filed": "Tax return filed successfully",
+      "vatUpdated": "VAT updated successfully",
+      "taxInvoiceCreated": "Tax invoice created successfully"
+    },
+    "users": {
+      "created": "User created successfully",
+      "updated": "User updated successfully",
+      "deleted": "User deleted successfully",
+      "restored": "User restored successfully",
+      "activated": "User activated successfully",
+      "deactivated": "User deactivated successfully",
+      "passwordChanged": "Password changed successfully",
+      "passwordReset": "Password reset successfully",
+      "profileUpdated": "Profile updated successfully",
+      "loggedIn": "Logged in successfully",
+      "loggedOut": "Logged out successfully",
+      "sessionExtended": "Session extended successfully",
+      "twoFactorEnabled": "Two-factor authentication enabled successfully",
+      "twoFactorDisabled": "Two-factor authentication disabled",
+      "permissionsUpdated": "User permissions updated successfully",
+      "roleAssigned": "Role assigned to user successfully",
+      "roleRemoved": "Role removed from user successfully"
+    },
+    "permissions": {
+      "updated": "Permissions updated successfully",
+      "granted": "Permission granted successfully",
+      "revoked": "Permission revoked successfully",
+      "roleCreated": "Role created successfully",
+      "roleUpdated": "Role updated successfully",
+      "roleDeleted": "Role deleted successfully",
+      "roleAssigned": "Role assigned successfully",
+      "roleRemoved": "Role removed successfully"
+    },
+    "customers": {
+      "created": "Customer created successfully",
+      "updated": "Customer updated successfully",
+      "deleted": "Customer deleted successfully",
+      "restored": "Customer restored successfully",
+      "activated": "Customer activated successfully",
+      "deactivated": "Customer deactivated successfully",
+      "balanceUpdated": "Customer balance updated successfully",
+      "statementGenerated": "Customer statement generated successfully",
+      "creditLimitUpdated": "Customer credit limit updated successfully"
+    },
+    "suppliers": {
+      "created": "Supplier created successfully",
+      "updated": "Supplier updated successfully",
+      "deleted": "Supplier deleted successfully",
+      "restored": "Supplier restored successfully",
+      "activated": "Supplier activated successfully",
+      "deactivated": "Supplier deactivated successfully",
+      "balanceUpdated": "Supplier balance updated successfully",
+      "statementGenerated": "Supplier statement generated successfully"
+    },
+    "accounts": {
+      "created": "Account created successfully",
+      "updated": "Account updated successfully",
+      "deleted": "Account deleted successfully",
+      "restored": "Account restored successfully",
+      "entryCreated": "Journal entry created successfully",
+      "entryUpdated": "Journal entry updated successfully",
+      "entryDeleted": "Journal entry deleted successfully",
+      "entryApproved": "Journal entry approved successfully",
+      "entryRejected": "Journal entry rejected",
+      "balanceUpdated": "Account balance updated successfully",
+      "trialBalanceGenerated": "Trial balance generated successfully",
+      "incomeStatementGenerated": "Income statement generated successfully",
+      "balanceSheetGenerated": "Balance sheet generated successfully",
+      "journalGenerated": "General journal generated successfully",
+      "ledgerGenerated": "General ledger generated successfully"
+    },
+    "reports": {
+      "generated": "Report generated successfully",
+      "exported": "Report exported successfully",
+      "printed": "Report printed successfully",
+      "sent": "Report sent successfully",
+      "scheduled": "Report scheduled successfully",
+      "cancelled": "Report cancelled successfully",
+      "salesReportGenerated": "Sales report generated successfully",
+      "purchaseReportGenerated": "Purchase report generated successfully",
+      "inventoryReportGenerated": "Inventory report generated successfully",
+      "profitReportGenerated": "Profit report generated successfully",
+      "taxReportGenerated": "Tax report generated successfully",
+      "customerReportGenerated": "Customer report generated successfully",
+      "supplierReportGenerated": "Supplier report generated successfully",
+      "cashFlowReportGenerated": "Cash flow report generated successfully"
+    },
+    "stocktaking": {
+      "started": "Stocktaking started successfully",
+      "paused": "Stocktaking paused",
+      "resumed": "Stocktaking resumed successfully",
+      "finished": "Stocktaking finished successfully",
+      "saved": "Stocktaking saved successfully",
+      "verified": "Stocktaking verified successfully",
+      "countUpdated": "Count updated successfully",
+      "discrepancyResolved": "Discrepancy resolved successfully",
+      "approved": "Stocktaking approved successfully",
+      "rejected": "Stocktaking rejected"
+    },
+    "expenses": {
+      "created": "Expense created successfully",
+      "updated": "Expense updated successfully",
+      "deleted": "Expense deleted successfully",
+      "approved": "Expense approved successfully",
+      "rejected": "Expense rejected",
+      "paid": "Expense paid successfully",
+      "categoryCreated": "Expense category created successfully",
+      "categoryUpdated": "Expense category updated successfully",
+      "categoryDeleted": "Expense category deleted successfully"
+    },
+    "revenues": {
+      "created": "Revenue created successfully",
+      "updated": "Revenue updated successfully",
+      "deleted": "Revenue deleted successfully",
+      "approved": "Revenue approved successfully",
+      "rejected": "Revenue rejected",
+      "received": "Revenue received successfully",
+      "categoryCreated": "Revenue category created successfully",
+      "categoryUpdated": "Revenue category updated successfully",
+      "categoryDeleted": "Revenue category deleted successfully"
+    },
+    "system": {
+      "backupCreated": "Backup created successfully",
+      "backupRestored": "Backup restored successfully",
+      "settingsUpdated": "System settings updated successfully",
+      "cacheCleared": "Cache cleared successfully",
+      "logsCleared": "System logs cleared successfully",
+      "updateInstalled": "Update installed successfully",
+      "maintenanceModeEnabled": "Maintenance mode enabled",
+      "maintenanceModeDisabled": "Maintenance mode disabled",
+      "databaseOptimized": "Database optimized successfully"
+    }
+  },
+
+  "error": {
+    "general": {
+      "operationFailed": "Operation failed",
+      "dataNotFound": "Data not found",
+      "invalidData": "Invalid data",
+      "unauthorized": "Unauthorized",
+      "forbidden": "Access forbidden",
+      "serverError": "Server error",
+      "connectionError": "Connection error",
+      "timeout": "Request timeout",
+      "validationError": "Validation error",
+      "duplicateEntry": "Duplicate entry",
+      "requiredField": "This field is required",
+      "invalidFormat": "Invalid format",
+      "fileTooLarge": "File is too large",
+      "fileTypeNotAllowed": "File type not allowed",
+      "uploadFailed": "File upload failed",
+      "downloadFailed": "File download failed",
+      "deleteFailed": "Delete failed",
+      "updateFailed": "Update failed",
+      "saveFailed": "Save failed",
+      "restoreFailed": "Restore failed",
+      "exportFailed": "Export failed",
+      "importFailed": "Import failed",
+      "printFailed": "Print failed",
+      "emailFailed": "Email sending failed",
+      "smsFailed": "SMS sending failed"
+    },
+    "warehouses": {
+      "notFound": "Warehouse not found",
+      "nameExists": "Warehouse name already exists",
+      "codeExists": "Warehouse code already exists",
+      "hasItems": "Cannot delete warehouse because it contains items",
+      "capacityExceeded": "Warehouse capacity exceeded",
+      "cannotTransfer": "Cannot transfer to and from the same warehouse",
+      "warehouseFull": "Warehouse is full",
+      "notActive": "Warehouse is not active",
+      "insufficientSpace": "Insufficient space in warehouse",
+      "transferFailed": "Stock transfer failed"
+    },
+    "items": {
+      "notFound": "Item not found",
+      "codeExists": "Item code already exists",
+      "barcodeExists": "Item barcode already exists",
+      "nameExists": "Item name already exists",
+      "hasTransactions": "Cannot delete item because it has transactions",
+      "hasStock": "Cannot delete item because it has stock",
+      "invalidPrice": "Invalid price",
+      "invalidCost": "Invalid cost",
+      "expiryDateInvalid": "Invalid expiry date",
+      "negativeStock": "Stock cannot be negative",
+      "insufficientStock": "Insufficient stock",
+      "notActive": "Item is not active",
+      "serialExists": "Serial number already exists",
+      "invalidBarcode": "Invalid barcode",
+      "noSerialAvailable": "No serial numbers available"
+    },
+    "groups": {
+      "notFound": "Group not found",
+      "codeExists": "Group code already exists",
+      "nameExists": "Group name already exists",
+      "hasItems": "Cannot delete group because it contains items",
+      "hasSubGroups": "Cannot delete group because it has sub-groups",
+      "circularReference": "Cannot set group as its own parent",
+      "invalidParent": "Invalid parent group",
+      "cannotDelete": "Cannot delete group"
+    },
+    "units": {
+      "notFound": "Unit not found",
+      "codeExists": "Unit code already exists",
+      "nameExists": "Unit name already exists",
+      "hasItems": "Cannot delete unit because it has associated items",
+      "invalidConversion": "Invalid conversion factor",
+      "circularConversion": "Circular conversion not allowed",
+      "cannotDelete": "Cannot delete unit"
+    },
+    "sales": {
+      "invoiceNotFound": "Sales invoice not found",
+      "invoiceNumberExists": "Invoice number already exists",
+      "invoiceAlreadyPaid": "Invoice already paid",
+      "invoiceAlreadyCancelled": "Invoice already cancelled",
+      "cannotCancel": "Cannot cancel a paid invoice",
+      "cannotDelete": "Cannot delete a paid invoice",
+      "insufficientStock": "Insufficient stock to complete sale",
+      "customerNotFound": "Customer not found",
+      "itemNotFound": "Item not found in invoice",
+      "returnNotFound": "Sales return not found",
+      "returnQuantityExceeds": "Return quantity exceeds sold quantity",
+      "quotationNotFound": "Quotation not found",
+      "quotationExpired": "Quotation has expired",
+      "quotationAlreadyConverted": "Quotation already converted",
+      "deliveryNotFound": "Delivery order not found",
+      "deliveryAlreadyDelivered": "Delivery already completed"
+    },
+    "purchases": {
+      "invoiceNotFound": "Purchase invoice not found",
+      "invoiceNumberExists": "Invoice number already exists",
+      "invoiceAlreadyPaid": "Invoice already paid",
+      "invoiceAlreadyCancelled": "Invoice already cancelled",
+      "cannotCancel": "Cannot cancel a paid invoice",
+      "cannotDelete": "Cannot delete a paid invoice",
+      "supplierNotFound": "Supplier not found",
+      "itemNotFound": "Item not found in invoice",
+      "returnNotFound": "Purchase return not found",
+      "returnQuantityExceeds": "Return quantity exceeds purchased quantity",
+      "orderNotFound": "Purchase order not found",
+      "orderAlreadyConverted": "Purchase order already converted",
+      "receiveNotFound": "Purchase receipt not found",
+      "receiveAlreadyReceived": "Quantity already received"
+    },
+    "banks": {
+      "notFound": "Bank account not found",
+      "nameExists": "Account name already exists",
+      "accountNumberExists": "Account number already exists",
+      "insufficientBalance": "Insufficient balance",
+      "cannotDelete": "Cannot delete account because it has transactions",
+      "transferFailed": "Bank transfer failed",
+      "checkNotFound": "Check not found",
+      "checkAlreadyCleared": "Check already cleared",
+      "checkAlreadyRejected": "Check already rejected",
+      "depositFailed": "Deposit failed",
+      "withdrawFailed": "Withdrawal failed",
+      "reconciliationFailed": "Bank reconciliation failed"
+    },
+    "branches": {
+      "notFound": "Branch not found",
+      "nameExists": "Branch name already exists",
+      "codeExists": "Branch code already exists",
+      "hasUsers": "Cannot delete branch because it has associated users",
+      "hasTransactions": "Cannot delete branch because it has transactions",
+      "cannotDelete": "Cannot delete main branch",
+      "notActive": "Branch is not active",
+      "invalidParent": "Invalid parent branch"
+    },
+    "cashiers": {
+      "notFound": "Cashier not found",
+      "alreadyOpened": "Cashier already opened",
+      "alreadyClosed": "Cashier already closed",
+      "notOpened": "Cashier is not open",
+      "insufficientCash": "Insufficient cash",
+      "cannotClose": "Cannot close cashier due to discrepancies",
+      "transferFailed": "Transfer between cashiers failed",
+      "reconciliationFailed": "Cashier reconciliation failed"
+    },
+    "taxes": {
+      "notFound": "Tax not found",
+      "nameExists": "Tax name already exists",
+      "rateExists": "Tax rate already exists",
+      "invalidRate": "Invalid tax rate",
+      "hasTransactions": "Cannot delete tax because it has transactions",
+      "calculationFailed": "Tax calculation failed",
+      "reportFailed": "Tax report generation failed",
+      "filingFailed": "Tax filing failed",
+      "vatCalculationFailed": "VAT calculation failed"
+    },
+    "users": {
+      "notFound": "User not found",
+      "invalidCredentials": "Invalid credentials",
+      "emailExists": "Email already exists",
+      "usernameExists": "Username already exists",
+      "invalidPassword": "Invalid password",
+      "passwordMismatch": "Password mismatch",
+      "accountLocked": "Account locked",
+      "accountDisabled": "Account disabled",
+      "sessionExpired": "Session expired",
+      "unauthorized": "Unauthorized access",
+      "passwordWeak": "Password is too weak",
+      "cannotDelete": "Cannot delete main user",
+      "cannotDeleteSelf": "Cannot delete your own account",
+      "twoFactorRequired": "Two-factor authentication required",
+      "invalidTwoFactorCode": "Invalid verification code"
+    },
+    "permissions": {
+      "notFound": "Permission not found",
+      "alreadyGranted": "Permission already granted",
+      "notGranted": "Permission not granted",
+      "cannotRevoke": "Cannot revoke main permission",
+      "roleNotFound": "Role not found",
+      "roleExists": "Role already exists",
+      "hasUsers": "Cannot delete role because it has associated users",
+      "cannotDelete": "Cannot delete main role"
+    },
+    "customers": {
+      "notFound": "Customer not found",
+      "codeExists": "Customer code already exists",
+      "emailExists": "Email already exists",
+      "phoneExists": "Phone number already exists",
+      "hasTransactions": "Cannot delete customer because they have transactions",
+      "hasBalance": "Cannot delete customer because they have balance",
+      "creditLimitExceeded": "Customer credit limit exceeded",
+      "accountSuspended": "Customer account suspended"
+    },
+    "suppliers": {
+      "notFound": "Supplier not found",
+      "codeExists": "Supplier code already exists",
+      "emailExists": "Email already exists",
+      "phoneExists": "Phone number already exists",
+      "hasTransactions": "Cannot delete supplier because they have transactions",
+      "hasBalance": "Cannot delete supplier because they have balance",
+      "accountSuspended": "Supplier account suspended"
+    },
+    "accounts": {
+      "notFound": "Account not found",
+      "codeExists": "Account code already exists",
+      "nameExists": "Account name already exists",
+      "hasTransactions": "Cannot delete account because it has transactions",
+      "hasSubAccounts": "Cannot delete account because it has sub-accounts",
+      "invalidParent": "Invalid parent account",
+      "circularReference": "Circular reference not allowed",
+      "entryNotFound": "Journal entry not found",
+      "entryNotBalanced": "Journal entry is not balanced",
+      "entryAlreadyApproved": "Entry already approved",
+      "entryAlreadyRejected": "Entry already rejected",
+      "invalidEntry": "Invalid journal entry"
+    },
+    "reports": {
+      "generationFailed": "Report generation failed",
+      "noData": "No data available for report",
+      "invalidParameters": "Invalid report parameters",
+      "exportFailed": "Report export failed",
+      "printFailed": "Report print failed",
+      "sendFailed": "Report sending failed",
+      "scheduleFailed": "Report scheduling failed",
+      "reportNotFound": "Report not found"
+    },
+    "stocktaking": {
+      "notFound": "Stocktaking not found",
+      "alreadyStarted": "Stocktaking already started",
+      "notStarted": "Stocktaking not started yet",
+      "alreadyFinished": "Stocktaking already finished",
+      "cannotModify": "Cannot modify finished stocktaking",
+      "discrepancy": "There is a discrepancy in quantities",
+      "notVerified": "Stocktaking not verified",
+      "countFailed": "Count update failed",
+      "approvalFailed": "Stocktaking approval failed"
+    },
+    "expenses": {
+      "notFound": "Expense not found",
+      "alreadyApproved": "Expense already approved",
+      "alreadyRejected": "Expense already rejected",
+      "cannotDelete": "Cannot delete approved expense",
+      "categoryNotFound": "Expense category not found",
+      "categoryHasExpenses": "Cannot delete category because it has expenses",
+      "budgetExceeded": "Budget exceeded"
+    },
+    "revenues": {
+      "notFound": "Revenue not found",
+      "alreadyApproved": "Revenue already approved",
+      "alreadyRejected": "Revenue already rejected",
+      "cannotDelete": "Cannot delete approved revenue",
+      "categoryNotFound": "Revenue category not found",
+      "categoryHasRevenues": "Cannot delete category because it has revenues"
+    },
+    "system": {
+      "backupFailed": "Backup creation failed",
+      "restoreFailed": "Backup restore failed",
+      "settingsSaveFailed": "Settings save failed",
+      "cacheClearFailed": "Cache clear failed",
+      "databaseError": "Database error",
+      "updateFailed": "Update installation failed",
+      "maintenanceError": "Maintenance mode error",
+      "optimizeFailed": "Database optimization failed"
+    }
+  },
+
+  "warning": {
+    "general": {
+      "unsavedChanges": "You have unsaved changes",
+      "deleteConfirmation": "Confirm deletion",
+      "permanentAction": "This action is permanent and cannot be undone",
+      "irreversible": "This action cannot be reversed",
+      "dataLoss": "Warning: You may lose some data",
+      "networkSlow": "Network connection is slow, operation may take longer",
+      "sessionExpiring": "Your session is about to expire"
+    },
+    "warehouses": {
+      "lowCapacity": "Remaining warehouse capacity is low",
+      "fullCapacity": "Warehouse is nearly full",
+      "noSpace": "Insufficient space in warehouse",
+      "lowStock": "Stock is low, please reorder",
+      "expiringSoon": "Some items are expiring soon",
+      "expired": "There are expired items",
+      "damaged": "There are damaged items"
+    },
+    "items": {
+      "noStock": "Item is out of stock",
+      "lowStock": "Item quantity is low, please reorder",
+      "expiring": "Item expiry date is approaching",
+      "expired": "Item has expired",
+      "negativeBalance": "Balance is negative, please review",
+      "noSerial": "Item has no serial numbers"
+    },
+    "groups": {
+      "deleteItems": "Deleting the group will affect its associated items",
+      "emptyGroup": "Group is empty, no items found"
+    },
+    "sales": {
+      "unpaidInvoice": "Invoice is unpaid",
+      "overdueInvoice": "Invoice is overdue",
+      "customerCreditLimit": "Customer is approaching credit limit",
+      "lowStockForSale": "Stock is low for items in the invoice",
+      "quotationExpiring": "Quotation is about to expire"
+    },
+    "purchases": {
+      "unpaidInvoice": "Purchase invoice is unpaid",
+      "overdueInvoice": "Purchase invoice is overdue",
+      "orderDelayed": "Purchase order is delayed"
+    },
+    "banks": {
+      "lowBalance": "Bank balance is low",
+      "negativeBalance": "Bank balance is negative",
+      "checkExpiring": "Check is about to expire"
+    },
+    "branches": {
+      "noWarehouse": "Branch has no warehouse",
+      "noCashier": "Branch has no cashier"
+    },
+    "cashiers": {
+      "lowCash": "Cash in cashier is low",
+      "discrepancy": "There is a discrepancy in cashier",
+      "notReconciled": "Cashier is not reconciled"
+    },
+    "users": {
+      "passwordExpiring": "Password is about to expire",
+      "inactiveUser": "User is inactive",
+      "noPermissions": "User has insufficient permissions"
+    },
+    "customers": {
+      "creditLimitWarning": "Customer is approaching credit limit",
+      "overdueBalance": "Customer has overdue balance",
+      "inactiveCustomer": "Customer is inactive"
+    },
+    "suppliers": {
+      "overdueBalance": "Supplier has overdue balance",
+      "inactiveSupplier": "Supplier is inactive"
+    },
+    "accounts": {
+      "unbalancedEntry": "Journal entry is not balanced",
+      "negativeBalance": "Account balance is negative"
+    },
+    "stocktaking": {
+      "discrepancy": "There is a discrepancy between expected and actual quantities",
+      "unverified": "Stocktaking is not verified yet",
+      "inProgress": "Stocktaking is in progress"
+    },
+    "system": {
+      "backupOld": "Backup is old, please update it",
+      "cacheLarge": "Cache is large, please clear it",
+      "updateAvailable": "A new system update is available"
+    }
+  },
+
+  "info": {
+    "general": {
+      "loading": "Loading...",
+      "processing": "Processing...",
+      "pleaseWait": "Please wait...",
+      "noData": "No data available",
+      "noResults": "No results found",
+      "loadingMore": "Loading more...",
+      "refreshing": "Refreshing...",
+      "saving": "Saving...",
+      "deleting": "Deleting...",
+      "updating": "Updating...",
+      "exporting": "Exporting...",
+      "importing": "Importing...",
+      "printing": "Printing..."
+    },
+    "warehouses": {
+      "stockSummary": "Warehouse stock summary",
+      "currentBalance": "Current stock balance",
+      "itemsCount": "Number of items in warehouse",
+      "capacityInfo": "Warehouse capacity information",
+      "lastTransaction": "Last warehouse transaction"
+    },
+    "items": {
+      "itemDetails": "Item details",
+      "stockStatus": "Item stock status",
+      "priceHistory": "Item price history",
+      "transactionHistory": "Item transaction history"
+    },
+    "sales": {
+      "invoiceSummary": "Sales invoice summary",
+      "invoiceItems": "Invoice items",
+      "paymentStatus": "Payment status",
+      "customerInfo": "Customer information",
+      "totalAmount": "Total amount",
+      "discount": "Discount",
+      "tax": "Tax",
+      "netAmount": "Net amount"
+    },
+    "purchases": {
+      "invoiceSummary": "Purchase invoice summary",
+      "invoiceItems": "Invoice items",
+      "paymentStatus": "Payment status",
+      "supplierInfo": "Supplier information"
+    },
+    "banks": {
+      "balance": "Current bank balance",
+      "lastTransaction": "Last bank transaction",
+      "statementPeriod": "Statement period"
+    },
+    "branches": {
+      "branchInfo": "Branch information",
+      "warehouses": "Warehouses under this branch",
+      "cashiers": "Cashiers under this branch",
+      "users": "Users in this branch"
+    },
+    "cashiers": {
+      "openingBalance": "Opening balance",
+      "closingBalance": "Closing balance",
+      "currentBalance": "Current balance",
+      "transactions": "Cash transactions"
+    },
+    "taxes": {
+      "vatRate": "VAT rate",
+      "taxAmount": "Tax amount",
+      "taxableAmount": "Taxable amount",
+      "taxPeriod": "Tax period"
+    },
+    "users": {
+      "userInfo": "User information",
+      "lastLogin": "Last login",
+      "currentSession": "Current session",
+      "permissions": "Permissions"
+    },
+    "customers": {
+      "customerInfo": "Customer information",
+      "balance": "Customer balance",
+      "lastPurchase": "Last purchase",
+      "totalPurchases": "Total purchases"
+    },
+    "suppliers": {
+      "supplierInfo": "Supplier information",
+      "balance": "Supplier balance",
+      "lastPurchase": "Last purchase",
+      "totalPurchases": "Total purchases"
+    },
+    "accounts": {
+      "accountInfo": "Account information",
+      "balance": "Account balance",
+      "entries": "Journal entries",
+      "period": "Accounting period"
+    },
+    "reports": {
+      "reportInfo": "Report information",
+      "generatedAt": "Generated at",
+      "period": "Period",
+      "filters": "Applied filters"
+    },
+    "stocktaking": {
+      "stocktakingInfo": "Stocktaking information",
+      "expectedCount": "Expected count",
+      "actualCount": "Actual count",
+      "difference": "Difference",
+      "status": "Stocktaking status"
+    },
+    "system": {
+      "systemInfo": "System information",
+      "version": "System version",
+      "lastBackup": "Last backup",
+      "databaseSize": "Database size"
+    }
+  },
+
+  "confirm": {
+    "general": {
+      "delete": "Are you sure you want to delete?",
+      "save": "Do you want to save changes?",
+      "cancel": "Do you want to cancel changes?",
+      "discard": "Do you want to discard changes?",
+      "logout": "Do you want to logout?",
+      "restore": "Do you want to restore data?",
+      "archive": "Do you want to archive data?",
+      "export": "Do you want to export data?",
+      "import": "Do you want to import data?",
+      "clear": "Do you want to clear data?",
+      "reset": "Do you want to reset data?",
+      "send": "Do you want to send?",
+      "print": "Do you want to print?"
+    },
+    "warehouses": {
+      "delete": "Are you sure you want to delete this warehouse?",
+      "clear": "Are you sure you want to clear warehouse contents?",
+      "transfer": "Do you want to transfer stock between warehouses?"
+    },
+    "items": {
+      "delete": "Are you sure you want to delete this item?",
+      "restore": "Do you want to restore this item?",
+      "priceUpdate": "Do you want to update item price?",
+      "stockAdjust": "Do you want to adjust item stock?"
+    },
+    "groups": {
+      "delete": "Are you sure you want to delete this group?"
+    },
+    "sales": {
+      "delete": "Are you sure you want to delete this sales invoice?",
+      "cancel": "Are you sure you want to cancel this sales invoice?",
+      "return": "Do you want to create a return for this invoice?",
+      "send": "Do you want to send the invoice to the customer?",
+      "print": "Do you want to print the invoice?",
+      "convert": "Do you want to convert quotation to invoice?",
+      "deliver": "Do you want to deliver this order?"
+    },
+    "purchases": {
+      "delete": "Are you sure you want to delete this purchase invoice?",
+      "cancel": "Are you sure you want to cancel this purchase invoice?",
+      "return": "Do you want to create a return for this invoice?",
+      "send": "Do you want to send the invoice to the supplier?",
+      "print": "Do you want to print the invoice?",
+      "convert": "Do you want to convert purchase order to invoice?",
+      "receive": "Do you want to record purchase receipt?"
+    },
+    "banks": {
+      "delete": "Are you sure you want to delete this bank account?",
+      "transfer": "Do you want to make a bank transfer?",
+      "deposit": "Do you want to make a bank deposit?",
+      "withdraw": "Do you want to make a bank withdrawal?",
+      "checkIssue": "Do you want to issue a check?",
+      "checkClear": "Do you want to clear this check?",
+      "reconcile": "Do you want to perform bank reconciliation?"
+    },
+    "branches": {
+      "delete": "Are you sure you want to delete this branch?",
+      "activate": "Do you want to activate this branch?",
+      "deactivate": "Do you want to deactivate this branch?"
+    },
+    "cashiers": {
+      "open": "Do you want to open the cashier?",
+      "close": "Do you want to close the cashier?",
+      "deposit": "Do you want to deposit cash?",
+      "withdraw": "Do you want to withdraw cash?",
+      "transfer": "Do you want to transfer between cashiers?",
+      "reconcile": "Do you want to reconcile the cashier?"
+    },
+    "taxes": {
+      "delete": "Are you sure you want to delete this tax?",
+      "file": "Do you want to file the tax return?",
+      "report": "Do you want to generate the tax report?"
+    },
+    "users": {
+      "delete": "Are you sure you want to delete this user?",
+      "deactivate": "Do you want to deactivate this user?",
+      "activate": "Do you want to activate this user?",
+      "resetPassword": "Do you want to reset the password?",
+      "changePassword": "Do you want to change the password?",
+      "logout": "Do you want to logout?"
+    },
+    "permissions": {
+      "revoke": "Are you sure you want to revoke this permission?",
+      "grant": "Do you want to grant this permission?",
+      "delete": "Are you sure you want to delete this role?"
+    },
+    "customers": {
+      "delete": "Are you sure you want to delete this customer?",
+      "deactivate": "Do you want to deactivate this customer?",
+      "activate": "Do you want to activate this customer?"
+    },
+    "suppliers": {
+      "delete": "Are you sure you want to delete this supplier?",
+      "deactivate": "Do you want to deactivate this supplier?",
+      "activate": "Do you want to activate this supplier?"
+    },
+    "accounts": {
+      "delete": "Are you sure you want to delete this account?",
+      "entryDelete": "Are you sure you want to delete this journal entry?",
+      "entryApprove": "Do you want to approve this journal entry?",
+      "entryReject": "Do you want to reject this journal entry?"
+    },
+    "reports": {
+      "generate": "Do you want to generate the report?",
+      "export": "Do you want to export the report?",
+      "print": "Do you want to print the report?",
+      "send": "Do you want to send the report?"
+    },
+    "stocktaking": {
+      "start": "Do you want to start stocktaking?",
+      "pause": "Do you want to pause stocktaking?",
+      "resume": "Do you want to resume stocktaking?",
+      "finish": "Do you want to finish stocktaking?",
+      "verify": "Do you want to verify stocktaking?",
+      "approve": "Do you want to approve stocktaking?"
+    },
+    "expenses": {
+      "delete": "Are you sure you want to delete this expense?",
+      "approve": "Do you want to approve this expense?",
+      "reject": "Do you want to reject this expense?"
+    },
+    "revenues": {
+      "delete": "Are you sure you want to delete this revenue?",
+      "approve": "Do you want to approve this revenue?",
+      "reject": "Do you want to reject this revenue?"
+    },
+    "system": {
+      "backup": "Do you want to create a backup?",
+      "restore": "Do you want to restore the backup?",
+      "reset": "Do you want to reset the system?",
+      "clearCache": "Do you want to clear the cache?",
+      "maintenance": "Do you want to enable maintenance mode?",
+      "update": "Do you want to install the update?"
+    }
+  },
+
+  "validation": {
+    "required": "This field is required",
+    "minLength": "Minimum length is ${min} characters",
+    "maxLength": "Maximum length is ${max} characters",
+    "exactLength": "Length must be ${length} characters",
+    "minValue": "Value must be at least ${min}",
+    "maxValue": "Value must be at most ${max}",
+    "between": "Value must be between ${min} and ${max}",
+    "email": "Please enter a valid email address",
+    "phone": "Please enter a valid phone number",
+    "number": "Please enter a valid number",
+    "integer": "Please enter a valid integer",
+    "positive": "Please enter a positive value",
+    "negative": "Please enter a negative value",
+    "date": "Please enter a valid date",
+    "dateAfter": "Date must be after ${date}",
+    "dateBefore": "Date must be before ${date}",
+    "time": "Please enter a valid time",
+    "url": "Please enter a valid URL",
+    "pattern": "Please enter a value matching the required pattern",
+    "unique": "Value already exists",
+    "exists": "Value does not exist",
+    "mismatch": "Values do not match",
+    "same": "Values must match",
+    "different": "Values must be different",
+    "in": "Value is not allowed",
+    "notIn": "Value is not allowed",
+    "array": "Please enter a valid array",
+    "object": "Please enter a valid object",
+    "boolean": "Please enter a valid boolean value",
+    "file": "Please upload a valid file",
+    "image": "Please upload a valid image",
+    "mimes": "File type not allowed. Allowed types: ${types}",
+    "maxSize": "File size must not exceed ${size}",
+    "minSize": "File size must be at least ${size}",
+    "dimensions": "Image dimensions are invalid",
+    "password": "Password must contain uppercase, lowercase, number and special character",
+    "confirmPassword": "Password confirmation does not match",
+    "currentPassword": "Current password is incorrect",
+    "newPassword": "New password is invalid",
+    "vatNumber": "Please enter a valid VAT number",
+    "iban": "Please enter a valid IBAN number",
+    "nationalId": "Please enter a valid national ID",
+    "commercialRegister": "Please enter a valid commercial register number"
+  }
+}

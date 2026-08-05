@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ar" >
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/image/attlsoft/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>اتل سوفت</title>
+    <style>
+        body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #root {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .app-content {
+      flex: 1;
+      overflow: auto;
+    }
+    
+    .page-content {
+      padding: 20px;
+    }
+    
+    .page-container {
+      padding: 20px;
+    }
+    
+    .page-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    
+    /* تأكد أن المحتوى يظهر */
+    .debug-border {
+      border: 2px solid red !important;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

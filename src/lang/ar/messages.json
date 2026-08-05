@@ -1,0 +1,928 @@
+{
+  "success": {
+    "general": {
+      "operationCompleted": "تمت العملية بنجاح",
+      "dataSaved": "تم حفظ البيانات بنجاح",
+      "dataUpdated": "تم تحديث البيانات بنجاح",
+      "dataDeleted": "تم حذف البيانات بنجاح",
+      "dataRestored": "تم استعادة البيانات بنجاح",
+      "dataArchived": "تم أرشفة البيانات بنجاح",
+      "dataExported": "تم تصدير البيانات بنجاح",
+      "dataImported": "تم استيراد البيانات بنجاح",
+      "dataSynced": "تم مزامنة البيانات بنجاح",
+      "fileUploaded": "تم رفع الملف بنجاح",
+      "fileDownloaded": "تم تحميل الملف بنجاح",
+      "fileDeleted": "تم حذف الملف بنجاح",
+      "fileRenamed": "تم إعادة تسمية الملف بنجاح",
+      "emailSent": "تم إرسال البريد الإلكتروني بنجاح",
+      "smsSent": "تم إرسال الرسالة النصية بنجاح",
+      "notificationSent": "تم إرسال الإشعار بنجاح",
+      "printDone": "تمت الطباعة بنجاح",
+      "pdfGenerated": "تم إنشاء ملف PDF بنجاح",
+      "excelGenerated": "تم إنشاء ملف Excel بنجاح"
+    },
+    "warehouses": {
+      "created": "تم إنشاء المستودع بنجاح",
+      "updated": "تم تحديث المستودع بنجاح",
+      "deleted": "تم حذف المستودع بنجاح",
+      "restored": "تم استعادة المستودع بنجاح",
+      "transferred": "تم نقل المخزون بين المستودعات بنجاح",
+      "capacityUpdated": "تم تحديث سعة المستودع بنجاح",
+      "activated": "تم تفعيل المستودع بنجاح",
+      "deactivated": "تم تعطيل المستودع بنجاح",
+      "stockMoved": "تم نقل المخزون بنجاح"
+    },
+    "items": {
+      "created": "تم إنشاء الصنف بنجاح",
+      "updated": "تم تحديث الصنف بنجاح",
+      "deleted": "تم حذف الصنف بنجاح",
+      "restored": "تم استعادة الصنف بنجاح",
+      "priceUpdated": "تم تحديث سعر الصنف بنجاح",
+      "costUpdated": "تم تحديث تكلفة الصنف بنجاح",
+      "barcodePrinted": "تم طباعة الباركود بنجاح",
+      "labelPrinted": "تم طباعة الملصق بنجاح",
+      "serialAssigned": "تم تعيين الرقم التسلسلي بنجاح",
+      "serialGenerated": "تم إنشاء الأرقام التسلسلية بنجاح",
+      "activated": "تم تفعيل الصنف بنجاح",
+      "deactivated": "تم تعطيل الصنف بنجاح",
+      "stockIn": "تم إضافة كميات للمخزون بنجاح",
+      "stockOut": "تم صرف الكميات بنجاح",
+      "stockAdjusted": "تم تعديل المخزون بنجاح",
+      "stockTransferred": "تم نقل الصنف بين المستودعات بنجاح"
+    },
+    "groups": {
+      "created": "تم إنشاء المجموعة بنجاح",
+      "updated": "تم تحديث المجموعة بنجاح",
+      "deleted": "تم حذف المجموعة بنجاح",
+      "restored": "تم استعادة المجموعة بنجاح",
+      "itemsAdded": "تم إضافة الأصناف إلى المجموعة بنجاح",
+      "itemsRemoved": "تم إزالة الأصناف من المجموعة بنجاح"
+    },
+    "units": {
+      "created": "تم إنشاء الوحدة بنجاح",
+      "updated": "تم تحديث الوحدة بنجاح",
+      "deleted": "تم حذف الوحدة بنجاح",
+      "conversionSet": "تم تعيين معامل التحويل بنجاح"
+    },
+    "sales": {
+      "invoiceCreated": "تم إنشاء فاتورة المبيعات بنجاح",
+      "invoiceUpdated": "تم تحديث فاتورة المبيعات بنجاح",
+      "invoiceDeleted": "تم حذف فاتورة المبيعات بنجاح",
+      "invoiceCancelled": "تم إلغاء فاتورة المبيعات بنجاح",
+      "invoicePrinted": "تم طباعة فاتورة المبيعات بنجاح",
+      "invoiceSent": "تم إرسال فاتورة المبيعات للعميل بنجاح",
+      "invoicePaid": "تم تسجيل سداد الفاتورة بنجاح",
+      "invoicePartiallyPaid": "تم تسجيل سداد جزئي للفاتورة بنجاح",
+      "returnCreated": "تم إنشاء مرتجع المبيعات بنجاح",
+      "returnUpdated": "تم تحديث مرتجع المبيعات بنجاح",
+      "returnDeleted": "تم حذف مرتجع المبيعات بنجاح",
+      "quotationCreated": "تم إنشاء عرض السعر بنجاح",
+      "quotationUpdated": "تم تحديث عرض السعر بنجاح",
+      "quotationDeleted": "تم حذف عرض السعر بنجاح",
+      "quotationConverted": "تم تحويل عرض السعر إلى فاتورة بنجاح",
+      "deliveryCreated": "تم إنشاء أمر التسليم بنجاح",
+      "deliveryUpdated": "تم تحديث أمر التسليم بنجاح",
+      "deliveryDeleted": "تم حذف أمر التسليم بنجاح"
+    },
+    "purchases": {
+      "invoiceCreated": "تم إنشاء فاتورة المشتريات بنجاح",
+      "invoiceUpdated": "تم تحديث فاتورة المشتريات بنجاح",
+      "invoiceDeleted": "تم حذف فاتورة المشتريات بنجاح",
+      "invoiceCancelled": "تم إلغاء فاتورة المشتريات بنجاح",
+      "invoicePrinted": "تم طباعة فاتورة المشتريات بنجاح",
+      "invoiceSent": "تم إرسال فاتورة المشتريات للمورد بنجاح",
+      "invoicePaid": "تم تسجيل سداد الفاتورة بنجاح",
+      "returnCreated": "تم إنشاء مرتجع المشتريات بنجاح",
+      "returnUpdated": "تم تحديث مرتجع المشتريات بنجاح",
+      "returnDeleted": "تم حذف مرتجع المشتريات بنجاح",
+      "orderCreated": "تم إنشاء أمر الشراء بنجاح",
+      "orderUpdated": "تم تحديث أمر الشراء بنجاح",
+      "orderDeleted": "تم حذف أمر الشراء بنجاح",
+      "orderConverted": "تم تحويل أمر الشراء إلى فاتورة بنجاح",
+      "receiveCreated": "تم تسجيل استلام المشتريات بنجاح",
+      "receiveUpdated": "تم تحديث استلام المشتريات بنجاح",
+      "receiveDeleted": "تم حذف استلام المشتريات بنجاح"
+    },
+    "banks": {
+      "created": "تم إنشاء الحساب البنكي بنجاح",
+      "updated": "تم تحديث الحساب البنكي بنجاح",
+      "deleted": "تم حذف الحساب البنكي بنجاح",
+      "deposited": "تم الإيداع في البنك بنجاح",
+      "withdrawn": "تم السحب من البنك بنجاح",
+      "transferred": "تم التحويل البنكي بنجاح",
+      "checkIssued": "تم إصدار الشيك بنجاح",
+      "checkCleared": "تم صرف الشيك بنجاح",
+      "checkRejected": "تم رفض الشيك",
+      "reconciled": "تمت التسوية البنكية بنجاح",
+      "statementImported": "تم استيراد كشف الحساب بنجاح"
+    },
+    "branches": {
+      "created": "تم إنشاء الفرع بنجاح",
+      "updated": "تم تحديث الفرع بنجاح",
+      "deleted": "تم حذف الفرع بنجاح",
+      "restored": "تم استعادة الفرع بنجاح",
+      "activated": "تم تفعيل الفرع بنجاح",
+      "deactivated": "تم تعطيل الفرع بنجاح",
+      "settingsUpdated": "تم تحديث إعدادات الفرع بنجاح",
+      "warehouseAssigned": "تم تخصيص المستودع للفرع بنجاح",
+      "cashierAssigned": "تم تخصيص الصندوق للفرع بنجاح"
+    },
+    "cashiers": {
+      "opened": "تم فتح الصندوق بنجاح",
+      "closed": "تم غلق الصندوق بنجاح",
+      "deposited": "تم الإيداع في الصندوق بنجاح",
+      "withdrawn": "تم السحب من الصندوق بنجاح",
+      "transferred": "تم التحويل بين الصناديق بنجاح",
+      "reconciled": "تمت تسوية الصندوق بنجاح",
+      "cashIn": "تم إضافة نقدية للصندوق بنجاح",
+      "cashOut": "تم صرف نقدية من الصندوق بنجاح"
+    },
+    "taxes": {
+      "created": "تم إنشاء الضريبة بنجاح",
+      "updated": "تم تحديث الضريبة بنجاح",
+      "deleted": "تم حذف الضريبة بنجاح",
+      "calculated": "تم حساب الضريبة بنجاح",
+      "reported": "تم إنشاء التقرير الضريبي بنجاح",
+      "filed": "تم تقديم الإقرار الضريبي بنجاح",
+      "vatUpdated": "تم تحديث ضريبة القيمة المضافة بنجاح",
+      "taxInvoiceCreated": "تم إنشاء الفاتورة الضريبية بنجاح"
+    },
+    "users": {
+      "created": "تم إنشاء المستخدم بنجاح",
+      "updated": "تم تحديث المستخدم بنجاح",
+      "deleted": "تم حذف المستخدم بنجاح",
+      "restored": "تم استعادة المستخدم بنجاح",
+      "activated": "تم تفعيل المستخدم بنجاح",
+      "deactivated": "تم تعطيل المستخدم بنجاح",
+      "passwordChanged": "تم تغيير كلمة المرور بنجاح",
+      "passwordReset": "تم إعادة تعيين كلمة المرور بنجاح",
+      "profileUpdated": "تم تحديث الملف الشخصي بنجاح",
+      "loggedIn": "تم تسجيل الدخول بنجاح",
+      "loggedOut": "تم تسجيل الخروج بنجاح",
+      "sessionExtended": "تم تمديد الجلسة بنجاح",
+      "twoFactorEnabled": "تم تفعيل التحقق بخطوتين بنجاح",
+      "twoFactorDisabled": "تم تعطيل التحقق بخطوتين",
+      "permissionsUpdated": "تم تحديث صلاحيات المستخدم بنجاح",
+      "roleAssigned": "تم تعيين الدور للمستخدم بنجاح",
+      "roleRemoved": "تم إزالة الدور من المستخدم بنجاح"
+    },
+    "permissions": {
+      "updated": "تم تحديث الصلاحيات بنجاح",
+      "granted": "تم منح الصلاحية بنجاح",
+      "revoked": "تم سحب الصلاحية بنجاح",
+      "roleCreated": "تم إنشاء الدور بنجاح",
+      "roleUpdated": "تم تحديث الدور بنجاح",
+      "roleDeleted": "تم حذف الدور بنجاح",
+      "roleAssigned": "تم تعيين الدور بنجاح",
+      "roleRemoved": "تم إزالة الدور بنجاح"
+    },
+    "customers": {
+      "created": "تم إنشاء العميل بنجاح",
+      "updated": "تم تحديث العميل بنجاح",
+      "deleted": "تم حذف العميل بنجاح",
+      "restored": "تم استعادة العميل بنجاح",
+      "activated": "تم تفعيل العميل بنجاح",
+      "deactivated": "تم تعطيل العميل بنجاح",
+      "balanceUpdated": "تم تحديث رصيد العميل بنجاح",
+      "statementGenerated": "تم إنشاء كشف حساب العميل بنجاح",
+      "creditLimitUpdated": "تم تحديث الحد الائتماني للعميل بنجاح"
+    },
+    "suppliers": {
+      "created": "تم إنشاء المورد بنجاح",
+      "updated": "تم تحديث المورد بنجاح",
+      "deleted": "تم حذف المورد بنجاح",
+      "restored": "تم استعادة المورد بنجاح",
+      "activated": "تم تفعيل المورد بنجاح",
+      "deactivated": "تم تعطيل المورد بنجاح",
+      "balanceUpdated": "تم تحديث رصيد المورد بنجاح",
+      "statementGenerated": "تم إنشاء كشف حساب المورد بنجاح"
+    },
+    "accounts": {
+      "created": "تم إنشاء الحساب المحاسبي بنجاح",
+      "updated": "تم تحديث الحساب المحاسبي بنجاح",
+      "deleted": "تم حذف الحساب المحاسبي بنجاح",
+      "restored": "تم استعادة الحساب المحاسبي بنجاح",
+      "entryCreated": "تم إنشاء القيد المحاسبي بنجاح",
+      "entryUpdated": "تم تحديث القيد المحاسبي بنجاح",
+      "entryDeleted": "تم حذف القيد المحاسبي بنجاح",
+      "entryApproved": "تم اعتماد القيد المحاسبي بنجاح",
+      "entryRejected": "تم رفض القيد المحاسبي",
+      "balanceUpdated": "تم تحديث الرصيد المحاسبي بنجاح",
+      "trialBalanceGenerated": "تم إنشاء ميزان المراجعة بنجاح",
+      "incomeStatementGenerated": "تم إنشاء قائمة الدخل بنجاح",
+      "balanceSheetGenerated": "تم إنشاء الميزانية العمومية بنجاح",
+      "journalGenerated": "تم إنشاء دفتر اليومية بنجاح",
+      "ledgerGenerated": "تم إنشاء دفتر الأستاذ بنجاح"
+    },
+    "reports": {
+      "generated": "تم إنشاء التقرير بنجاح",
+      "exported": "تم تصدير التقرير بنجاح",
+      "printed": "تم طباعة التقرير بنجاح",
+      "sent": "تم إرسال التقرير بنجاح",
+      "scheduled": "تم جدولة التقرير بنجاح",
+      "cancelled": "تم إلغاء التقرير بنجاح",
+      "salesReportGenerated": "تم إنشاء تقرير المبيعات بنجاح",
+      "purchaseReportGenerated": "تم إنشاء تقرير المشتريات بنجاح",
+      "inventoryReportGenerated": "تم إنشاء تقرير المخزون بنجاح",
+      "profitReportGenerated": "تم إنشاء تقرير الأرباح بنجاح",
+      "taxReportGenerated": "تم إنشاء التقرير الضريبي بنجاح",
+      "customerReportGenerated": "تم إنشاء تقرير العملاء بنجاح",
+      "supplierReportGenerated": "تم إنشاء تقرير الموردين بنجاح",
+      "cashFlowReportGenerated": "تم إنشاء تقرير التدفق النقدي بنجاح"
+    },
+    "stocktaking": {
+      "started": "تم بدء الجرد بنجاح",
+      "paused": "تم إيقاف الجرد مؤقتاً",
+      "resumed": "تم استئناف الجرد بنجاح",
+      "finished": "تم إنهاء الجرد بنجاح",
+      "saved": "تم حفظ الجرد بنجاح",
+      "verified": "تم التحقق من الجرد بنجاح",
+      "countUpdated": "تم تحديث الكمية الجردية بنجاح",
+      "discrepancyResolved": "تم حل الاختلاف في الجرد بنجاح",
+      "approved": "تم اعتماد الجرد بنجاح",
+      "rejected": "تم رفض الجرد"
+    },
+    "expenses": {
+      "created": "تم إنشاء المصروف بنجاح",
+      "updated": "تم تحديث المصروف بنجاح",
+      "deleted": "تم حذف المصروف بنجاح",
+      "approved": "تم اعتماد المصروف بنجاح",
+      "rejected": "تم رفض المصروف",
+      "paid": "تم دفع المصروف بنجاح",
+      "categoryCreated": "تم إنشاء تصنيف المصروفات بنجاح",
+      "categoryUpdated": "تم تحديث تصنيف المصروفات بنجاح",
+      "categoryDeleted": "تم حذف تصنيف المصروفات بنجاح"
+    },
+    "revenues": {
+      "created": "تم إنشاء الإيراد بنجاح",
+      "updated": "تم تحديث الإيراد بنجاح",
+      "deleted": "تم حذف الإيراد بنجاح",
+      "approved": "تم اعتماد الإيراد بنجاح",
+      "rejected": "تم رفض الإيراد",
+      "received": "تم استلام الإيراد بنجاح",
+      "categoryCreated": "تم إنشاء تصنيف الإيرادات بنجاح",
+      "categoryUpdated": "تم تحديث تصنيف الإيرادات بنجاح",
+      "categoryDeleted": "تم حذف تصنيف الإيرادات بنجاح"
+    },
+    "system": {
+      "backupCreated": "تم إنشاء النسخة الاحتياطية بنجاح",
+      "backupRestored": "تم استعادة النسخة الاحتياطية بنجاح",
+      "settingsUpdated": "تم تحديث إعدادات النظام بنجاح",
+      "cacheCleared": "تم مسح ذاكرة التخزين المؤقت بنجاح",
+      "logsCleared": "تم مسح سجلات النظام بنجاح",
+      "updateInstalled": "تم تثبيت التحديث بنجاح",
+      "maintenanceModeEnabled": "تم تفعيل وضع الصيانة",
+      "maintenanceModeDisabled": "تم تعطيل وضع الصيانة",
+      "databaseOptimized": "تم تحسين قاعدة البيانات بنجاح"
+    }
+  },
+
+  "error": {
+    "general": {
+      "operationFailed": "فشلت العملية",
+      "dataNotFound": "البيانات غير موجودة",
+      "invalidData": "بيانات غير صالحة",
+      "unauthorized": "غير مصرح به",
+      "forbidden": "ممنوع الوصول",
+      "serverError": "خطأ في الخادم",
+      "connectionError": "خطأ في الاتصال",
+      "timeout": "انتهى الوقت المحدد",
+      "validationError": "خطأ في التحقق من البيانات",
+      "duplicateEntry": "الإدخال مكرر",
+      "requiredField": "هذا الحقل مطلوب",
+      "invalidFormat": "تنسيق غير صحيح",
+      "fileTooLarge": "الملف كبير جداً",
+      "fileTypeNotAllowed": "نوع الملف غير مسموح به",
+      "uploadFailed": "فشل رفع الملف",
+      "downloadFailed": "فشل تحميل الملف",
+      "deleteFailed": "فشل حذف البيانات",
+      "updateFailed": "فشل تحديث البيانات",
+      "saveFailed": "فشل حفظ البيانات",
+      "restoreFailed": "فشل استعادة البيانات",
+      "exportFailed": "فشل تصدير البيانات",
+      "importFailed": "فشل استيراد البيانات",
+      "printFailed": "فشل الطباعة",
+      "emailFailed": "فشل إرسال البريد الإلكتروني",
+      "smsFailed": "فشل إرسال الرسالة النصية"
+    },
+    "warehouses": {
+      "notFound": "المستودع غير موجود",
+      "nameExists": "اسم المستودع موجود مسبقاً",
+      "codeExists": "رمز المستودع موجود مسبقاً",
+      "hasItems": "لا يمكن حذف المستودع لوجود أصناف فيه",
+      "capacityExceeded": "تم تجاوز سعة المستودع",
+      "cannotTransfer": "لا يمكن النقل من وإلى نفس المستودع",
+      "warehouseFull": "المستودع ممتلئ",
+      "notActive": "المستودع غير نشط",
+      "insufficientSpace": "لا توجد مساحة كافية في المستودع",
+      "transferFailed": "فشل نقل المخزون بين المستودعات"
+    },
+    "items": {
+      "notFound": "الصنف غير موجود",
+      "codeExists": "رمز الصنف موجود مسبقاً",
+      "barcodeExists": "باركود الصنف موجود مسبقاً",
+      "nameExists": "اسم الصنف موجود مسبقاً",
+      "hasTransactions": "لا يمكن حذف الصنف لوجود حركات عليه",
+      "hasStock": "لا يمكن حذف الصنف لوجود مخزون له",
+      "invalidPrice": "سعر غير صحيح",
+      "invalidCost": "تكلفة غير صحيحة",
+      "expiryDateInvalid": "تاريخ الانتهاء غير صحيح",
+      "negativeStock": "لا يمكن أن يكون المخزون سالباً",
+      "insufficientStock": "المخزون غير كافٍ",
+      "notActive": "الصنف غير نشط",
+      "serialExists": "الرقم التسلسلي موجود مسبقاً",
+      "invalidBarcode": "باركود غير صحيح",
+      "noSerialAvailable": "لا توجد أرقام تسلسلية متاحة"
+    },
+    "groups": {
+      "notFound": "المجموعة غير موجودة",
+      "codeExists": "رمز المجموعة موجود مسبقاً",
+      "nameExists": "اسم المجموعة موجود مسبقاً",
+      "hasItems": "لا يمكن حذف المجموعة لوجود أصناف فيها",
+      "hasSubGroups": "لا يمكن حذف المجموعة لوجود مجموعات فرعية",
+      "circularReference": "لا يمكن جعل المجموعة نفسها مجموعة أم",
+      "invalidParent": "المجموعة الأم غير صالحة",
+      "cannotDelete": "لا يمكن حذف المجموعة"
+    },
+    "units": {
+      "notFound": "الوحدة غير موجودة",
+      "codeExists": "رمز الوحدة موجود مسبقاً",
+      "nameExists": "اسم الوحدة موجود مسبقاً",
+      "hasItems": "لا يمكن حذف الوحدة لوجود أصناف مرتبطة بها",
+      "invalidConversion": "معامل التحويل غير صحيح",
+      "circularConversion": "تحويل دوري غير مسموح به",
+      "cannotDelete": "لا يمكن حذف الوحدة"
+    },
+    "sales": {
+      "invoiceNotFound": "فاتورة المبيعات غير موجودة",
+      "invoiceNumberExists": "رقم الفاتورة موجود مسبقاً",
+      "invoiceAlreadyPaid": "الفاتورة مدفوعة مسبقاً",
+      "invoiceAlreadyCancelled": "الفاتورة ملغاة مسبقاً",
+      "cannotCancel": "لا يمكن إلغاء فاتورة مدفوعة",
+      "cannotDelete": "لا يمكن حذف فاتورة مدفوعة",
+      "insufficientStock": "المخزون غير كافٍ لإتمام عملية البيع",
+      "customerNotFound": "العميل غير موجود",
+      "itemNotFound": "الصنف غير موجود في الفاتورة",
+      "returnNotFound": "مرتجع المبيعات غير موجود",
+      "returnQuantityExceeds": "كمية المرتجع تتجاوز الكمية المباعة",
+      "quotationNotFound": "عرض السعر غير موجود",
+      "quotationExpired": "عرض السعر منتهي الصلاحية",
+      "quotationAlreadyConverted": "تم تحويل عرض السعر مسبقاً",
+      "deliveryNotFound": "أمر التسليم غير موجود",
+      "deliveryAlreadyDelivered": "تم تسليم الأمر مسبقاً"
+    },
+    "purchases": {
+      "invoiceNotFound": "فاتورة المشتريات غير موجودة",
+      "invoiceNumberExists": "رقم الفاتورة موجود مسبقاً",
+      "invoiceAlreadyPaid": "الفاتورة مدفوعة مسبقاً",
+      "invoiceAlreadyCancelled": "الفاتورة ملغاة مسبقاً",
+      "cannotCancel": "لا يمكن إلغاء فاتورة مدفوعة",
+      "cannotDelete": "لا يمكن حذف فاتورة مدفوعة",
+      "supplierNotFound": "المورد غير موجود",
+      "itemNotFound": "الصنف غير موجود في الفاتورة",
+      "returnNotFound": "مرتجع المشتريات غير موجود",
+      "returnQuantityExceeds": "كمية المرتجع تتجاوز الكمية المشتراة",
+      "orderNotFound": "أمر الشراء غير موجود",
+      "orderAlreadyConverted": "تم تحويل أمر الشراء مسبقاً",
+      "receiveNotFound": "استلام المشتريات غير موجود",
+      "receiveAlreadyReceived": "تم استلام الكمية مسبقاً"
+    },
+    "banks": {
+      "notFound": "الحساب البنكي غير موجود",
+      "nameExists": "اسم الحساب موجود مسبقاً",
+      "accountNumberExists": "رقم الحساب موجود مسبقاً",
+      "insufficientBalance": "الرصيد غير كافٍ",
+      "cannotDelete": "لا يمكن حذف الحساب لوجود حركات عليه",
+      "transferFailed": "فشل التحويل البنكي",
+      "checkNotFound": "الشيك غير موجود",
+      "checkAlreadyCleared": "تم صرف الشيك مسبقاً",
+      "checkAlreadyRejected": "تم رفض الشيك مسبقاً",
+      "depositFailed": "فشل الإيداع البنكي",
+      "withdrawFailed": "فشل السحب البنكي",
+      "reconciliationFailed": "فشلت التسوية البنكية"
+    },
+    "branches": {
+      "notFound": "الفرع غير موجود",
+      "nameExists": "اسم الفرع موجود مسبقاً",
+      "codeExists": "رمز الفرع موجود مسبقاً",
+      "hasUsers": "لا يمكن حذف الفرع لوجود مستخدمين مرتبطين به",
+      "hasTransactions": "لا يمكن حذف الفرع لوجود حركات عليه",
+      "cannotDelete": "لا يمكن حذف الفرع الرئيسي",
+      "notActive": "الفرع غير نشط",
+      "invalidParent": "الفرع الرئيسي غير صالح"
+    },
+    "cashiers": {
+      "notFound": "الصندوق غير موجود",
+      "alreadyOpened": "الصندوق مفتوح مسبقاً",
+      "alreadyClosed": "الصندوق مغلق مسبقاً",
+      "notOpened": "الصندوق غير مفتوح",
+      "insufficientCash": "النقدية غير كافية",
+      "cannotClose": "لا يمكن غلق الصندوق لوجود اختلافات",
+      "transferFailed": "فشل التحويل بين الصناديق",
+      "reconciliationFailed": "فشلت تسوية الصندوق"
+    },
+    "taxes": {
+      "notFound": "الضريبة غير موجودة",
+      "nameExists": "اسم الضريبة موجود مسبقاً",
+      "rateExists": "نسبة الضريبة موجودة مسبقاً",
+      "invalidRate": "نسبة ضريبة غير صحيحة",
+      "hasTransactions": "لا يمكن حذف الضريبة لوجود حركات عليها",
+      "calculationFailed": "فشل حساب الضريبة",
+      "reportFailed": "فشل إنشاء التقرير الضريبي",
+      "filingFailed": "فشل تقديم الإقرار الضريبي",
+      "vatCalculationFailed": "فشل حساب ضريبة القيمة المضافة"
+    },
+    "users": {
+      "notFound": "المستخدم غير موجود",
+      "invalidCredentials": "بيانات الدخول غير صحيحة",
+      "emailExists": "البريد الإلكتروني موجود مسبقاً",
+      "usernameExists": "اسم المستخدم موجود مسبقاً",
+      "invalidPassword": "كلمة المرور غير صحيحة",
+      "passwordMismatch": "كلمة المرور غير متطابقة",
+      "accountLocked": "الحساب مقفل",
+      "accountDisabled": "الحساب غير نشط",
+      "sessionExpired": "انتهت الجلسة",
+      "unauthorized": "غير مصرح لك بالدخول",
+      "passwordWeak": "كلمة المرور ضعيفة",
+      "cannotDelete": "لا يمكن حذف المستخدم الرئيسي",
+      "cannotDeleteSelf": "لا يمكن حذف حسابك الخاص",
+      "twoFactorRequired": "التحقق بخطوتين مطلوب",
+      "invalidTwoFactorCode": "رمز التحقق غير صحيح"
+    },
+    "permissions": {
+      "notFound": "الصلاحية غير موجودة",
+      "alreadyGranted": "الصلاحية ممنوحة مسبقاً",
+      "notGranted": "الصلاحية غير ممنوحة",
+      "cannotRevoke": "لا يمكن سحب صلاحية رئيسية",
+      "roleNotFound": "الدور غير موجود",
+      "roleExists": "الدور موجود مسبقاً",
+      "hasUsers": "لا يمكن حذف الدور لوجود مستخدمين مرتبطين به",
+      "cannotDelete": "لا يمكن حذف الدور الرئيسي"
+    },
+    "customers": {
+      "notFound": "العميل غير موجود",
+      "codeExists": "رمز العميل موجود مسبقاً",
+      "emailExists": "البريد الإلكتروني موجود مسبقاً",
+      "phoneExists": "رقم الجوال موجود مسبقاً",
+      "hasTransactions": "لا يمكن حذف العميل لوجود حركات له",
+      "hasBalance": "لا يمكن حذف العميل لوجود رصيد عليه",
+      "creditLimitExceeded": "تم تجاوز الحد الائتماني للعميل",
+      "accountSuspended": "حساب العميل موقف"
+    },
+    "suppliers": {
+      "notFound": "المورد غير موجود",
+      "codeExists": "رمز المورد موجود مسبقاً",
+      "emailExists": "البريد الإلكتروني موجود مسبقاً",
+      "phoneExists": "رقم الجوال موجود مسبقاً",
+      "hasTransactions": "لا يمكن حذف المورد لوجود حركات له",
+      "hasBalance": "لا يمكن حذف المورد لوجود رصيد عليه",
+      "accountSuspended": "حساب المورد موقف"
+    },
+    "accounts": {
+      "notFound": "الحساب المحاسبي غير موجود",
+      "codeExists": "رمز الحساب موجود مسبقاً",
+      "nameExists": "اسم الحساب موجود مسبقاً",
+      "hasTransactions": "لا يمكن حذف الحساب لوجود حركات عليه",
+      "hasSubAccounts": "لا يمكن حذف الحساب لوجود حسابات فرعية",
+      "invalidParent": "الحساب الأم غير صالح",
+      "circularReference": "مرجعية دائرية غير مسموح بها",
+      "entryNotFound": "القيد المحاسبي غير موجود",
+      "entryNotBalanced": "القيد المحاسبي غير متوازن",
+      "entryAlreadyApproved": "القيد معتمد مسبقاً",
+      "entryAlreadyRejected": "القيد مرفوض مسبقاً",
+      "invalidEntry": "قيد محاسبي غير صحيح"
+    },
+    "reports": {
+      "generationFailed": "فشل إنشاء التقرير",
+      "noData": "لا توجد بيانات للتقرير",
+      "invalidParameters": "معايير غير صالحة للتقرير",
+      "exportFailed": "فشل تصدير التقرير",
+      "printFailed": "فشل طباعة التقرير",
+      "sendFailed": "فشل إرسال التقرير",
+      "scheduleFailed": "فشل جدولة التقرير",
+      "reportNotFound": "التقرير غير موجود"
+    },
+    "stocktaking": {
+      "notFound": "الجرد غير موجود",
+      "alreadyStarted": "الجرد بدأ بالفعل",
+      "notStarted": "الجرد لم يبدأ بعد",
+      "alreadyFinished": "الجرد انتهى بالفعل",
+      "cannotModify": "لا يمكن تعديل جرد منتهي",
+      "discrepancy": "يوجد اختلاف في الكميات",
+      "notVerified": "لم يتم التحقق من الجرد",
+      "countFailed": "فشل تحديث الكمية الجردية",
+      "approvalFailed": "فشل اعتماد الجرد"
+    },
+    "expenses": {
+      "notFound": "المصروف غير موجود",
+      "alreadyApproved": "المصروف معتمد مسبقاً",
+      "alreadyRejected": "المصروف مرفوض مسبقاً",
+      "cannotDelete": "لا يمكن حذف مصروف معتمد",
+      "categoryNotFound": "تصنيف المصروفات غير موجود",
+      "categoryHasExpenses": "لا يمكن حذف التصنيف لوجود مصروفات مرتبطة به",
+      "budgetExceeded": "تم تجاوز الميزانية المحددة"
+    },
+    "revenues": {
+      "notFound": "الإيراد غير موجود",
+      "alreadyApproved": "الإيراد معتمد مسبقاً",
+      "alreadyRejected": "الإيراد مرفوض مسبقاً",
+      "cannotDelete": "لا يمكن حذف إيراد معتمد",
+      "categoryNotFound": "تصنيف الإيرادات غير موجود",
+      "categoryHasRevenues": "لا يمكن حذف التصنيف لوجود إيرادات مرتبطة به"
+    },
+    "system": {
+      "backupFailed": "فشل إنشاء النسخة الاحتياطية",
+      "restoreFailed": "فشل استعادة النسخة الاحتياطية",
+      "settingsSaveFailed": "فشل حفظ إعدادات النظام",
+      "cacheClearFailed": "فشل مسح ذاكرة التخزين المؤقت",
+      "databaseError": "خطأ في قاعدة البيانات",
+      "updateFailed": "فشل تثبيت التحديث",
+      "maintenanceError": "خطأ في وضع الصيانة",
+      "optimizeFailed": "فشل تحسين قاعدة البيانات"
+    }
+  },
+
+  "warning": {
+    "general": {
+      "unsavedChanges": "توجد تغييرات غير محفوظة",
+      "deleteConfirmation": "تأكيد الحذف",
+      "permanentAction": "هذا الإجراء دائم ولا يمكن التراجع عنه",
+      "irreversible": "لا يمكن التراجع عن هذا الإجراء",
+      "dataLoss": "تحذير: قد تفقد بعض البيانات",
+      "networkSlow": "اتصال الشبكة بطيء، قد تستغرق العملية وقتاً أطول",
+      "sessionExpiring": "الجلسة على وشك الانتهاء"
+    },
+    "warehouses": {
+      "lowCapacity": "السعة المتبقية في المستودع منخفضة",
+      "fullCapacity": "المستودع ممتلئ تقريباً",
+      "noSpace": "لا توجد مساحة كافية في المستودع",
+      "lowStock": "المخزون منخفض، يرجى إعادة الطلب",
+      "expiringSoon": "هناك أصناف تنتهي صلاحيتها قريباً",
+      "expired": "توجد أصناف منتهية الصلاحية",
+      "damaged": "توجد أصناف تالفة"
+    },
+    "items": {
+      "noStock": "الصنف غير متوفر في المخزون",
+      "lowStock": "كمية الصنف منخفضة، يرجى إعادة الطلب",
+      "expiring": "تاريخ انتهاء الصنف قريب",
+      "expired": "الصنف منتهي الصلاحية",
+      "negativeBalance": "الرصيد سالب، يرجى المراجعة",
+      "noSerial": "الصنف لا يحتوي على أرقام تسلسلية"
+    },
+    "groups": {
+      "deleteItems": "حذف المجموعة سيؤثر على الأصناف المرتبطة بها",
+      "emptyGroup": "المجموعة فارغة، لا توجد أصناف"
+    },
+    "sales": {
+      "unpaidInvoice": "الفاتورة غير مدفوعة",
+      "overdueInvoice": "الفاتورة متأخرة السداد",
+      "customerCreditLimit": "العميل قارب على تجاوز الحد الائتماني",
+      "lowStockForSale": "المخزون منخفض للأصناف المطلوبة في الفاتورة",
+      "quotationExpiring": "عرض السعر على وشك الانتهاء"
+    },
+    "purchases": {
+      "unpaidInvoice": "فاتورة المشتريات غير مدفوعة",
+      "overdueInvoice": "فاتورة المشتريات متأخرة السداد",
+      "orderDelayed": "أمر الشراء متأخر عن الموعد المحدد"
+    },
+    "banks": {
+      "lowBalance": "الرصيد البنكي منخفض",
+      "negativeBalance": "الرصيد البنكي سالب",
+      "checkExpiring": "الشيك على وشك الانتهاء"
+    },
+    "branches": {
+      "noWarehouse": "الفرع لا يحتوي على مستودع",
+      "noCashier": "الفرع لا يحتوي على صندوق"
+    },
+    "cashiers": {
+      "lowCash": "النقدية في الصندوق منخفضة",
+      "discrepancy": "يوجد اختلاف في الصندوق",
+      "notReconciled": "الصندوق غير مسوى"
+    },
+    "users": {
+      "passwordExpiring": "كلمة المرور على وشك الانتهاء",
+      "inactiveUser": "المستخدم غير نشط",
+      "noPermissions": "المستخدم ليس لديه صلاحيات كافية"
+    },
+    "customers": {
+      "creditLimitWarning": "العميل قارب على تجاوز الحد الائتماني",
+      "overdueBalance": "على العميل رصيد متأخر",
+      "inactiveCustomer": "العميل غير نشط"
+    },
+    "suppliers": {
+      "overdueBalance": "على المورد رصيد متأخر",
+      "inactiveSupplier": "المورد غير نشط"
+    },
+    "accounts": {
+      "unbalancedEntry": "القيد المحاسبي غير متوازن",
+      "negativeBalance": "الرصيد المحاسبي سالب"
+    },
+    "stocktaking": {
+      "discrepancy": "يوجد اختلاف بين الكميات المتوقعة والفعلية",
+      "unverified": "الجرد غير موثق بعد",
+      "inProgress": "الجرد قيد التنفيذ"
+    },
+    "system": {
+      "backupOld": "النسخة الاحتياطية قديمة، يرجى تحديثها",
+      "cacheLarge": "ذاكرة التخزين المؤقت كبيرة، يرجى مسحها",
+      "updateAvailable": "يوجد تحديث جديد للنظام"
+    }
+  },
+
+  "info": {
+    "general": {
+      "loading": "جاري التحميل...",
+      "processing": "جاري المعالجة...",
+      "pleaseWait": "يرجى الانتظار...",
+      "noData": "لا توجد بيانات",
+      "noResults": "لا توجد نتائج",
+      "loadingMore": "جاري تحميل المزيد...",
+      "refreshing": "جاري التحديث...",
+      "saving": "جاري الحفظ...",
+      "deleting": "جاري الحذف...",
+      "updating": "جاري التحديث...",
+      "exporting": "جاري التصدير...",
+      "importing": "جاري الاستيراد...",
+      "printing": "جاري الطباعة..."
+    },
+    "warehouses": {
+      "stockSummary": "ملخص المخزون في المستودع",
+      "currentBalance": "الرصيد الحالي للمخزون",
+      "itemsCount": "عدد الأصناف في المستودع",
+      "capacityInfo": "معلومات سعة المستودع",
+      "lastTransaction": "آخر حركة تمت في المستودع"
+    },
+    "items": {
+      "itemDetails": "تفاصيل الصنف",
+      "stockStatus": "حالة المخزون للصنف",
+      "priceHistory": "سجل أسعار الصنف",
+      "transactionHistory": "سجل حركات الصنف"
+    },
+    "sales": {
+      "invoiceSummary": "ملخص فاتورة المبيعات",
+      "invoiceItems": "أصناف الفاتورة",
+      "paymentStatus": "حالة السداد",
+      "customerInfo": "معلومات العميل",
+      "totalAmount": "إجمالي المبلغ",
+      "discount": "الخصم",
+      "tax": "الضريبة",
+      "netAmount": "صافي المبلغ"
+    },
+    "purchases": {
+      "invoiceSummary": "ملخص فاتورة المشتريات",
+      "invoiceItems": "أصناف الفاتورة",
+      "paymentStatus": "حالة السداد",
+      "supplierInfo": "معلومات المورد"
+    },
+    "banks": {
+      "balance": "الرصيد الحالي للبنك",
+      "lastTransaction": "آخر حركة بنكية",
+      "statementPeriod": "فترة كشف الحساب"
+    },
+    "branches": {
+      "branchInfo": "معلومات الفرع",
+      "warehouses": "المستودعات التابعة للفرع",
+      "cashiers": "الصناديق التابعة للفرع",
+      "users": "المستخدمين في الفرع"
+    },
+    "cashiers": {
+      "openingBalance": "رصيد الافتتاح",
+      "closingBalance": "رصيد الإغلاق",
+      "currentBalance": "الرصيد الحالي",
+      "transactions": "الحركات النقدية"
+    },
+    "taxes": {
+      "vatRate": "نسبة ضريبة القيمة المضافة",
+      "taxAmount": "مبلغ الضريبة",
+      "taxableAmount": "المبلغ الخاضع للضريبة",
+      "taxPeriod": "الفترة الضريبية"
+    },
+    "users": {
+      "userInfo": "معلومات المستخدم",
+      "lastLogin": "آخر تسجيل دخول",
+      "currentSession": "الجلسة الحالية",
+      "permissions": "الصلاحيات"
+    },
+    "customers": {
+      "customerInfo": "معلومات العميل",
+      "balance": "رصيد العميل",
+      "lastPurchase": "آخر عملية شراء",
+      "totalPurchases": "إجمالي المشتريات"
+    },
+    "suppliers": {
+      "supplierInfo": "معلومات المورد",
+      "balance": "رصيد المورد",
+      "lastPurchase": "آخر عملية شراء",
+      "totalPurchases": "إجمالي المشتريات"
+    },
+    "accounts": {
+      "accountInfo": "معلومات الحساب",
+      "balance": "رصيد الحساب",
+      "entries": "القيود المحاسبية",
+      "period": "الفترة المحاسبية"
+    },
+    "reports": {
+      "reportInfo": "معلومات التقرير",
+      "generatedAt": "تم الإنشاء في",
+      "period": "الفترة",
+      "filters": "الفلاتر المستخدمة"
+    },
+    "stocktaking": {
+      "stocktakingInfo": "معلومات الجرد",
+      "expectedCount": "الكمية المتوقعة",
+      "actualCount": "الكمية الفعلية",
+      "difference": "الفرق",
+      "status": "حالة الجرد"
+    },
+    "system": {
+      "systemInfo": "معلومات النظام",
+      "version": "إصدار النظام",
+      "lastBackup": "آخر نسخة احتياطية",
+      "databaseSize": "حجم قاعدة البيانات"
+    }
+  },
+
+  "confirm": {
+    "general": {
+      "delete": "هل أنت متأكد من الحذف؟",
+      "save": "هل تريد حفظ التغييرات؟",
+      "cancel": "هل تريد إلغاء التغييرات؟",
+      "discard": "هل تريد تجاهل التغييرات؟",
+      "logout": "هل تريد تسجيل الخروج؟",
+      "restore": "هل تريد استعادة البيانات؟",
+      "archive": "هل تريد أرشفة البيانات؟",
+      "export": "هل تريد تصدير البيانات؟",
+      "import": "هل تريد استيراد البيانات؟",
+      "clear": "هل تريد مسح البيانات؟",
+      "reset": "هل تريد إعادة تعيين البيانات؟",
+      "send": "هل تريد الإرسال؟",
+      "print": "هل تريد الطباعة؟"
+    },
+    "warehouses": {
+      "delete": "هل تريد حذف المستودع؟",
+      "clear": "هل تريد مسح محتويات المستودع؟",
+      "transfer": "هل تريد نقل المخزون بين المستودعات؟"
+    },
+    "items": {
+      "delete": "هل تريد حذف الصنف؟",
+      "restore": "هل تريد استعادة الصنف؟",
+      "priceUpdate": "هل تريد تحديث سعر الصنف؟",
+      "stockAdjust": "هل تريد تعديل مخزون الصنف؟"
+    },
+    "groups": {
+      "delete": "هل تريد حذف المجموعة؟"
+    },
+    "sales": {
+      "delete": "هل تريد حذف فاتورة المبيعات؟",
+      "cancel": "هل تريد إلغاء فاتورة المبيعات؟",
+      "return": "هل تريد إنشاء مرتجع للفاتورة؟",
+      "send": "هل تريد إرسال الفاتورة للعميل؟",
+      "print": "هل تريد طباعة الفاتورة؟",
+      "convert": "هل تريد تحويل عرض السعر إلى فاتورة؟",
+      "deliver": "هل تريد تسليم الأمر؟"
+    },
+    "purchases": {
+      "delete": "هل تريد حذف فاتورة المشتريات؟",
+      "cancel": "هل تريد إلغاء فاتورة المشتريات؟",
+      "return": "هل تريد إنشاء مرتجع للفاتورة؟",
+      "send": "هل تريد إرسال الفاتورة للمورد؟",
+      "print": "هل تريد طباعة الفاتورة؟",
+      "convert": "هل تريد تحويل أمر الشراء إلى فاتورة؟",
+      "receive": "هل تريد تسجيل استلام المشتريات؟"
+    },
+    "banks": {
+      "delete": "هل تريد حذف الحساب البنكي؟",
+      "transfer": "هل تريد إجراء تحويل بنكي؟",
+      "deposit": "هل تريد الإيداع في البنك؟",
+      "withdraw": "هل تريد السحب من البنك؟",
+      "checkIssue": "هل تريد إصدار شيك؟",
+      "checkClear": "هل تريد صرف الشيك؟",
+      "reconcile": "هل تريد إجراء التسوية البنكية؟"
+    },
+    "branches": {
+      "delete": "هل تريد حذف الفرع؟",
+      "activate": "هل تريد تفعيل الفرع؟",
+      "deactivate": "هل تريد تعطيل الفرع؟"
+    },
+    "cashiers": {
+      "open": "هل تريد فتح الصندوق؟",
+      "close": "هل تريد غلق الصندوق؟",
+      "deposit": "هل تريد الإيداع في الصندوق؟",
+      "withdraw": "هل تريد السحب من الصندوق؟",
+      "transfer": "هل تريد التحويل بين الصناديق؟",
+      "reconcile": "هل تريد تسوية الصندوق؟"
+    },
+    "taxes": {
+      "delete": "هل تريد حذف الضريبة؟",
+      "file": "هل تريد تقديم الإقرار الضريبي؟",
+      "report": "هل تريد إنشاء التقرير الضريبي؟"
+    },
+    "users": {
+      "delete": "هل تريد حذف المستخدم؟",
+      "deactivate": "هل تريد تعطيل المستخدم؟",
+      "activate": "هل تريد تفعيل المستخدم؟",
+      "resetPassword": "هل تريد إعادة تعيين كلمة المرور؟",
+      "changePassword": "هل تريد تغيير كلمة المرور؟",
+      "logout": "هل تريد تسجيل الخروج؟"
+    },
+    "permissions": {
+      "revoke": "هل تريد سحب الصلاحية؟",
+      "grant": "هل تريد منح الصلاحية؟",
+      "delete": "هل تريد حذف الدور؟"
+    },
+    "customers": {
+      "delete": "هل تريد حذف العميل؟",
+      "deactivate": "هل تريد تعطيل العميل؟",
+      "activate": "هل تريد تفعيل العميل؟"
+    },
+    "suppliers": {
+      "delete": "هل تريد حذف المورد؟",
+      "deactivate": "هل تريد تعطيل المورد؟",
+      "activate": "هل تريد تفعيل المورد؟"
+    },
+    "accounts": {
+      "delete": "هل تريد حذف الحساب المحاسبي؟",
+      "entryDelete": "هل تريد حذف القيد المحاسبي؟",
+      "entryApprove": "هل تريد اعتماد القيد المحاسبي؟",
+      "entryReject": "هل تريد رفض القيد المحاسبي؟"
+    },
+    "reports": {
+      "generate": "هل تريد إنشاء التقرير؟",
+      "export": "هل تريد تصدير التقرير؟",
+      "print": "هل تريد طباعة التقرير؟",
+      "send": "هل تريد إرسال التقرير؟"
+    },
+    "stocktaking": {
+      "start": "هل تريد بدء الجرد؟",
+      "pause": "هل تريد إيقاف الجرد مؤقتاً؟",
+      "resume": "هل تريد استئناف الجرد؟",
+      "finish": "هل تريد إنهاء الجرد؟",
+      "verify": "هل تريد التحقق من الجرد؟",
+      "approve": "هل تريد اعتماد الجرد؟"
+    },
+    "expenses": {
+      "delete": "هل تريد حذف المصروف؟",
+      "approve": "هل تريد اعتماد المصروف؟",
+      "reject": "هل تريد رفض المصروف؟"
+    },
+    "revenues": {
+      "delete": "هل تريد حذف الإيراد؟",
+      "approve": "هل تريد اعتماد الإيراد؟",
+      "reject": "هل تريد رفض الإيراد؟"
+    },
+    "system": {
+      "backup": "هل تريد إنشاء نسخة احتياطية؟",
+      "restore": "هل تريد استعادة النسخة الاحتياطية؟",
+      "reset": "هل تريد إعادة تعيين النظام؟",
+      "clearCache": "هل تريد مسح ذاكرة التخزين المؤقت؟",
+      "maintenance": "هل تريد تفعيل وضع الصيانة؟",
+      "update": "هل تريد تثبيت التحديث؟"
+    }
+  },
+
+  "validation": {
+    "required": "هذا الحقل مطلوب",
+    "minLength": "الحد الأدنى للطول هو ${min} أحرف",
+    "maxLength": "الحد الأقصى للطول هو ${max} أحرف",
+    "exactLength": "الطول يجب أن يكون ${length} أحرف",
+    "minValue": "القيمة يجب أن تكون على الأقل ${min}",
+    "maxValue": "القيمة يجب أن تكون على الأكثر ${max}",
+    "between": "القيمة يجب أن تكون بين ${min} و ${max}",
+    "email": "الرجاء إدخال بريد إلكتروني صحيح",
+    "phone": "الرجاء إدخال رقم هاتف صحيح",
+    "number": "الرجاء إدخال رقم صحيح",
+    "integer": "الرجاء إدخال عدد صحيح",
+    "positive": "الرجاء إدخال قيمة موجبة",
+    "negative": "الرجاء إدخال قيمة سالبة",
+    "date": "الرجاء إدخال تاريخ صحيح",
+    "dateAfter": "التاريخ يجب أن يكون بعد ${date}",
+    "dateBefore": "التاريخ يجب أن يكون قبل ${date}",
+    "time": "الرجاء إدخال وقت صحيح",
+    "url": "الرجاء إدخال رابط صحيح",
+    "pattern": "الرجاء إدخال قيمة مطابقة للنمط المطلوب",
+    "unique": "القيمة موجودة مسبقاً",
+    "exists": "القيمة غير موجودة",
+    "mismatch": "القيم غير متطابقة",
+    "same": "القيم يجب أن تكون متطابقة",
+    "different": "القيم يجب أن تكون مختلفة",
+    "in": "القيمة غير مسموح بها",
+    "notIn": "القيمة غير مسموح بها",
+    "array": "الرجاء إدخال مصفوفة صحيحة",
+    "object": "الرجاء إدخال كائن صحيح",
+    "boolean": "الرجاء إدخال قيمة منطقية صحيحة",
+    "file": "الرجاء رفع ملف صحيح",
+    "image": "الرجاء رفع صورة صحيحة",
+    "mimes": "نوع الملف غير مسموح به. الأنواع المسموحة: ${types}",
+    "maxSize": "حجم الملف يجب أن لا يتجاوز ${size}",
+    "minSize": "حجم الملف يجب أن لا يقل عن ${size}",
+    "dimensions": "أبعاد الصورة غير صحيحة",
+    "password": "كلمة المرور يجب أن تحتوي على حرف كبير وحرف صغير ورقم ورمز خاص",
+    "confirmPassword": "تأكيد كلمة المرور غير متطابق",
+    "currentPassword": "كلمة المرور الحالية غير صحيحة",
+    "newPassword": "كلمة المرور الجديدة غير صحيحة",
+    "vatNumber": "الرجاء إدخال رقم ضريبي صحيح",
+    "iban": "الرجاء إدخال رقم IBAN صحيح",
+    "nationalId": "الرجاء إدخال رقم هوية صحيح",
+    "commercialRegister": "الرجاء إدخال رقم سجل تجاري صحيح"
+  }
+}

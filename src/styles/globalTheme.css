@@ -1,0 +1,1219 @@
+/* ========================================
+   نظام الثيمات المتكامل - AttlSoft ERP
+   ======================================== */
+
+/* ===== الألوان الجديدة ===== */
+:root {
+  /* الألوان الأساسية */
+  --primary-color: #513ef7;
+  --primary-hover: #3a2bc9;
+  --primary-light: #6b5cf7;
+  --primary-dark: #2a1db8;
+
+  /* الأخضر */
+  --success-color: #22c55e;
+  --success-hover: #16a34a;
+
+  /* الأحمر */
+  --danger-color: #ef4444;
+  --danger-hover: #dc2626;
+
+  /* الأصفر */
+  --warning-color: #eab308;
+  --warning-hover: #ca8a04;
+
+  /* السماوي */
+  --info-color: #06b6d4;
+  --info-hover: #0891b2;
+
+  /* الأرجواني */
+  --purple-color: #8b5cf6;
+  --purple-hover: #7c3aed;
+
+  /* البرتقالي */
+  --orange-color: #f97316;
+  --orange-hover: #ea580c;
+
+  /* الوردي */
+  --pink-color: #ec4899;
+  --pink-hover: #db2777;
+
+  transition: all 0.2s ease;
+}
+
+/* ===== Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  direction: rtl;
+}
+
+body {
+  font-family: var(--font-family-main);
+  background-color: var(--color-bgPrimary);
+  color: var(--color-textPrimary);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-scrollbarTrack);
+  border-radius: var(--radius-md);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbarThumb);
+  border-radius: var(--radius-md);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-scrollbarThumbHover);
+}
+
+/* ===== Cards ===== */
+.ant-card,
+[data-slot="card"] {
+  background: var(--color-bgCard) !important;
+  border: 1px solid var(--color-borderCard) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--color-shadowCard) !important;
+  transition: all 0.2s ease !important;
+}
+
+.ant-card:hover,
+[data-slot="card"]:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--color-shadowLg) !important;
+}
+
+/* ===== HeroUI Tabs ===== */
+[data-slot="tab"] {
+  color: var(--color-textSecondary) !important;
+  transition: all 0.2s ease !important;
+}
+
+[data-slot="tab"][data-selected="true"] {
+  color: var(--primary-color) !important;
+  font-weight: 600 !important;
+}
+
+[data-slot="tab"]:hover {
+  color: var(--primary-hover) !important;
+}
+
+[data-slot="tab"]::after {
+  background: var(--primary-color) !important;
+}
+
+[data-slot="card-body"] {
+  color: var(--color-textPrimary) !important;
+  background: transparent !important;
+}
+
+/* ============================================
+   ===== الجداول =====
+   ============================================ */
+
+.ant-table-wrapper .ant-table-container {
+  overflow-x: visible !important;
+  overflow-y: hidden !important;
+
+}
+
+.ant-table-wrapper .ant-table {
+  overflow-x: auto !important;
+  background: var(--color-bgTable) !important;
+  color: var(--color-textPrimary) !important;
+  border-radius: var(--radius-md) !important;
+}
+
+.ant-table-thead > tr > th {
+  background: var(--color-bgTableHeader) !important;
+  border-bottom-color: var(--color-borderTable) !important;
+  font-weight: 600 !important;
+  padding: 12px 16px !important;
+}
+
+/* ===== النهار: رأس الجدول ===== */
+.light-mode .ant-table-thead > tr > th {
+  background: var(--primary-color) !important;
+  color: #ffffff !important;
+}
+
+.light-mode .ant-table-thead > tr > th .ant-table-column-title {
+  color: #ffffff !important;
+}
+
+.light-mode .ant-table-thead > tr > th .anticon {
+  color: #ffffff !important;
+}
+
+.light-mode .ant-table-thead > tr > th:hover {
+  background: var(--primary-hover) !important;
+}
+
+/* ===== الداكن: رأس الجدول ===== */
+.dark-mode .ant-table-thead > tr > th {
+  background: #0A0F1F !important;
+  color: #ffffff !important;
+  border-bottom-color: #1A2240 !important;
+}
+
+.dark-mode .ant-table-thead > tr > th .ant-table-column-title {
+  color: #ffffff !important;
+}
+
+.dark-mode .ant-table-thead > tr > th .anticon {
+  color: #ffffff !important;
+}
+
+.dark-mode .ant-table-thead > tr > th:hover {
+  background: #12182D !important;
+}
+
+/* ===== صفوف الجدول ===== */
+.dark-mode .ant-table-tbody > tr > td {
+  background: #12182D !important;
+  color: #B9C2E3 !important;
+  border-bottom-color: #1A2240 !important;
+}
+
+.dark-mode .ant-table-tbody > tr:nth-child(even) {
+  background: #161F3A !important;
+}
+
+.dark-mode .ant-table-tbody > tr:hover > td {
+  background: #1A2240 !important;
+}
+
+.dark-mode .ant-table-tbody > tr.ant-table-row-selected > td {
+  background: #1F2A4D !important;
+}
+
+.light-mode .ant-table-tbody > tr > td {
+  border-bottom-color: var(--color-borderTable) !important;
+  padding: 12px 16px !important;
+}
+
+.light-mode .ant-table-tbody > tr:hover > td {
+  background: var(--color-bgTableRowHover) !important;
+}
+
+.light-mode .ant-table-tbody > tr.ant-table-row-selected > td {
+  background: var(--color-activeBg) !important;
+}
+
+.light-mode .ant-table-tbody > tr:nth-child(even) {
+  background: var(--color-tableStripedBg) !important;
+}
+
+/* ===== الأعمدة الثابتة ===== */
+.ant-table-cell-fix-left,
+.ant-table-cell-fix-right {
+  background: var(--color-bgTable) !important;
+  z-index: 5 !important;
+}
+
+.ant-table-thead .ant-table-cell-fix-left,
+.ant-table-thead .ant-table-cell-fix-right {
+  background: var(--color-bgTableHeader) !important;
+  z-index: 15 !important;
+}
+
+.dark-mode .ant-table-cell-fix-left,
+.dark-mode .ant-table-cell-fix-right {
+  background: #12182D !important;
+}
+
+.dark-mode .ant-table-thead .ant-table-cell-fix-left,
+.dark-mode .ant-table-thead .ant-table-cell-fix-right {
+  background: #0A0F1F !important;
+}
+
+.ant-table-cell-fix-left-first {
+  box-shadow: inset 10px 0 8px -8px rgba(0,0,0,0.15) !important;
+}
+
+.ant-table-cell-fix-right-last {
+  box-shadow: inset -10px 0 8px -8px rgba(0,0,0,0.15) !important;
+}
+
+/* ===== سكرول بار الجدول ===== */
+.ant-table-wrapper .ant-table::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+.ant-table-wrapper .ant-table::-webkit-scrollbar-track {
+  background: var(--color-scrollbarTrack);
+  border-radius: 5px;
+}
+
+.ant-table-wrapper .ant-table::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbarThumb);
+  border-radius: 5px;
+}
+
+.ant-table-wrapper .ant-table::-webkit-scrollbar-thumb:hover {
+  background: var(--color-scrollbarThumbHover);
+}
+
+/* ============================================
+   ===== الأزرار - جميع الألوان =====
+   ============================================ */
+
+.ant-btn {
+  transition: all 0.2s ease !important;
+  border-radius: var(--radius-md) !important;
+}
+
+/* ===== الزر الأساسي (أزرق) ===== */
+.ant-btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  color: #ffffff !important;
+}
+
+.ant-btn-primary:hover:not(:disabled) {
+  background: var(--primary-hover) !important;
+  border-color: var(--primary-hover) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+/* ===== الزر الأخضر ===== */
+.ant-btn-success,
+.ant-btn-green,
+button[color="green"] {
+  background: var(--success-color) !important;
+  border-color: var(--success-color) !important;
+  color: #ffffff !important;
+}
+
+.ant-btn-success:hover:not(:disabled),
+.ant-btn-green:hover:not(:disabled),
+button[color="green"]:hover {
+  background: var(--success-hover) !important;
+  border-color: var(--success-hover) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+/* ===== الزر الأحمر ===== */
+.ant-btn-danger,
+.ant-btn-red,
+button[color="red"] {
+  background: var(--danger-color) !important;
+  border-color: var(--danger-color) !important;
+  color: #ffffff !important;
+}
+
+.ant-btn-danger:hover:not(:disabled),
+.ant-btn-red:hover:not(:disabled),
+button[color="red"]:hover {
+  background: var(--danger-hover) !important;
+  border-color: var(--danger-hover) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+/* ===== الزر الأصفر ===== */
+.ant-btn-warning,
+.ant-btn-yellow,
+button[color="yellow"] {
+  background: var(--warning-color) !important;
+  border-color: var(--warning-color) !important;
+  color: #ffffff !important;
+}
+
+.ant-btn-warning:hover:not(:disabled),
+.ant-btn-yellow:hover:not(:disabled),
+button[color="yellow"]:hover {
+  background: var(--warning-hover) !important;
+  border-color: var(--warning-hover) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+/* ===== الزر السماوي ===== */
+.ant-btn-cyan,
+.ant-btn-info,
+button[color="cyan"] {
+  background: var(--info-color) !important;
+  border-color: var(--info-color) !important;
+  color: #ffffff !important;
+}
+
+.ant-btn-cyan:hover:not(:disabled),
+.ant-btn-info:hover:not(:disabled),
+button[color="cyan"]:hover {
+  background: var(--info-hover) !important;
+  border-color: var(--info-hover) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+/* ===== الزر الأرجواني ===== */
+.ant-btn-purple,
+button[color="purple"] {
+  background: var(--purple-color) !important;
+  border-color: var(--purple-color) !important;
+  color: #ffffff !important;
+}
+
+.ant-btn-purple:hover:not(:disabled),
+button[color="purple"]:hover {
+  background: var(--purple-hover) !important;
+  border-color: var(--purple-hover) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+/* ===== الزر البرتقالي ===== */
+.ant-btn-orange,
+button[color="orange"] {
+  background: var(--orange-color) !important;
+  border-color: var(--orange-color) !important;
+  color: #ffffff !important;
+}
+
+.ant-btn-orange:hover:not(:disabled),
+button[color="orange"]:hover {
+  background: var(--orange-hover) !important;
+  border-color: var(--orange-hover) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+/* ===== الزر الوردي ===== */
+.ant-btn-pink,
+button[color="pink"] {
+  background: var(--pink-color) !important;
+  border-color: var(--pink-color) !important;
+  color: #ffffff !important;
+}
+
+.ant-btn-pink:hover:not(:disabled),
+button[color="pink"]:hover {
+  background: var(--pink-hover) !important;
+  border-color: var(--pink-hover) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+/* ===== الزر الافتراضي ===== */
+.ant-btn-default {
+  background: #ffffff !important;
+  border-color: #d9d9d9 !important;
+  color: #000000 !important;
+}
+
+.ant-btn-default:hover:not(:disabled) {
+  background: #f5f5f5 !important;
+  border-color: var(--primary-color) !important;
+  color: var(--primary-color) !important;
+  transform: translateY(-1px);
+}
+
+/* ===== الزر المعطل ===== */
+.ant-btn:disabled,
+.ant-btn[disabled] {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* ============================================
+   ===== الأزرار - الوضع الليلي =====
+   ============================================ */
+
+.dark-mode .ant-btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .ant-btn-primary:hover:not(:disabled) {
+  background: var(--primary-hover) !important;
+  border-color: var(--primary-hover) !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .ant-btn-success,
+.dark-mode .ant-btn-green,
+.dark-mode button[color="green"] {
+  background: var(--success-color) !important;
+  border-color: var(--success-color) !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .ant-btn-success:hover:not(:disabled),
+.dark-mode .ant-btn-green:hover:not(:disabled),
+.dark-mode button[color="green"]:hover {
+  background: var(--success-hover) !important;
+  border-color: var(--success-hover) !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .ant-btn-danger,
+.dark-mode .ant-btn-red,
+.dark-mode button[color="red"] {
+  background: var(--danger-color) !important;
+  border-color: var(--danger-color) !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .ant-btn-danger:hover:not(:disabled),
+.dark-mode .ant-btn-red:hover:not(:disabled),
+.dark-mode button[color="red"]:hover {
+  background: var(--danger-hover) !important;
+  border-color: var(--danger-hover) !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .ant-btn-warning,
+.dark-mode .ant-btn-yellow,
+.dark-mode button[color="yellow"] {
+  background: var(--warning-color) !important;
+  border-color: var(--warning-color) !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .ant-btn-warning:hover:not(:disabled),
+.dark-mode .ant-btn-yellow:hover:not(:disabled),
+.dark-mode button[color="yellow"]:hover {
+  background: var(--warning-hover) !important;
+  border-color: var(--warning-hover) !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .ant-btn-cyan,
+.dark-mode .ant-btn-info,
+.dark-mode button[color="cyan"] {
+  background: var(--info-color) !important;
+  border-color: var(--info-color) !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .ant-btn-cyan:hover:not(:disabled),
+.dark-mode .ant-btn-info:hover:not(:disabled),
+.dark-mode button[color="cyan"]:hover {
+  background: var(--info-hover) !important;
+  border-color: var(--info-hover) !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .ant-btn-purple,
+.dark-mode button[color="purple"] {
+  background: var(--purple-color) !important;
+  border-color: var(--purple-color) !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .ant-btn-purple:hover:not(:disabled),
+.dark-mode button[color="purple"]:hover {
+  background: var(--purple-hover) !important;
+  border-color: var(--purple-hover) !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .ant-btn-orange,
+.dark-mode button[color="orange"] {
+  background: var(--orange-color) !important;
+  border-color: var(--orange-color) !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .ant-btn-orange:hover:not(:disabled),
+.dark-mode button[color="orange"]:hover {
+  background: var(--orange-hover) !important;
+  border-color: var(--orange-hover) !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .ant-btn-pink,
+.dark-mode button[color="pink"] {
+  background: var(--pink-color) !important;
+  border-color: var(--pink-color) !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .ant-btn-pink:hover:not(:disabled),
+.dark-mode button[color="pink"]:hover {
+  background: var(--pink-hover) !important;
+  border-color: var(--pink-hover) !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .ant-btn-default {
+  background: #1A2240 !important;
+  border-color: #28345E !important;
+  color: #B9C2E3 !important;
+}
+
+.dark-mode .ant-btn-default:hover:not(:disabled) {
+  background: #24305B !important;
+  border-color: var(--primary-color) !important;
+  color: var(--primary-color) !important;
+}
+
+/* ============================================
+   ===== MODAL - الرأس والفوتر ثابتين، البودي سكرول =====
+   ============================================ */
+
+.ant-modal {
+  max-height: 90vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.ant-modal-content {
+  display: flex !important;
+  flex-direction: column !important;
+  max-height: 90vh !important;
+  overflow: hidden !important;
+  border-radius: var(--radius-xl) !important;
+  background: var(--color-bgModal) !important;
+}
+
+/* =====  الرأس ثابت ===== */
+.ant-modal-header {
+  flex-shrink: 0 !important;
+  border-bottom: 2px solid var(--color-borderPrimary) !important;
+  padding: 16px 24px !important;
+  background: var(--color-bgModal) !important;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0 !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 10 !important;
+}
+
+/* =====  الجسم قابل للتمرير ===== */
+.ant-modal-body {
+  flex: 1 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding: 20px 24px !important;
+  max-height: calc(90vh - 130px) !important;
+  background: var(--color-bgModal) !important;
+}
+
+/* ===== سكرول بار المودال ===== */
+.ant-modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ant-modal-body::-webkit-scrollbar-track {
+  background: var(--color-scrollbarTrack);
+  border-radius: 10px;
+}
+
+.ant-modal-body::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbarThumb);
+  border-radius: 10px;
+}
+
+.ant-modal-body::-webkit-scrollbar-thumb:hover {
+  background: var(--color-scrollbarThumbHover);
+}
+
+/* =====  الفوتر ثابت ===== */
+.ant-modal-footer {
+  flex-shrink: 0 !important;
+  border-top: 1px solid var(--color-borderPrimary) !important;
+  padding: 12px 24px !important;
+  background: var(--color-bgModal) !important;
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl) !important;
+  position: sticky !important;
+  bottom: 0 !important;
+  z-index: 10 !important;
+}
+
+/* ===== إصلاح أزرار الفوتر ===== */
+.ant-modal-footer .ant-btn {
+  min-width: 80px !important;
+}
+
+.ant-modal-footer .ant-btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  color: #ffffff !important;
+}
+
+.ant-modal-footer .ant-btn-primary:hover {
+  background: var(--primary-hover) !important;
+  border-color: var(--primary-hover) !important;
+}
+
+.ant-modal-footer .ant-btn-default {
+  background: #ffffff !important;
+  border-color: #d9d9d9 !important;
+  color: #000000 !important;
+}
+
+.ant-modal-footer .ant-btn-default:hover {
+  background: #f5f5f5 !important;
+  border-color: var(--primary-color) !important;
+  color: var(--primary-color) !important;
+}
+
+/* ===== زر الإغلاق (X) ===== */
+.ant-modal-close {
+  color: var(--danger-color) !important;
+  transition: all 0.2s ease !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+}
+
+.ant-modal-close:hover {
+  background: var(--danger-color)20 !important;
+  color: var(--danger-hover) !important;
+  transform: rotate(90deg) !important;
+}
+
+.dark-mode .ant-modal-close {
+  color: #FF4D6D !important;
+}
+
+.dark-mode .ant-modal-close:hover {
+  background: #FF4D6D20 !important;
+  color: #FF708A !important;
+}
+
+/* ===== الدارك مود للمودال ===== */
+.dark-mode .ant-modal-content {
+  background: #12182D !important;
+}
+
+.dark-mode .ant-modal-header {
+  background: #12182D !important;
+  border-bottom-color: #28345E !important;
+}
+
+.dark-mode .ant-modal-title {
+  color: #FFFFFF !important;
+}
+
+.dark-mode .ant-modal-body {
+  background: #12182D !important;
+}
+
+.dark-mode .ant-modal-footer {
+  background: #12182D !important;
+  border-top-color: #28345E !important;
+}
+
+.dark-mode .ant-modal-footer .ant-btn-default {
+  background: #1A2240 !important;
+  border-color: #28345E !important;
+  color: #B9C2E3 !important;
+}
+
+.dark-mode .ant-modal-footer .ant-btn-default:hover {
+  background: #24305B !important;
+  border-color: var(--primary-color) !important;
+  color: var(--primary-color) !important;
+}
+
+/* ============================================
+   ===== POPCONFIRM - في منتصف الشاشة + أزرار متساوية =====
+   ============================================ */
+/* ============================================
+   ===== MODAL.CONFIRM - تنسيق الدارك مود =====
+   ============================================ */
+/* ============================================
+   Modal.confirm - Dark Theme
+   ============================================ */
+
+/* الخلفية الخارجية */
+.custom-delete-modal .ant-modal-content {
+  background: #12182D !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,.45) !important;
+}
+
+/* الرأس */
+.custom-delete-modal .ant-modal-header {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255,255,255,.08) !important;
+  padding: 18px 24px !important;
+}
+
+.custom-delete-modal .ant-modal-confirm-title,
+.custom-delete-modal .ant-modal-title {
+  color: #250b0b !important;
+}
+
+/* الجسم */
+.custom-delete-modal .ant-modal-body {
+  background: transparent !important;
+  padding: 24px !important;
+}
+
+/* إزالة الكارد الداخلي */
+.custom-delete-modal .ant-modal-confirm-body {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  gap: 16px !important;
+}
+
+/* الأيقونة */
+.custom-delete-modal .ant-modal-confirm-body .anticon-exclamation-circle {
+  color: var(--danger-color) !important;
+  font-size: 28px !important;
+  margin-top: 2px !important;
+}
+
+/* العنوان */
+.custom-delete-modal .ant-modal-confirm-title {
+  color: #000000 !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+}
+
+/* النص */
+.custom-delete-modal .ant-modal-confirm-content {
+  color: #2b3046 !important;
+  margin-top: 6px !important;
+  line-height: 1.7 !important;
+  font-size: 14px !important; 
+}
+
+/* الفوتر */
+.custom-delete-modal .ant-modal-footer {
+  background: transparent !important;
+  border-top: 1px solid rgba(255,255,255,.08) !important;
+  padding: 16px 24px !important;
+}
+
+/* الأزرار */
+.custom-delete-modal .ant-btn {
+  border-radius: 10px !important;
+  height: 42px !important;
+  min-width: 95px !important;
+}
+
+/* ===== زر التأكيد (أحمر) ===== */
+.custom-delete-modal .ant-btn-primary,
+.custom-delete-modal .ant-btn-dangerous {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  color: #ffffff !important;
+}
+
+.custom-delete-modal .ant-btn-primary:hover,
+.custom-delete-modal .ant-btn-dangerous:hover {
+  background: var(--primary-hover) !important;
+  border-color: var(--primary-hover) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 24px rgba(81, 62, 247, 0.4) !important;
+}
+/* زر الإغلاق */
+.custom-delete-modal .ant-modal-close {
+  color: #fff !important;
+}
+
+.custom-delete-modal .ant-modal-close:hover {
+  background: rgba(255,255,255,.08) !important;
+}
+/* ============================================
+   ===== تنسيق الحقول (أرقام، تواريخ، نصوص) =====
+   ============================================ */
+
+/* ===== حقل الرقم ===== */
+.ant-input-number {
+  background: var(--color-bgInput) !important;
+  border-color: var(--color-borderInput) !important;
+  color: var(--color-textPrimary) !important;
+  border-radius: var(--radius-md) !important;
+  width: 100% !important;
+}
+
+.ant-input-number:hover {
+  border-color: var(--primary-color) !important;
+}
+
+.ant-input-number:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 2px rgba(81, 62, 247, 0.2) !important;
+}
+
+.ant-input-number .ant-input-number-input {
+  color: var(--color-textPrimary) !important;
+}
+
+.dark-mode .ant-input-number {
+  background: #1A2240 !important;
+  border-color: #28345E !important;
+  color: #FFFFFF !important;
+}
+
+.dark-mode .ant-input-number .ant-input-number-input {
+  color: #FFFFFF !important;
+}
+
+/* ===== حقل التاريخ ===== */
+.ant-picker {
+  background: var(--color-bgInput) !important;
+  border-color: var(--color-borderInput) !important;
+  color: var(--color-textPrimary) !important;
+  border-radius: var(--radius-md) !important;
+  width: 100% !important;
+  padding: 8px 12px !important;
+}
+
+.ant-picker:hover {
+  border-color: var(--primary-color) !important;
+}
+
+.ant-picker:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 2px rgba(81, 62, 247, 0.2) !important;
+}
+
+.ant-picker .ant-picker-input > input {
+  color: var(--color-textPrimary) !important;
+}
+
+.ant-picker .ant-picker-suffix {
+  color: var(--color-textSecondary) !important;
+}
+
+.dark-mode .ant-picker {
+  background: #1A2240 !important;
+  border-color: #28345E !important;
+  color: #FFFFFF !important;
+}
+
+.dark-mode .ant-picker .ant-picker-input > input {
+  color: #FFFFFF !important;
+}
+
+/* ===== حقل النص الطويل (TextArea) ===== */
+.ant-input-textarea {
+  background: var(--color-bgInput) !important;
+  border-color: var(--color-borderInput) !important;
+  color: var(--color-textPrimary) !important;
+  border-radius: var(--radius-md) !important;
+}
+
+.ant-input-textarea:hover {
+  border-color: var(--primary-color) !important;
+}
+
+.ant-input-textarea:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 2px rgba(81, 62, 247, 0.2) !important;
+}
+
+.ant-input-textarea textarea {
+  background: transparent !important;
+  color: var(--color-textPrimary) !important;
+}
+
+.dark-mode .ant-input-textarea {
+  background: #1A2240 !important;
+  border-color: #28345E !important;
+  color: #FFFFFF !important;
+}
+
+.dark-mode .ant-input-textarea textarea {
+  color: #FFFFFF !important;
+}
+
+/* ===== تسميات الحقول ===== */
+.ant-form-item-label > label {
+  color: var(--color-textPrimary) !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+}
+
+.ant-form-item-label > label.ant-form-item-required::before {
+  color: var(--danger-color) !important;
+}
+
+.dark-mode .ant-form-item-label > label {
+  color: #FFFFFF !important;
+}
+
+/* ===== رسائل الخطأ في الحقول ===== */
+.ant-form-item-explain-error {
+  color: var(--danger-color) !important;
+  font-size: 13px !important;
+  margin-top: 4px !important;
+}
+
+/* ===== أيقونات الحقول ===== */
+.ant-form-item .anticon {
+  color: var(--color-textSecondary) !important;
+}
+
+.ant-form-item .anticon:hover {
+  color: var(--primary-color) !important;
+}
+
+/* ============================================
+   ===== باقي العناصر =====
+   ============================================ */
+
+/* ===== Checkbox ===== */
+.ant-checkbox .ant-checkbox-inner {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.light-mode .ant-checkbox .ant-checkbox-inner {
+  background-color: transparent;
+  border-color: #d9d9d9;
+}
+
+.dark-mode .ant-checkbox .ant-checkbox-inner {
+  background-color: transparent !important;
+  border-color: #4A5B8A !important;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner::after {
+  border-color: white !important;
+}
+
+.dark-mode .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+/* ===== Radio ===== */
+.ant-radio .ant-radio-inner {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.ant-radio-checked .ant-radio-inner {
+  border-color: var(--primary-color) !important;
+}
+
+.ant-radio-checked .ant-radio-inner::after {
+  background-color: var(--primary-color) !important;
+}
+
+/* ===== Switch ===== */
+.ant-switch-checked {
+  background-color: var(--primary-color) !important;
+}
+
+/* ===== Input ===== */
+.ant-input,
+.ant-input-affix-wrapper {
+  background: var(--color-bgInput) !important;
+  border-color: var(--color-borderInput) !important;
+  color: var(--color-textPrimary) !important;
+  border-radius: var(--radius-md) !important;
+}
+
+.ant-input:focus,
+.ant-input-affix-wrapper:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 2px rgba(81, 62, 247, 0.2) !important;
+}
+
+.dark-mode .ant-input,
+.dark-mode .ant-input-affix-wrapper {
+  background: #1A2240 !important;
+  border-color: #28345E !important;
+  color: #FFFFFF !important;
+}
+
+/* ===== Select ===== */
+.ant-select-selector {
+  background: var(--color-bgSelect) !important;
+  border-color: var(--color-borderInput) !important;
+  border-radius: var(--radius-md) !important;
+}
+
+.dark-mode .ant-select-selector {
+  background: #1A2240 !important;
+  border-color: #28345E !important;
+  color: #FFFFFF !important;
+}
+
+/* ===== Pagination ===== */
+.ant-pagination-item-active {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.ant-pagination-item-active a {
+  color: white !important;
+}
+
+.dark-mode .ant-pagination-item-active {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+/* ===== Tabs ===== */
+.ant-tabs-tab:hover {
+  color: var(--primary-color) !important;
+}
+
+.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: var(--primary-color) !important;
+}
+
+.ant-tabs-ink-bar {
+  background: var(--primary-color) !important;
+}
+
+/* ===== Alert ===== */
+.ant-alert-success {
+  background: var(--success-color)20 !important;
+  border-color: var(--success-color) !important;
+  color: var(--success-color) !important;
+}
+
+.ant-alert-error {
+  background: var(--danger-color)20 !important;
+  border-color: var(--danger-color) !important;
+  color: var(--danger-color) !important;
+}
+
+.ant-alert-warning {
+  background: var(--warning-color)20 !important;
+  border-color: var(--warning-color) !important;
+  color: var(--warning-color) !important;
+}
+
+.ant-alert-info {
+  background: var(--primary-color)20 !important;
+  border-color: var(--primary-color) !important;
+  color: var(--primary-color) !important;
+}
+
+/* ===== Message ===== */
+.ant-message-success .ant-message-notice-content {
+  background: var(--success-color)15 !important;
+  border: 1px solid var(--success-color) !important;
+  color: var(--success-color) !important;
+}
+
+.ant-message-error .ant-message-notice-content {
+  background: var(--danger-color)15 !important;
+  border: 1px solid var(--danger-color) !important;
+  color: var(--danger-color) !important;
+}
+
+.ant-message-warning .ant-message-notice-content {
+  background: var(--warning-color)15 !important;
+  border: 1px solid var(--warning-color) !important;
+  color: var(--warning-color) !important;
+}
+
+.ant-message-info .ant-message-notice-content {
+  background: var(--primary-color)15 !important;
+  border: 1px solid var(--primary-color) !important;
+  color: var(--primary-color) !important;
+}
+
+/* ===== Tag ===== */
+.ant-tag-success {
+  background: var(--success-color)20 !important;
+  border-color: var(--success-color) !important;
+  color: var(--success-color) !important;
+}
+
+.ant-tag-error {
+  background: var(--danger-color)20 !important;
+  border-color: var(--danger-color) !important;
+  color: var(--danger-color) !important;
+}
+
+.ant-tag-warning {
+  background: var(--warning-color)20 !important;
+  border-color: var(--warning-color) !important;
+  color: var(--warning-color) !important;
+}
+
+/* ============================================
+   ===== العناصر العادية =====
+   ============================================ */
+
+.light-mode .ant-tag {
+  background: #f5f5f5;
+  border-color: #d9d9d9;
+  color: #000000;
+}
+
+.dark-mode .ant-tag {
+  background: #1F2A4D;
+  border-color: #28345E;
+  color: #ffffff;
+}
+
+.ant-divider {
+  border-color: var(--color-borderPrimary) !important;
+}
+
+.light-mode .ant-divider {
+  border-color: #f0f0f0;
+}
+
+.dark-mode .ant-divider {
+  border-color: #28345E;
+}
+
+.ant-typography {
+  color: var(--color-textPrimary) !important;
+}
+
+.ant-typography-secondary {
+  color: var(--color-textSecondary) !important;
+}
+
+.ant-typography-success {
+  color: var(--success-color) !important;
+}
+
+.ant-typography-warning {
+  color: var(--warning-color) !important;
+}
+
+.ant-typography-danger {
+  color: var(--danger-color) !important;
+}
+
+
+
+
+/*   .ant-table-container */

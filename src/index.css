@@ -1,0 +1,531 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   ===== إجبار RTL/LTR على كل العناصر =====
+   ============================================ */
+
+/* ===== إجبار الاتجاه العام ===== */
+html[dir="rtl"] {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] {
+  direction: ltr !important;
+}
+
+/* ===== إجبار جميع العناصر على احترام الاتجاه ===== */
+html[dir="rtl"] *,
+html[dir="rtl"] *::before,
+html[dir="rtl"] *::after {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] *,
+html[dir="ltr"] *::before,
+html[dir="ltr"] *::after {
+  direction: ltr !important;
+}
+
+/* ============================================
+   ===== Ant Design - إجبار RTL/LTR =====
+   ============================================ */
+
+/* ===== Menu ===== */
+html[dir="rtl"] .ant-menu,
+html[dir="rtl"] .ant-menu-horizontal,
+html[dir="rtl"] .ant-menu-vertical,
+html[dir="rtl"] .ant-menu-inline,
+html[dir="rtl"] .ant-menu-submenu,
+html[dir="rtl"] .ant-menu-item,
+html[dir="rtl"] .ant-menu-submenu-title {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .ant-menu,
+html[dir="ltr"] .ant-menu-horizontal,
+html[dir="ltr"] .ant-menu-vertical,
+html[dir="ltr"] .ant-menu-inline,
+html[dir="ltr"] .ant-menu-submenu,
+html[dir="ltr"] .ant-menu-item,
+html[dir="ltr"] .ant-menu-submenu-title {
+  direction: ltr !important;
+}
+
+/* ===== Menu Popup (القوائم الفرعية) ===== */
+html[dir="rtl"] .ant-menu-submenu-popup,
+html[dir="rtl"] .ant-dropdown,
+html[dir="rtl"] .ant-dropdown-menu {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .ant-menu-submenu-popup,
+html[dir="ltr"] .ant-dropdown,
+html[dir="ltr"] .ant-dropdown-menu {
+  direction: ltr !important;
+}
+
+/* ===== Modal ===== */
+html[dir="rtl"] .ant-modal,
+html[dir="rtl"] .ant-modal-content,
+html[dir="rtl"] .ant-modal-header,
+html[dir="rtl"] .ant-modal-body,
+html[dir="rtl"] .ant-modal-footer {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .ant-modal,
+html[dir="ltr"] .ant-modal-content,
+html[dir="ltr"] .ant-modal-header,
+html[dir="ltr"] .ant-modal-body,
+html[dir="ltr"] .ant-modal-footer {
+  direction: ltr !important;
+}
+
+/* ===== Drawer ===== */
+html[dir="rtl"] .ant-drawer,
+html[dir="rtl"] .ant-drawer-content,
+html[dir="rtl"] .ant-drawer-header,
+html[dir="rtl"] .ant-drawer-body,
+html[dir="rtl"] .ant-drawer-footer {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .ant-drawer,
+html[dir="ltr"] .ant-drawer-content,
+html[dir="ltr"] .ant-drawer-header,
+html[dir="ltr"] .ant-drawer-body,
+html[dir="ltr"] .ant-drawer-footer {
+  direction: ltr !important;
+}
+
+/* ===== Table ===== */
+html[dir="rtl"] .ant-table,
+html[dir="rtl"] .ant-table-wrapper,
+html[dir="rtl"] .ant-table-thead,
+html[dir="rtl"] .ant-table-tbody,
+html[dir="rtl"] .ant-table-cell {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .ant-table,
+html[dir="ltr"] .ant-table-wrapper,
+html[dir="ltr"] .ant-table-thead,
+html[dir="ltr"] .ant-table-tbody,
+html[dir="ltr"] .ant-table-cell {
+  direction: ltr !important;
+}
+
+/* ===== Form ===== */
+html[dir="rtl"] .ant-form,
+html[dir="rtl"] .ant-form-item,
+html[dir="rtl"] .ant-form-item-label,
+html[dir="rtl"] .ant-form-item-control {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .ant-form,
+html[dir="ltr"] .ant-form-item,
+html[dir="ltr"] .ant-form-item-label,
+html[dir="ltr"] .ant-form-item-control {
+  direction: ltr !important;
+}
+
+/* ===== Input ===== */
+html[dir="rtl"] .ant-input,
+html[dir="rtl"] .ant-input-affix-wrapper,
+html[dir="rtl"] .ant-input-group,
+html[dir="rtl"] .ant-input-search {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .ant-input,
+html[dir="ltr"] .ant-input-affix-wrapper,
+html[dir="ltr"] .ant-input-group,
+html[dir="ltr"] .ant-input-search {
+  direction: ltr !important;
+}
+
+/* ===== Select ===== */
+html[dir="rtl"] .ant-select,
+html[dir="rtl"] .ant-select-selector,
+html[dir="rtl"] .ant-select-dropdown,
+html[dir="rtl"] .ant-select-item {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .ant-select,
+html[dir="ltr"] .ant-select-selector,
+html[dir="ltr"] .ant-select-dropdown,
+html[dir="ltr"] .ant-select-item {
+  direction: ltr !important;
+}
+
+/* ===== Button ===== */
+html[dir="rtl"] .ant-btn {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .ant-btn {
+  direction: ltr !important;
+}
+
+/* ===== Tabs ===== */
+html[dir="rtl"] .ant-tabs,
+html[dir="rtl"] .ant-tabs-tab,
+html[dir="rtl"] .ant-tabs-nav {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .ant-tabs,
+html[dir="ltr"] .ant-tabs-tab,
+html[dir="ltr"] .ant-tabs-nav {
+  direction: ltr !important;
+}
+
+/* ===== Card ===== */
+html[dir="rtl"] .ant-card,
+html[dir="rtl"] .ant-card-body,
+html[dir="rtl"] .ant-card-head {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .ant-card,
+html[dir="ltr"] .ant-card-body,
+html[dir="ltr"] .ant-card-head {
+  direction: ltr !important;
+}
+
+/* ===== Pagination ===== */
+html[dir="rtl"] .ant-pagination {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .ant-pagination {
+  direction: ltr !important;
+}
+
+/* ===== Tooltip ===== */
+html[dir="rtl"] .ant-tooltip,
+html[dir="rtl"] .ant-tooltip-inner {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .ant-tooltip,
+html[dir="ltr"] .ant-tooltip-inner {
+  direction: ltr !important;
+}
+
+/* ===== Popover ===== */
+html[dir="rtl"] .ant-popover,
+html[dir="rtl"] .ant-popover-inner,
+html[dir="rtl"] .ant-popover-title,
+html[dir="rtl"] .ant-popover-inner-content {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .ant-popover,
+html[dir="ltr"] .ant-popover-inner,
+html[dir="ltr"] .ant-popover-title,
+html[dir="ltr"] .ant-popover-inner-content {
+  direction: ltr !important;
+}
+
+/* ===== Dropdown ===== */
+html[dir="rtl"] .ant-dropdown,
+html[dir="rtl"] .ant-dropdown-menu,
+html[dir="rtl"] .ant-dropdown-menu-item {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .ant-dropdown,
+html[dir="ltr"] .ant-dropdown-menu,
+html[dir="ltr"] .ant-dropdown-menu-item {
+  direction: ltr !important;
+}
+
+/* ===== Header ===== */
+html[dir="rtl"] .ant-layout-header {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .ant-layout-header {
+  direction: ltr !important;
+}
+
+/* ===== Sider ===== */
+html[dir="rtl"] .ant-layout-sider {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .ant-layout-sider {
+  direction: ltr !important;
+}
+
+/* ===== Content ===== */
+html[dir="rtl"] .ant-layout-content {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .ant-layout-content {
+  direction: ltr !important;
+}
+
+/* ============================================
+   ===== الصفحة الرئيسية (HomePage) =====
+   ============================================ */
+
+/* ===== RTL للصفحة الرئيسية ===== */
+html[dir="rtl"] .home-page,
+html[dir="rtl"] .vision-ticker,
+html[dir="rtl"] .ticker-container,
+html[dir="rtl"] .ticker-content,
+html[dir="rtl"] .ticker-text,
+html[dir="rtl"] .main-row,
+html[dir="rtl"] .images-container,
+html[dir="rtl"] .cards-grid,
+html[dir="rtl"] .mini-card,
+html[dir="rtl"] .mini-card-content {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .home-page,
+html[dir="ltr"] .vision-ticker,
+html[dir="ltr"] .ticker-container,
+html[dir="ltr"] .ticker-content,
+html[dir="ltr"] .ticker-text,
+html[dir="ltr"] .main-row,
+html[dir="ltr"] .images-container,
+html[dir="ltr"] .cards-grid,
+html[dir="ltr"] .mini-card,
+html[dir="ltr"] .mini-card-content {
+  direction: ltr !important;
+}
+
+/* ===== RTL للـ Ticker (الشريط المتحرك) ===== */
+html[dir="rtl"] .ticker-logo {
+  order: 3 !important;
+}
+
+html[dir="rtl"] .ticker-support {
+  order: 1 !important;
+}
+
+html[dir="rtl"] .ticker-content {
+  order: 2 !important;
+}
+
+html[dir="ltr"] .ticker-logo {
+  order: 1 !important;
+}
+
+html[dir="ltr"] .ticker-support {
+  order: 3 !important;
+}
+
+html[dir="ltr"] .ticker-content {
+  order: 2 !important;
+}
+
+/* ===== RTL للـ Cards ===== */
+html[dir="rtl"] .mini-card-title {
+  text-align: center !important;
+}
+
+html[dir="ltr"] .mini-card-title {
+  text-align: center !important;
+}
+
+/* ============================================
+   ===== كلاسات إضافية للتحكم =====
+   ============================================ */
+
+/* ===== RTL آمن ===== */
+.rtl-safe {
+  direction: rtl !important;
+}
+
+.ltr-safe {
+  direction: ltr !important;
+}
+
+/* ===== Flexbox RTL آمن ===== */
+html[dir="rtl"] .flex-row {
+  flex-direction: row-reverse !important;
+}
+
+html[dir="ltr"] .flex-row {
+  flex-direction: row !important;
+}
+
+/* ===== Margin RTL آمن ===== */
+html[dir="rtl"] .mr-auto {
+  margin-right: auto !important;
+  margin-left: 0 !important;
+}
+
+html[dir="rtl"] .ml-auto {
+  margin-left: auto !important;
+  margin-right: 0 !important;
+}
+
+html[dir="ltr"] .mr-auto {
+  margin-left: auto !important;
+  margin-right: 0 !important;
+}
+
+html[dir="ltr"] .ml-auto {
+  margin-right: auto !important;
+  margin-left: 0 !important;
+}
+
+/* ===== Padding RTL آمن ===== */
+html[dir="rtl"] .pr-4 {
+  padding-right: 1rem !important;
+  padding-left: 0 !important;
+}
+
+html[dir="rtl"] .pl-4 {
+  padding-left: 1rem !important;
+  padding-right: 0 !important;
+}
+
+html[dir="ltr"] .pr-4 {
+  padding-left: 1rem !important;
+  padding-right: 0 !important;
+}
+
+html[dir="ltr"] .pl-4 {
+  padding-right: 1rem !important;
+  padding-left: 0 !important;
+}
+
+/* ============================================
+   ===== RTL/LTR للـ ERPTopNav =====
+   ============================================ */
+
+/* ===== الهيدر ===== */
+html[dir="rtl"] .erp-header,
+html[dir="rtl"] .desktop-layout,
+html[dir="rtl"] .mobile-layout,
+html[dir="rtl"] .mobile-header {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .erp-header,
+html[dir="ltr"] .desktop-layout,
+html[dir="ltr"] .mobile-layout,
+html[dir="ltr"] .mobile-header {
+  direction: ltr !important;
+}
+
+/* ===== القائمة الرئيسية ===== */
+html[dir="rtl"] .main-menu {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .main-menu {
+  direction: ltr !important;
+}
+
+/* ===== أيقونات الهيدر ===== */
+html[dir="rtl"] .icons-container {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .icons-container {
+  direction: ltr !important;
+}
+
+/* ===== اسم الشركة ===== */
+html[dir="rtl"] .company-text {
+  text-align: center !important;
+}
+
+html[dir="ltr"] .company-text {
+  text-align: center !important;
+}
+
+/* ===== الشريط المتحرك (Ticker) ===== */
+html[dir="rtl"] .ticker-container {
+  direction: rtl !important;
+}
+
+html[dir="ltr"] .ticker-container {
+  direction: ltr !important;
+}
+
+
+
+
+.ant-input,
+.ant-input-number,
+.ant-select-selector,
+.ant-picker {
+  border-radius: 1px !important;
+  text-align: center;
+  -webkit-border-radius: 1px !important;
+  -moz-border-radius: 1px !important;
+  -ms-border-radius: 1px !important;
+  -o-border-radius: 1px !important;
+}
+
+
+
+
+.ant-input,
+.ant-input-number-input {
+  text-align: center;
+}
+
+.ant-input::placeholder {
+  text-align: center;
+
+}
+
+
+.ant-select-dropdown {
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+
+
+
+#icon_barcode {
+  width: 20px;
+  height: 20px;
+  margin-left: 4px;
+}
+
+#attlCard {
+
+  border-radius: 10px;
+
+}
+
+
+
+
+.ant-space-compact .ant-btn {
+  border-radius: 6px !important;
+  display: flex;
+  align-items: center;
+  margin: 0 2px !important;
+  -webkit-border-radius: 6px !important;
+  -moz-border-radius: 6px !important;
+  -ms-border-radius: 6px !important;
+  -o-border-radius: 6px !important;
+}
+
+/* .ant-input,
+.ant-input-number,
+.ant-select-selector,
+.ant-picker {
+
+  border-inline-end: 5px solid rgb(209, 2, 2) !important; 
+  border-radius: 6px !important;
+} */
