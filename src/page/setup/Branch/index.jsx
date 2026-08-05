@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons';
 import ReportGenerator from "@/utils/ReportGenerator";
 import BranchModal from './BranchModal';
-import { fetchBranches, addBranch, updateBranch, deleteBranch } from '@/api/branch';
+import { fetchBranches, addBranch, updateBranch, deleteBranch } from '@/api/Branch';
 import { useTranslate } from '@/hooks/useTranslate';
 
 const BranchesPage = () => {
