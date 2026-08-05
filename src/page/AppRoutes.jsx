@@ -5,11 +5,11 @@ import CategoryHome from './inventory/categories/index.jsx';
 import SuppliersPage from './purchase/Suppliers/index.jsx';
 import CustomersPage from './sale/customers/index.jsx';
 import UnitsPage from './inventory/units/index.jsx';  
-import BankPage from './Setup/Banks/index.jsx';
-import SafePage from './Setup/Safes/index.jsx';
-import BranchPage from './Setup/Branch/index.jsx';
-import TaxPage from './Setup/Taxes/index.jsx';
-import OmlatPage from './Setup/Omlats/index.jsx';
+import BankPage from './setup/Banks/index.jsx';
+import SafePage from './setup/Safes/index.jsx';
+import BranchPage from './setup/Branch/index.jsx';
+import TaxPage from './setup/Taxes/index.jsx';
+import OmlatPage from './setup/Omlats/index.jsx';
 import StorePage from './inventory/Stores/index.jsx';
 
 
