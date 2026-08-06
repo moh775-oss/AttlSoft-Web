@@ -438,18 +438,20 @@ export default function ERPTopNav() { // إزالة props
         </div>
 
         <Menu
-          mode="vertical"
-          theme={isDarkMode ? 'dark' : 'light'}
-          items={arabicMenuItems}
-          className="mobile-menu"
-          onClick={({ key }) => {
-            if (key && key.startsWith('/')) {
-              navigate(key);
-              setDrawerVisible(false);
-            }
-          }}
-          dir={isRightToLeft ? "rtl" : "ltr"}
-        />
+        mode="vertical"
+        theme={isDarkMode ? 'dark' : 'light'}
+        items={arabicMenuItems}
+        className="mobile-menu"
+        onClick={({ key, keyPath }) => {
+          
+          if (key && key.startsWith('/')) {
+            navigate(key);
+            setDrawerVisible(false);
+          }
+
+        }}
+        dir={isRightToLeft ? "rtl" : "ltr"}
+      />
       </Drawer>
     </Layout>
   );

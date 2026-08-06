@@ -966,3 +966,59 @@
   width: 100% !important;
 }
 
+/* إصلاح عرض القوائم الفرعية في الموبايل */
+.mobile-menu .ant-menu-sub {
+  background: transparent !important;
+  max-height: 400px !important;
+  overflow-y: auto !important;
+}
+
+.mobile-menu .ant-menu-sub .ant-menu-item {
+  background: transparent !important;
+  padding-left: 40px !important;
+  margin-left: 0 !important;
+}
+/* تحسين زر الإغلاق في الدراور */
+.ant-drawer-close {
+  position: absolute !important;
+  top: 12px !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  background: #ff4d4f !important;
+  color: white !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 9999 !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+  border: none !important;
+}
+
+/* زر الإغلاق في RTL (العربية) */
+.ant-drawer-rtl .ant-drawer-close {
+  left: -45px !important;
+  right: auto !important;
+}
+
+/* زر الإغلاق في LTR (الإنجليزية) */
+.ant-drawer:not(.ant-drawer-rtl) .ant-drawer-close {
+  right: -45px !important;
+  left: auto !important;
+}
+
+.ant-drawer-close:hover {
+  background: #ff7875 !important;
+  transform: scale(1.1) !important;
+}
+
+.ant-drawer-close .anticon {
+  color: white !important;
+  font-size: 16px !important;
+}
+
+/* منع التمرير في الخلفية عند فتح الدراور */
+body.ant-drawer-open {
+  overflow: hidden !important;
+}
