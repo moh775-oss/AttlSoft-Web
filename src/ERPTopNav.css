@@ -1135,69 +1135,148 @@ body.ant-drawer-open {
 }
 
 
-/* ===== إصلاح القوائم الفرعية في الموبايل ===== */
-@media (max-width: 768px) {
-  /* القوائم الفرعية تظهر تحت وليس جنب */
-  .mobile-menu .ant-menu-sub {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    min-width: 100% !important;
-    max-height: 300px !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
-    padding: 5px 0 !important;
-    margin: 5px 0 !important;
+/* ===== إصلاح القوائم في الموبايل ===== */
+@media (max-width: 1000px) {
+  /* 🔥 إصلاح الـ Drawer */
+  .ant-drawer-content-wrapper {
+    width: 280px !important;
+    position: fixed !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    z-index: 1050 !important;
+    height: 100vh !important;
   }
 
-  /* كل عناصر القائمة تظهر بشكل عمودي */
+  /* منع الصفحة من التحرك */
+  .ant-drawer-open .ant-layout,
+  .ant-drawer-open .erp-layout,
+  .ant-drawer-open .ant-layout-content,
+  .ant-drawer-open .ant-scrolling-effect {
+    transform: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+
+  /* 🔥 منع السكرول المزدوج */
+  .ant-drawer-open body {
+    overflow: hidden !important;
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* منع السكرول العرضي */
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+  }
+
+  /* الخلفية الداكنة */
+  .ant-drawer-mask {
+    background: rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(4px) !important;
+    z-index: 1049 !important;
+  }
+
+  .ant-drawer {
+    z-index: 1050 !important;
+  }
+
+  /* 🔥 القوائم تظهر تحت بشكل inline */
+  .mobile-menu {
+    background: transparent !important;
+    max-height: calc(100vh - 160px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 5px 0 !important;
+  }
+
   .mobile-menu .ant-menu-item,
   .mobile-menu .ant-menu-submenu-title {
-    display: flex !important;
-    align-items: center !important;
-    width: 100% !important;
     padding: 12px 20px !important;
     margin: 2px 0 !important;
     border-radius: 8px !important;
     font-size: 14px !important;
+    height: auto !important;
+    line-height: 1.5 !important;
   }
 
-  /* القوائم الفرعية تكون تحت الأب */
+  /* 🔥 القوائم الفرعية تظهر تحت الأب */
+  .mobile-menu .ant-menu-sub {
+    background: transparent !important;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    max-height: 300px !important;
+    overflow-y: auto !important;
+    padding: 5px 0 !important;
+    margin: 0 !important;
+  }
+
   .mobile-menu .ant-menu-sub .ant-menu-item {
     padding-left: 40px !important;
     margin-left: 0 !important;
-    width: 100% !important;
+    font-size: 13px !important;
   }
 
-  /* سهم القائمة الفرعية */
-  .mobile-menu .ant-menu-submenu-arrow {
-    margin-left: auto !important;
-    margin-right: 5px !important;
-  }
-
-  /* إصلاح المسافات */
-  .mobile-menu .ant-menu-submenu-title .ant-menu-title-content {
-    flex: 1 !important;
-  }
-
-  /* منع القوائم من الظهور خارج الـ Drawer */
-  .mobile-menu .ant-menu-submenu-popup {
-    display: none !important;
-  }
-
-  /* إخفاء أي قوائم منبثقة في الموبايل */
+  /* إخفاء أي قوائم منبثقة */
   .ant-menu-submenu-popup {
     display: none !important;
   }
-}
 
-/* ===== إصلاح بقاء القوائم بعد الانتقال ===== */
-.mobile-menu .ant-menu-item-selected {
-  background: transparent !important;
+  /* إصلاح زر الإغلاق */
+  .ant-drawer-close {
+    position: absolute !important;
+    top: 12px !important;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    background: #ff4d4f !important;
+    color: white !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 9999 !important;
+    cursor: pointer !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+    left: -45px !important;
+    right: auto !important;
+  }
+
+  .ant-drawer-close:hover {
+    background: #ff7875 !important;
+    transform: scale(1.1) !important;
+  }
+
+  .ant-drawer-close .anticon {
+    color: white !important;
+    font-size: 16px !important;
+  }
+
+  /* الـ Drawer يظهر من اليسار دائماً */
+  .ant-drawer-content-wrapper {
+    left: 0 !important;
+    right: auto !important;
+  }
+
+  /* إصلاح الـ Header */
+  .erp-header {
+    height: 64px !important;
+    position: fixed !important;
+    z-index: 1000 !important;
+  }
+
+  .ant-layout-content {
+    margin-top: 64px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
 }
 
 /* عند غلق الـ Drawer، إخفاء كل القوائم */
@@ -1205,28 +1284,23 @@ body.ant-drawer-open {
   display: none !important;
 }
 
-/* التأكد من أن الـ Drawer يغطي كل الشاشة */
-.ant-drawer-content-wrapper {
-  height: 100vh !important;
-  max-height: 100vh !important;
-}
-
+/* تنظيف */
 .ant-drawer-body {
   padding: 0 !important;
-  height: 100% !important;
   overflow: hidden !important;
 }
 
-.mobile-menu {
-  max-height: calc(100vh - 150px) !important;
-  overflow-y: auto !important;
-  padding-bottom: 20px !important;
+.ant-drawer-content {
+  overflow: hidden !important;
 }
 
-/* منع السكرول العرضي */
-html, body {
-  overflow-x: hidden !important;
-  max-width: 100% !important;
+.ant-drawer-header {
+  border-bottom: 1px solid #f0f0f0 !important;
+  padding: 16px 20px !important;
+}
+
+.dark-mode .ant-drawer-header {
+  border-bottom-color: #28345E !important;
 }
 
 
