@@ -1133,3 +1133,157 @@ body.ant-drawer-open {
 .mobile-menu .ant-menu-sub .ant-menu-item {
   padding-left: 40px !important;
 }
+
+
+
+
+
+/* ===== إصلاح نهائي للـ Drawer في RTL و LTR ===== */
+@media (max-width: 1000px) {
+  /* تثبيت الـ Drawer */
+  .ant-drawer-content-wrapper {
+    width: 280px !important;
+    position: fixed !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    z-index: 1050 !important;
+    transition: transform 0.3s ease !important;
+  }
+
+  /* RTL - من اليمين */
+  .ant-drawer-rtl .ant-drawer-content-wrapper {
+    right: 0 !important;
+    left: auto !important;
+  }
+
+  /* LTR - من اليسار */
+  .ant-drawer:not(.ant-drawer-rtl) .ant-drawer-content-wrapper {
+    left: 0 !important;
+    right: auto !important;
+  }
+
+  /* منع الصفحة من التحرك */
+  .ant-drawer-open .ant-layout,
+  .ant-drawer-open .erp-layout,
+  .ant-drawer-open .ant-layout-content {
+    transform: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+    transition: none !important;
+    overflow: hidden !important;
+  }
+
+  /* الخلفية الداكنة */
+  .ant-drawer-mask {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+    z-index: 1049 !important;
+  }
+
+  .ant-drawer {
+    z-index: 1050 !important;
+  }
+
+  /* زر الإغلاق - RTL */
+  .ant-drawer-rtl .ant-drawer-close {
+    position: absolute !important;
+    top: 12px !important;
+    right: auto !important;
+    left: -45px !important;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    background: #ff4d4f !important;
+    color: white !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 9999 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+  }
+
+  /* زر الإغلاق - LTR */
+  .ant-drawer:not(.ant-drawer-rtl) .ant-drawer-close {
+    position: absolute !important;
+    top: 12px !important;
+    left: auto !important;
+    right: -45px !important;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    background: #ff4d4f !important;
+    color: white !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 9999 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+  }
+
+  .ant-drawer-close:hover {
+    background: #ff7875 !important;
+    transform: scale(1.1) !important;
+  }
+
+  .ant-drawer-close .anticon {
+    color: white !important;
+    font-size: 16px !important;
+  }
+
+  /* منع ظهور القوائم بعد الإغلاق */
+  .ant-drawer:not(.ant-drawer-open) .mobile-menu {
+    display: none !important;
+  }
+
+  /* إصلاح القوائم الفرعية */
+  .mobile-menu .ant-menu-sub {
+    background: transparent !important;
+    max-height: 300px !important;
+    overflow-y: auto !important;
+  }
+
+  .mobile-menu .ant-menu-item,
+  .mobile-menu .ant-menu-submenu-title {
+    padding: 12px 20px !important;
+    margin: 2px 8px !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+  }
+
+  .mobile-menu .ant-menu-sub .ant-menu-item {
+    padding-left: 35px !important;
+  }
+
+  /* التأكد من أن المحتوى لا يتأثر */
+  .ant-layout-content {
+    margin-top: 64px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* منع أي تأثيرات جانبية */
+.ant-drawer-open .ant-drawer-content-wrapper,
+.ant-drawer-open .ant-drawer-content {
+  transition: none !important;
+}
+
+/* إخفاء أي عناصر متبقية */
+.ant-drawer-content {
+  overflow: hidden !important;
+}
+
+.ant-drawer-body {
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+body.ant-drawer-open {
+  overflow: hidden !important;
+}

@@ -23,15 +23,16 @@ import './ERPTopNav.css';
 
 const { Header } = Layout;
 
-export default function ERPTopNav() { // إزالة props
+export default function ERPTopNav() {
   const navigate = useNavigate();
   const { isDarkMode, toggleTheme } = useTheme();
   const { t, changeLanguage } = useTranslate();
   const { i18n } = useTranslation();
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1000);
+  const [selectedKeys, setSelectedKeys] = useState([]);
+  const [openKeys, setOpenKeys] = useState([]);
 
-  // جلب الاتجاه الحالي من i18n
   const isRightToLeft = i18n.language === 'ar';
 
   useEffect(() => {
@@ -42,16 +43,20 @@ export default function ERPTopNav() { // إزالة props
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // عند تغيير اللغة، نغلق الـ Drawer
+  useEffect(() => {
+    setDrawerVisible(false);
+    setSelectedKeys([]);
+    setOpenKeys([]);
+  }, [isRightToLeft]);
+
   const toggleLayout = () => {
-  const newLang = isRightToLeft ? 'en' : 'ar';
-
-  changeLanguage(newLang);
-
-  localStorage.setItem('language', newLang);
-
-  document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
-  document.documentElement.lang = newLang;
-};
+    const newLang = isRightToLeft ? 'en' : 'ar';
+    changeLanguage(newLang);
+    localStorage.setItem('language', newLang);
+    document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = newLang;
+  };
 
   const handleLogout = () => {
     console.log('تسجيل الخروج');
@@ -75,7 +80,7 @@ export default function ERPTopNav() { // إزالة props
         { label: t('manageBanks'), key: '/setup/banks' },
         { label: t('safes'), key: '/setup/safes' },
         { label: t('taxes'), key: '/setup/taxes' },
-        {label: t('currencies'), key: '/setup/omlats'},
+        { label: t('currencies'), key: '/setup/omlats' },
         {
           label: t('zakat'),
           key: 'setup_zatca',
@@ -85,7 +90,6 @@ export default function ERPTopNav() { // إزالة props
             { label: t('vatReturn'), key: '/setup/zatca/vat-return' },
           ],
         },
-
         { label: t('settings'), key: '/setup/settings' },
       ],
     },
@@ -101,7 +105,7 @@ export default function ERPTopNav() { // إزالة props
             { label: t('categories'), key: '/inventory/setup/categories' },
             { label: t('units'), key: '/inventory/setup/units' },
             { label: t('items'), key: '/inventory/setup/items' },
-            { label: t('store'), key: '/inventory/setup/stores'},
+            { label: t('store'), key: '/inventory/setup/stores' },
             { label: t('stocktaking'), key: '/inventory/setup/stocktaking' },
           ]
         },
@@ -204,7 +208,6 @@ export default function ERPTopNav() { // إزالة props
         },
       ],
     },
-
     {
       label: t('accounts'),
       key: 'accounts',
@@ -245,7 +248,6 @@ export default function ERPTopNav() { // إزالة props
         },
       ],
     },
-
     {
       label: t('system'),
       key: 'system',
@@ -289,16 +291,11 @@ export default function ERPTopNav() { // إزالة props
                 items={arabicMenuItems}
                 className="main-menu"
                 triggerSubMenuAction={"click"}
-                onClick={({ key, keyPath }) => {
-    // 🔥 المفتاح السحري: فقط ننتقل إذا كان المفتاح يبدأ بـ '/' 
-    // وليس مجرد عنصر أبوي
-    if (key && key.startsWith('/')) {
-      navigate(key);
-      setDrawerVisible(false);
-    }
-    // إذا كان key لا يبدأ بـ '/' (مثل 'sales', 'accounts'), 
-    // لا نفعل شيء - فقط نترك الـ Menu يتعامل مع فتح القوائم الفرعية
-  }}
+                onClick={({ key }) => {
+                  if (key && key.startsWith('/')) {
+                    navigate(key);
+                  }
+                }}
                 dir={isRightToLeft ? "rtl" : "ltr"}
                 overflowedIndicator={<MoreOutlined />}
               />
@@ -306,30 +303,20 @@ export default function ERPTopNav() { // إزالة props
 
             <div className="icons-section">
               <div className="icons-container">
-
                 <Tooltip title={isDarkMode ? t('lightMode') : t('darkMode')}>
-                  <button
-                    className="icon-btn theme-btn"
-                    onClick={toggleTheme}
-                  >
+                  <button className="icon-btn theme-btn" onClick={toggleTheme}>
                     {isDarkMode ? <SunOutlined /> : <MoonOutlined />}
                   </button>
                 </Tooltip>
 
                 <Tooltip title={isRightToLeft ? t('english') : t('arabic')}>
-                  <button
-                    className="icon-btn lang-btn"
-                    onClick={toggleLayout}
-                  >
+                  <button className="icon-btn lang-btn" onClick={toggleLayout}>
                     {isRightToLeft ? '🇺🇸' : '🇸🇦'}
                   </button>
                 </Tooltip>
 
                 <Tooltip title={t('logout')}>
-                  <button
-                    className="icon-btn logout-btn"
-                    onClick={handleLogout}
-                  >
+                  <button className="icon-btn logout-btn" onClick={handleLogout}>
                     <LogoutOutlined />
                   </button>
                 </Tooltip>
@@ -344,23 +331,13 @@ export default function ERPTopNav() { // إزالة props
               {isRightToLeft ? (
                 <>
                   <div className="mobile-icons">
-
-                    <button
-                      className="mobile-icon-btn theme-mobile-btn"
-                      onClick={toggleTheme}
-                    >
+                    <button className="mobile-icon-btn theme-mobile-btn" onClick={toggleTheme}>
                       {isDarkMode ? <SunOutlined /> : <MoonOutlined />}
                     </button>
-                    <button
-                      className="mobile-icon-btn lang-mobile-btn"
-                      onClick={toggleLayout}
-                    >
+                    <button className="mobile-icon-btn lang-mobile-btn" onClick={toggleLayout}>
                       🇺🇸
                     </button>
-                    <button
-                      className="mobile-icon-btn logout-mobile-btn"
-                      onClick={handleLogout}
-                    >
+                    <button className="mobile-icon-btn logout-mobile-btn" onClick={handleLogout}>
                       <LogoutOutlined />
                     </button>
                   </div>
@@ -388,22 +365,13 @@ export default function ERPTopNav() { // إزالة props
                   </div>
 
                   <div className="mobile-icons">
-                    <button
-                      className="mobile-icon-btn logout-mobile-btn"
-                      onClick={handleLogout}
-                    >
+                    <button className="mobile-icon-btn logout-mobile-btn" onClick={handleLogout}>
                       <LogoutOutlined />
                     </button>
-                    <button
-                      className="mobile-icon-btn lang-mobile-btn"
-                      onClick={toggleLayout}
-                    >
+                    <button className="mobile-icon-btn lang-mobile-btn" onClick={toggleLayout}>
                       🇸🇦
                     </button>
-                    <button
-                      className="mobile-icon-btn theme-mobile-btn"
-                      onClick={toggleTheme}
-                    >
+                    <button className="mobile-icon-btn theme-mobile-btn" onClick={toggleTheme}>
                       {isDarkMode ? <SunOutlined /> : <MoonOutlined />}
                     </button>
                   </div>
@@ -414,54 +382,65 @@ export default function ERPTopNav() { // إزالة props
         )}
       </Header>
 
-     <Drawer
-  title={
-    <div className="drawer-title">
-      <span className="drawer-company-name">
-        {t('appName')}
-      </span>
-    </div>
-  }
-  placement={isRightToLeft ? "right" : "left"}
-  onClose={() => setDrawerVisible(false)}
-  open={drawerVisible}  // 🔥 هذا يتحكم في فتح/غلق الـ Drawer
-  className={`mobile-drawer ${isDarkMode ? 'dark-drawer' : 'light-drawer'}`}
-  width={280}
-  push={false}  // يمنع دفع المحتوى
-  mask={true}
-  maskClosable={true}
-  closable={true}
-  // 🔥 مهم جداً: منع الـ Drawer من الغلق عند الضغط على القوائم
-  getContainer={false}
->
-  <div className="drawer-actions-horizontal">
-    <button className="drawer-action-icon-btn theme-drawer-btn" onClick={toggleTheme}>
-      {isDarkMode ? <SunOutlined /> : <MoonOutlined />}
-    </button>
+      <Drawer
+        title={
+          <div className="drawer-title">
+            <span className="drawer-company-name">{t('appName')}</span>
+          </div>
+        }
+        placement={isRightToLeft ? "right" : "left"}
+        onClose={() => {
+          setDrawerVisible(false);
+          setSelectedKeys([]);
+          setOpenKeys([]);
+        }}
+        open={drawerVisible}
+        className={`mobile-drawer ${isDarkMode ? 'dark-drawer' : 'light-drawer'}`}
+        width={280}
+        push={false}
+        mask={true}
+        maskClosable={true}
+        closable={true}
+        getContainer={false}
+      >
+        <div className="drawer-actions-horizontal">
+          <button className="drawer-action-icon-btn theme-drawer-btn" onClick={toggleTheme}>
+            {isDarkMode ? <SunOutlined /> : <MoonOutlined />}
+          </button>
 
-    <button className="drawer-action-icon-btn lang-drawer-btn" onClick={toggleLayout}>
-      {isRightToLeft ? '🇺🇸' : '🇸🇦'}
-    </button>
+          <button className="drawer-action-icon-btn lang-drawer-btn" onClick={toggleLayout}>
+            {isRightToLeft ? '🇺🇸' : '🇸🇦'}
+          </button>
 
-    <button className="drawer-action-icon-btn logout-drawer-btn" onClick={handleLogout}>
-      <LogoutOutlined />
-    </button>
-  </div>
+          <button className="drawer-action-icon-btn logout-drawer-btn" onClick={handleLogout}>
+            <LogoutOutlined />
+          </button>
+        </div>
 
-  <Menu
-    mode="vertical"
-    theme={isDarkMode ? 'dark' : 'light'}
-    items={arabicMenuItems}
-    className="mobile-menu"
-    onClick={({ key }) => {
-      if (key && key.startsWith('/')) {
-        navigate(key);
-        setDrawerVisible(false);
-      }
-    }}
-    dir={isRightToLeft ? "rtl" : "ltr"}
-  />
-</Drawer>
+        <Menu
+          mode="vertical"
+          theme={isDarkMode ? 'dark' : 'light'}
+          items={arabicMenuItems}
+          className="mobile-menu"
+          selectedKeys={selectedKeys}
+          openKeys={openKeys}
+          onOpenChange={(keys) => {
+            setOpenKeys(keys);
+          }}
+          onClick={({ key }) => {
+            if (key && key.startsWith('/')) {
+              setSelectedKeys([key]);
+              navigate(key);
+              setDrawerVisible(false);
+              setTimeout(() => {
+                setSelectedKeys([]);
+                setOpenKeys([]);
+              }, 300);
+            }
+          }}
+          dir={isRightToLeft ? "rtl" : "ltr"}
+        />
+      </Drawer>
     </Layout>
   );
 }
