@@ -25,7 +25,7 @@ export default function HomePage() {
   
   const isRightToLeft = i18n.language === 'ar';
   
-  const username = localStorage.getItem('username') || 'محمد عبدالحكيم قائد ';
+  const username = localStorage.getItem('username') || 'محمد عبدالحكيم قائد محمد';
   const branchName = localStorage.getItem('branchName') ||'فرع الرياض - الرئيسي - شارع العليا الفرعي';
 
   useEffect(() => {

@@ -289,11 +289,16 @@ export default function ERPTopNav() { // إزالة props
                 items={arabicMenuItems}
                 className="main-menu"
                 triggerSubMenuAction={"click"}
-                onClick={({ key }) => {
-                  if (key && key.startsWith('/')) {
-                    navigate(key);
-                  }
-                }}
+                onClick={({ key, keyPath }) => {
+    // 🔥 المفتاح السحري: فقط ننتقل إذا كان المفتاح يبدأ بـ '/' 
+    // وليس مجرد عنصر أبوي
+    if (key && key.startsWith('/')) {
+      navigate(key);
+      setDrawerVisible(false);
+    }
+    // إذا كان key لا يبدأ بـ '/' (مثل 'sales', 'accounts'), 
+    // لا نفعل شيء - فقط نترك الـ Menu يتعامل مع فتح القوائم الفرعية
+  }}
                 dir={isRightToLeft ? "rtl" : "ltr"}
                 overflowedIndicator={<MoreOutlined />}
               />
@@ -409,7 +414,7 @@ export default function ERPTopNav() { // إزالة props
         )}
       </Header>
 
-      <Drawer
+     <Drawer
   title={
     <div className="drawer-title">
       <span className="drawer-company-name">
@@ -419,14 +424,15 @@ export default function ERPTopNav() { // إزالة props
   }
   placement={isRightToLeft ? "right" : "left"}
   onClose={() => setDrawerVisible(false)}
-  open={drawerVisible}
+  open={drawerVisible}  // 🔥 هذا يتحكم في فتح/غلق الـ Drawer
   className={`mobile-drawer ${isDarkMode ? 'dark-drawer' : 'light-drawer'}`}
   width={280}
-  // 🔥 هذه الخصائص هي الحل السحري 🔥
-  push={false}  // يمنع دفع المحتوى الرئيسي نهائياً
-  mask={true}   // يظهر الخلفية الداكنة
-  maskClosable={true}  // يغلق عند الضغط على الخلفية
-  closable={true}  // يظهر زر الإغلاق
+  push={false}  // يمنع دفع المحتوى
+  mask={true}
+  maskClosable={true}
+  closable={true}
+  // 🔥 مهم جداً: منع الـ Drawer من الغلق عند الضغط على القوائم
+  getContainer={false}
 >
   <div className="drawer-actions-horizontal">
     <button className="drawer-action-icon-btn theme-drawer-btn" onClick={toggleTheme}>
