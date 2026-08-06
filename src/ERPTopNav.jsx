@@ -410,19 +410,26 @@ export default function ERPTopNav() { // إزالة props
       </Header>
 
       <Drawer
-        title={
-          <div className="drawer-title">
-            <span className="drawer-company-name">
-              {t('appName')}
-            </span>
-          </div>
-        }
-        placement={isRightToLeft ? "right" : "left"}
-        onClose={() => setDrawerVisible(false)}
-        open={drawerVisible}
-        className={`mobile-drawer ${isDarkMode ? 'dark-drawer' : 'light-drawer'}`}
-        width={260}
-      >
+  title={
+    <div className="drawer-title">
+      <span className="drawer-company-name">
+        {t('appName')}
+      </span>
+    </div>
+  }
+  placement={isRightToLeft ? "right" : "left"}
+  onClose={() => setDrawerVisible(false)}
+  open={drawerVisible}
+  className={`mobile-drawer ${isDarkMode ? 'dark-drawer' : 'light-drawer'}`}
+  width={280}
+  // 🔥 هذه الخصائص الجديدة هي الحل 🔥
+  push={false}  // يمنع دفع المحتوى الرئيسي
+  mask={true}   // يظهر الخلفية الداكنة
+  maskClosable={true}  // يغلق عند الضغط على الخلفية
+  style={{ position: 'relative' }}
+  bodyStyle={{ padding: 0 }}
+>
+
         <div className="drawer-actions-horizontal">
           <button className="drawer-action-icon-btn theme-drawer-btn" onClick={toggleTheme}>
             {isDarkMode ? <SunOutlined /> : <MoonOutlined />}

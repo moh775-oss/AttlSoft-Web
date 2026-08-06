@@ -1022,3 +1022,164 @@
 body.ant-drawer-open {
   overflow: hidden !important;
 }
+
+
+/* ===== تحسين الـ Drawer في الموبايل ===== */
+@media (max-width: 768px) {
+  /* منع التمرير في الخلفية */
+  .ant-drawer-open .ant-layout-content {
+    overflow: hidden !important;
+    pointer-events: none !important;
+  }
+
+  /* تحسين الـ Drawer نفسه */
+  .ant-drawer-content-wrapper {
+    width: 280px !important;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  /* التأكد من أن الـ Drawer فوق كل شيء */
+  .ant-drawer {
+    z-index: 1001 !important;
+  }
+
+  /* الخلفية الداكنة (الـ mask) */
+  .ant-drawer-mask {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  /* منع الصفحة الرئيسية من التحرك */
+  .ant-drawer-open .ant-layout {
+    overflow: hidden !important;
+  }
+
+  /* تحسين عرض القوائم في الدراور */
+  .ant-drawer-body {
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .mobile-menu {
+    max-height: calc(100vh - 160px) !important;
+    overflow-y: auto !important;
+    padding-bottom: 20px !important;
+  }
+
+  /* تثبيت الـ Header في مكانه */
+  .erp-header {
+    position: fixed !important;
+    z-index: 1000 !important;
+  }
+}
+
+/* ===== إصلاح مشكلة التمرير عند فتح الـ Drawer ===== */
+.ant-drawer-open .ant-scrolling-effect {
+  overflow: hidden !important;
+}
+
+/* تحسين زر الإغلاق */
+.ant-drawer-close {
+  position: absolute !important;
+  top: 12px !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  background: #ff4d4f !important;
+  color: white !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 9999 !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+  border: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.ant-drawer-rtl .ant-drawer-close {
+  left: -45px !important;
+  right: auto !important;
+}
+
+.ant-drawer:not(.ant-drawer-rtl) .ant-drawer-close {
+  right: -45px !important;
+  left: auto !important;
+}
+
+.ant-drawer-close:hover {
+  background: #ff7875 !important;
+  transform: scale(1.1) !important;
+}
+
+.ant-drawer-close .anticon {
+  color: white !important;
+  font-size: 16px !important;
+}
+
+/* ===== إصلاح القوائم الفرعية في الموبايل ===== */
+.mobile-menu .ant-menu-sub {
+  background: transparent !important;
+}
+
+.mobile-menu .ant-menu-item,
+.mobile-menu .ant-menu-submenu-title {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  padding: 12px 20px !important;
+  margin: 2px 8px !important;
+  border-radius: 8px !important;
+  border-left: 3px solid transparent !important;
+  transition: all 0.2s ease !important;
+  background: transparent !important;
+  border-bottom: none !important;
+}
+
+.light-mode .mobile-menu .ant-menu-item,
+.light-mode .mobile-menu .ant-menu-submenu-title {
+  color: #000000 !important;
+}
+
+.dark-mode .mobile-menu .ant-menu-item,
+.dark-mode .mobile-menu .ant-menu-submenu-title {
+  color: #ffffff !important;
+}
+
+.light-mode .mobile-menu .ant-menu-item:hover,
+.light-mode .mobile-menu .ant-menu-submenu-title:hover {
+  background: #e6f7ff !important;
+  color: #1890ff !important;
+  border-left: 3px solid #1890ff !important;
+}
+
+.dark-mode .mobile-menu .ant-menu-item:hover,
+.dark-mode .mobile-menu .ant-menu-submenu-title:hover {
+  background: #1F2A4D !important;
+  color: #7A6BFF !important;
+  border-left: 3px solid #7A6BFF !important;
+}
+
+/* تحسين المسافات للقوائم الفرعية */
+.mobile-menu .ant-menu-sub .ant-menu-item {
+  padding-left: 40px !important;
+  margin-left: 8px !important;
+}
+
+/* منع التمرير الزائد */
+.mobile-menu::-webkit-scrollbar {
+  width: 4px;
+}
+
+.mobile-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mobile-menu::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.dark-mode .mobile-menu::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
