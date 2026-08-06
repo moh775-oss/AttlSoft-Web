@@ -292,14 +292,12 @@ const [openKeys, setOpenKeys] = useState([]);
                 className="main-menu"
                 triggerSubMenuAction={"click"}
                 onClick={({ key, keyPath }) => {
-    // 🔥 المفتاح السحري: فقط ننتقل إذا كان المفتاح يبدأ بـ '/' 
-    // وليس مجرد عنصر أبوي
+    
     if (key && key.startsWith('/')) {
       navigate(key);
       setDrawerVisible(false);
     }
-    // إذا كان key لا يبدأ بـ '/' (مثل 'sales', 'accounts'), 
-    // لا نفعل شيء - فقط نترك الـ Menu يتعامل مع فتح القوائم الفرعية
+    
   }}
                 dir={isRightToLeft ? "rtl" : "ltr"}
                 overflowedIndicator={<MoreOutlined />}
@@ -451,7 +449,7 @@ const [openKeys, setOpenKeys] = useState([]);
   </div>
 
   <Menu
-  mode="vertical"
+  mode="inline"  // 🔥 تغيير من vertical إلى inline
   theme={isDarkMode ? 'dark' : 'light'}
   items={arabicMenuItems}
   className="mobile-menu"
@@ -460,10 +458,6 @@ const [openKeys, setOpenKeys] = useState([]);
   onOpenChange={(keys) => {
     setOpenKeys(keys);
   }}
-  // 🔥 هذي تمنع القوائم من الظهور خارج الـ Drawer
-  popupOffset={[0, 0]}
-  // 🔥 هذي تخلي القوائم تظهر تحت وليس جنب
-  subMenuOpenDelay={0}
   onClick={({ key }) => {
     if (key && key.startsWith('/')) {
       setSelectedKeys([key]);
