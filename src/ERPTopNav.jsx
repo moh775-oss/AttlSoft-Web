@@ -30,6 +30,8 @@ export default function ERPTopNav() { // إزالة props
   const { i18n } = useTranslation();
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1000);
+  const [selectedKeys, setSelectedKeys] = useState([]);
+const [openKeys, setOpenKeys] = useState([]);
 
   // جلب الاتجاه الحالي من i18n
   const isRightToLeft = i18n.language === 'ar';
@@ -449,18 +451,32 @@ export default function ERPTopNav() { // إزالة props
   </div>
 
   <Menu
-    mode="vertical"
-    theme={isDarkMode ? 'dark' : 'light'}
-    items={arabicMenuItems}
-    className="mobile-menu"
-    onClick={({ key }) => {
-      if (key && key.startsWith('/')) {
-        navigate(key);
-        setDrawerVisible(false);
-      }
-    }}
-    dir={isRightToLeft ? "rtl" : "ltr"}
-  />
+  mode="vertical"
+  theme={isDarkMode ? 'dark' : 'light'}
+  items={arabicMenuItems}
+  className="mobile-menu"
+  selectedKeys={selectedKeys}
+  openKeys={openKeys}
+  onOpenChange={(keys) => {
+    setOpenKeys(keys);
+  }}
+  // 🔥 هذي تمنع القوائم من الظهور خارج الـ Drawer
+  popupOffset={[0, 0]}
+  // 🔥 هذي تخلي القوائم تظهر تحت وليس جنب
+  subMenuOpenDelay={0}
+  onClick={({ key }) => {
+    if (key && key.startsWith('/')) {
+      setSelectedKeys([key]);
+      navigate(key);
+      setDrawerVisible(false);
+      setTimeout(() => {
+        setSelectedKeys([]);
+        setOpenKeys([]);
+      }, 200);
+    }
+  }}
+  dir={isRightToLeft ? "rtl" : "ltr"}
+/>
 </Drawer>
     </Layout>
   );
