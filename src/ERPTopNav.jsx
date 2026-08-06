@@ -422,44 +422,40 @@ export default function ERPTopNav() { // إزالة props
   open={drawerVisible}
   className={`mobile-drawer ${isDarkMode ? 'dark-drawer' : 'light-drawer'}`}
   width={280}
-  // 🔥 هذه الخصائص الجديدة هي الحل 🔥
-  push={false}  // يمنع دفع المحتوى الرئيسي
+  // 🔥 هذه الخصائص هي الحل السحري 🔥
+  push={false}  // يمنع دفع المحتوى الرئيسي نهائياً
   mask={true}   // يظهر الخلفية الداكنة
   maskClosable={true}  // يغلق عند الضغط على الخلفية
-  style={{ position: 'relative' }}
-  bodyStyle={{ padding: 0 }}
+  closable={true}  // يظهر زر الإغلاق
 >
+  <div className="drawer-actions-horizontal">
+    <button className="drawer-action-icon-btn theme-drawer-btn" onClick={toggleTheme}>
+      {isDarkMode ? <SunOutlined /> : <MoonOutlined />}
+    </button>
 
-        <div className="drawer-actions-horizontal">
-          <button className="drawer-action-icon-btn theme-drawer-btn" onClick={toggleTheme}>
-            {isDarkMode ? <SunOutlined /> : <MoonOutlined />}
-          </button>
+    <button className="drawer-action-icon-btn lang-drawer-btn" onClick={toggleLayout}>
+      {isRightToLeft ? '🇺🇸' : '🇸🇦'}
+    </button>
 
-          <button className="drawer-action-icon-btn lang-drawer-btn" onClick={toggleLayout}>
-            {isRightToLeft ? '🇺🇸' : '🇸🇦'}
-          </button>
+    <button className="drawer-action-icon-btn logout-drawer-btn" onClick={handleLogout}>
+      <LogoutOutlined />
+    </button>
+  </div>
 
-          <button className="drawer-action-icon-btn logout-drawer-btn" onClick={handleLogout}>
-            <LogoutOutlined />
-          </button>
-        </div>
-
-        <Menu
-        mode="vertical"
-        theme={isDarkMode ? 'dark' : 'light'}
-        items={arabicMenuItems}
-        className="mobile-menu"
-        onClick={({ key, keyPath }) => {
-          
-          if (key && key.startsWith('/')) {
-            navigate(key);
-            setDrawerVisible(false);
-          }
-
-        }}
-        dir={isRightToLeft ? "rtl" : "ltr"}
-      />
-      </Drawer>
+  <Menu
+    mode="vertical"
+    theme={isDarkMode ? 'dark' : 'light'}
+    items={arabicMenuItems}
+    className="mobile-menu"
+    onClick={({ key }) => {
+      if (key && key.startsWith('/')) {
+        navigate(key);
+        setDrawerVisible(false);
+      }
+    }}
+    dir={isRightToLeft ? "rtl" : "ltr"}
+  />
+</Drawer>
     </Layout>
   );
 }
