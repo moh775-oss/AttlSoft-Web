@@ -1,25 +1,38 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Cairo', sans-serif;
+  background: var(--color-bgPrimary);
+  transition: background-color 0.3s ease;
+  overflow: auto !important; 
+   
+}
+
+body.home-page-body {
+  overflow: hidden !important; 
+  
+}
 
 .app-container {
   min-height: 10vh;
   background: var(--color-bgPrimary) !important;
   position: relative;
-  
   display: flex;
   flex-direction: column;
   transition: background-color 0.3s ease;
   overflow-x: hidden;
   padding-top: 75px !important;
-
-  
+  padding-bottom: 70px !important;
 }
- /* justify-content: center; */
+
 .app-content {
   flex: 1;
   padding: 5px 10px;
   margin-top: 0 !important;
   background: var(--color-bgPrimary);
   transition: background-color 0.3s ease;
-    overflow-x: hidden;
+  overflow-x: hidden;
+
 }
 
 /* ===== الصفحة الرئيسية ===== */
@@ -27,13 +40,17 @@
   margin: 0 auto;
   width: 100%;
   background: var(--color-bgPrimary);
-    overflow-x: hidden;
-}
+  overflow-x: hidden;
+  height: 100vh;
+  overflow: hidden;
 
+}
 
 .main-row {
   display: flex;
   flex-wrap: wrap;
+  overflow: hidden;
+  padding-bottom: 70px;
 }
 
 [dir="ltr"] .images-col {

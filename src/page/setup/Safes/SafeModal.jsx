@@ -34,18 +34,21 @@ const SafeModal = ({
   useEffect(() => {
     if (visible) {
       loadBranches();
+      form.resetFields();
     }
-  }, [visible]);
+  }, [visible  , form]);
 
   useEffect(() => {
-    if (visible && initialValues) {
-      form.setFieldsValue(initialValues);
-      setAllBranches(initialValues.allBranches || false);
-    } else if (visible) {
+    if (visible) {
       form.resetFields();
-      setAllBranches(false);
+      if (initialValues) form.setFieldsValue(initialValues);
     }
   }, [visible, initialValues, form]);
+
+  const handleCancel = () => {
+    form.resetFields();
+    onCancel();
+  };
 
   const handleAllBranchesChange = (checked) => {
     setAllBranches(checked);
@@ -65,9 +68,10 @@ const SafeModal = ({
 
   return (
     <Modal
+      key={initialValues?.id || 'add'}
       title={isEdit ? t('editSafe') : t('addSafe')}
       open={visible}
-      onCancel={onCancel}
+      onCancel={handleCancel}
       onOk={handleOk}
       confirmLoading={loading}
       okText={isEdit ? t('edit') : t('add')}
@@ -80,10 +84,7 @@ const SafeModal = ({
         form={form}
         layout="vertical"
         dir="rtl"
-        initialValues={{
-          allBranches: false,
-          ...initialValues,
-        }}
+        
       >
         <Form.Item
           name="name"

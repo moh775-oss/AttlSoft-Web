@@ -16,26 +16,29 @@ const SupplierModal = ({
   const [form] = Form.useForm();
   const isEdit = !!initialValues;
 
+ 
+
+   useEffect(() => {
+    if (!visible) form.resetFields();
+  }, [visible, form]);
+
   useEffect(() => {
-    if (visible && initialValues) {
+    if (visible) {
+      form.resetFields();
       form.setFieldsValue({
         ...initialValues,
         branch: initialValues.branch || 1,
         debitLimit: initialValues.debitLimit || 0,
         balance: initialValues.balance || 0,
       });
-    } else if (visible) {
-      form.resetFields();
-      
-      form.setFieldsValue({
-        branch: 1,
-        debitLimit: 0,
-        balance: 0,
-        schemCode: 'CRN',
-        both: false,
-      });
     }
   }, [visible, initialValues, form]);
+
+  const handleCancel = () => {
+    form.resetFields();
+    onCancel();
+  };
+
 
   const handleOk = async () => {
     try {
@@ -48,9 +51,10 @@ const SupplierModal = ({
 
   return (
     <Modal
+    key={initialValues?.id || 'add'}
       title={isEdit ? t('editPurchaseSupplier') : t('addPurchaseSupplier')}
       open={visible}
-      onCancel={onCancel}
+      onCancel={handleCancel}
       onOk={handleOk}
       confirmLoading={loading}
       okText={isEdit ? t('edit') : t('add')}
@@ -63,13 +67,7 @@ const SupplierModal = ({
         form={form}
         layout="vertical"
         dir="rtl"
-        initialValues={{
-          branch: 1,
-          debitLimit: 0,
-          balance: 0,
-          schemCode: 'CRN',
-          both: false,
-        }}
+       
       >
         {/* المعلومات الأساسية */}
         <div className="mb-4">

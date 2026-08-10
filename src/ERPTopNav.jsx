@@ -424,14 +424,14 @@ const [openKeys, setOpenKeys] = useState([]);
   }
   placement={isRightToLeft ? "left" : "left"}
   onClose={() => setDrawerVisible(false)}
-  open={drawerVisible}  // 🔥 هذا يتحكم في فتح/غلق الـ Drawer
+  open={drawerVisible} 
   className={`mobile-drawer ${isDarkMode ? 'dark-drawer' : 'light-drawer'}`}
   width={280}
-  push={false}  // يمنع دفع المحتوى
+  push={false} 
   mask={true}
   maskClosable={true}
   closable={true}
-  // 🔥 مهم جداً: منع الـ Drawer من الغلق عند الضغط على القوائم
+  
   getContainer={false}
 >
   <div className="drawer-actions-horizontal">
@@ -449,7 +449,7 @@ const [openKeys, setOpenKeys] = useState([]);
   </div>
 
   <Menu
-  mode="inline"  // 🔥 تغيير من vertical إلى inline
+  mode="inline"  
   theme={isDarkMode ? 'dark' : 'light'}
   items={arabicMenuItems}
   className="mobile-menu"

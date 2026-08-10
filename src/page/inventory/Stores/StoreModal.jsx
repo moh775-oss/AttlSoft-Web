@@ -30,20 +30,21 @@ const StoreModal = ({
   };
 
   useEffect(() => {
-    if (visible) {
-      loadBranches();
-    }
-  }, [visible]);
+    if (!visible) form.resetFields();
+  }, [visible, form]);
 
   useEffect(() => {
-    if (visible && initialValues) {
-      form.setFieldsValue(initialValues);
-      setAllBranches(initialValues.allBranches || false);
-    } else if (visible) {
+    if (visible) {
       form.resetFields();
-      setAllBranches(false);
+      if (initialValues) form.setFieldsValue(initialValues);
     }
   }, [visible, initialValues, form]);
+
+  const handleCancel = () => {
+    form.resetFields();
+    onCancel();
+  };
+
 
   const handleAllBranchesChange = (checked) => {
     setAllBranches(checked);
@@ -63,9 +64,10 @@ const StoreModal = ({
 
   return (
     <Modal
+      key={initialValues?.id || 'add'}
       title={isEdit ? t('editStore') : t('addStore')}
       open={visible}
-      onCancel={onCancel}
+      onCancel={handleCancel}
       onOk={handleOk}
       confirmLoading={loading}
       okText={isEdit ? t('edit') : t('add')}
@@ -78,11 +80,7 @@ const StoreModal = ({
         form={form}
         layout="vertical"
         dir="rtl"
-        initialValues={{
-          isActive: true,
-          allBranches: false,
-          ...initialValues,
-        }}
+       
       >
         <Form.Item
           name="name"

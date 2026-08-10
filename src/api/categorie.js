@@ -1,59 +1,66 @@
-// src/api/categorie.js
 import axios from 'axios';
-
 import { API_URL } from '@/config/api';
 
-
+// جلب المجموعات
 export const fetchCategories = async () => {
-  const { data } = await axios.get(`${API_URL}/Cat/get`);
-
-  return data.map(item => ({
-    id: item.catId,
-    code: item.catId,
-    name: item.catName,
-    type: item.catType,
-    description: "",
-    isActive: item.catStatus,
-    createdAt: new Date(),
-    ...item
-  }));
-};
-
-
-export const addCategory = async (values) => {
-  const params = {
-    CatName: values.name,
-    Branch: 1,
-    UserId: null,
-    Dep_ID: null,
-    Cat_Status: 1,
-    FontName: "",
-    FontSize: 0,
-    FontStyle: 0,
-    BtnColor: 0,
-    BtnFontColor: 0,
-  };
-  console.log("Adding category with params:", params); 
-
   try {
-    const { data } = await axios.post(
-      `${API_URL}/Cat/addCat`,
-      null,
-      { params }
-    );
+    const { data } = await axios.get(`${API_URL}/Cat/get`);
+    
+    if (!Array.isArray(data)) {
+      return [];
+    }
 
-    return data;
+    return data.map(item => ({
+      id: item.catId,
+      code: item.catId,
+      name: item.catName,
+      type: item.catType || 0,
+      depId: item.depId || item.dep_ID || 0,
+      isActive: item.catStatus !== null && item.catStatus !== undefined ? item.catStatus : true,
+      branch: item.branch || 1,
+      userId: item.userId || null,
+      fontName: item.fontName || '',
+      fontSize: item.fontSize || 0,
+      fontStyle: item.fontStyle || 0,
+      btnColor: item.btnColor || 0,
+      btnFontColor: item.btnFontColor || 0,
+      ...item
+    }));
   } catch (error) {
-    console.error("Error adding category:", error);
+    console.error('Error fetching categories:', error);
     throw error;
   }
 };
 
-// تحديث فئة
+// إضافة مجموعة
+export const addCategory = async (values) => {
+  const params = {
+    catName: values.name,
+    branch: values.branch || 1,
+    userId: values.userId || 1,
+    cat_Status: values.isActive !== undefined ? values.isActive : true,
+  };
+
+  try {
+    const { data } = await axios.post(`${API_URL}/Cat/addCat`, params);
+    return data;
+  } catch (error) {
+    console.error('Error adding category:', error);
+    throw error;
+  }
+};
+
+// تحديث مجموعة
 export const updateCategory = async (id, categoryData) => {
   try {
-    const response = await axios.put(`${API_URL}/Cat/PutCat/${id}`, categoryData);
+    const params = {
+      catName: categoryData.name,
+      branch: categoryData.branch || 1,
+      userId: categoryData.userId || 1,
+      cat_Status: categoryData.isActive !== undefined ? categoryData.isActive : true,
+    };
     
+    const response = await axios.put(`${API_URL}/Cat/PutCat?id=${id}`, params);
     return response.data;
   } catch (error) {
     console.error('Error updating category:', error);
@@ -61,10 +68,10 @@ export const updateCategory = async (id, categoryData) => {
   }
 };
 
-// حذف فئة
+// حذف مجموعة
 export const deleteCategory = async (id) => {
   try {
-    const response = await axios.delete(`${API_URL}/Cat/delCat/${id}`);
+    const response = await axios.delete(`${API_URL}/Cat/delCat?id=${id}`);
     return response.data;
   } catch (error) {
     console.error('Error deleting category:', error);

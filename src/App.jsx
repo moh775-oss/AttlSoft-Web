@@ -2,11 +2,22 @@ import ERPTopNav from "./ERPTopNav";
 import AppRoutes from "./page/AppRoutes"; 
 import "./App.css";
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 
 export default function App() {
   const { i18n } = useTranslation();
+    const location = useLocation();
+  const isHomePage = location.pathname === '/';
   const isRightToLeft = i18n.language === 'ar';
+
+  useEffect(() => {
+    if (isHomePage) {
+      document.body.classList.add('home-page-body');
+    } else {
+      document.body.classList.remove('home-page-body');
+    }
+  }, [isHomePage]);
 
   useEffect(() => {
     document.documentElement.dir = isRightToLeft ? 'rtl' : 'ltr';

@@ -14,21 +14,20 @@ const TaxModal = ({
   const isEdit = !!initialValues;
 
   useEffect(() => {
-    if (visible && initialValues) {
-      form.setFieldsValue({
-        ...initialValues,
-        isActive: initialValues.isActive !== false,
-        isDefault: initialValues.isDefault || false,
-      });
-    } else if (visible) {
+    if (!visible) form.resetFields();
+  }, [visible, form]);
+
+  useEffect(() => {
+    if (visible) {
       form.resetFields();
-      form.setFieldsValue({
-        isActive: true,
-        isDefault: false,
-        taxPercent: 5,
-      });
+      if (initialValues) form.setFieldsValue(initialValues);
     }
   }, [visible, initialValues, form]);
+
+  const handleCancel = () => {
+    form.resetFields();
+    onCancel();
+  };
 
   const handleOk = async () => {
     try {
@@ -41,9 +40,10 @@ const TaxModal = ({
 
   return (
     <Modal
+      key={initialValues?.id || 'add'}
       title={isEdit ? t('editTax') : t('addTax')}
       open={visible}
-      onCancel={onCancel}
+      onCancel={handleCancel}
       onOk={handleOk}
       confirmLoading={loading}
       okText={isEdit ? t('edit') : t('add')}
@@ -56,13 +56,7 @@ const TaxModal = ({
         form={form}
         layout="vertical"
         dir="rtl"
-        initialValues={{
-          isActive: true,
-          isDefault: false,
-          taxPercent: 5,
-          ...initialValues,
-        }}
-      >
+        >
         <Form.Item
           name="nameAr"
           label={t('taxNameAr')}

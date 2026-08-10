@@ -13,13 +13,21 @@ const BranchModal = ({
   const [form] = Form.useForm();
   const isEdit = !!initialValues;
 
+   useEffect(() => {
+    if (!visible) form.resetFields();
+  }, [visible, form]);
+
   useEffect(() => {
-    if (visible && initialValues) {
-      form.setFieldsValue(initialValues);
-    } else if (visible) {
+    if (visible) {
       form.resetFields();
+      if (initialValues) form.setFieldsValue(initialValues);
     }
   }, [visible, initialValues, form]);
+
+  const handleCancel = () => {
+    form.resetFields();
+    onCancel();
+  };
 
   const handleOk = async () => {
     try {
@@ -32,9 +40,10 @@ const BranchModal = ({
 
   return (
     <Modal
+    key={initialValues?.id || 'add'}
       title={isEdit ? t('editBranch') : t('addBranch')}
       open={visible}
-      onCancel={onCancel}
+      onCancel={handleCancel}
       onOk={handleOk}
       confirmLoading={loading}
       okText={isEdit ? t('edit') : t('add')}
@@ -47,9 +56,7 @@ const BranchModal = ({
         form={form}
         layout="vertical"
         dir="rtl"
-        initialValues={{
-          ...initialValues,
-        }}
+        
       >
         <Form.Item
           name="name"

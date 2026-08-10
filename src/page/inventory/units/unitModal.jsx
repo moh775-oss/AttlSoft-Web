@@ -1,7 +1,5 @@
-// src/pages/Units/UnitModal.jsx
-
 import { useEffect } from 'react';
-import { Modal, Form, Input, Button, Select, Switch } from 'antd';
+import { Modal, Form, Input } from 'antd';
 import { useTranslate } from '@/hooks/useTranslate';
 
 const UnitModal = ({
@@ -15,11 +13,14 @@ const UnitModal = ({
   const [form] = Form.useForm();
   const isEdit = !!initialValues;
 
+   useEffect(() => {
+    if (!visible) form.resetFields();
+  }, [visible, form]);
+
   useEffect(() => {
-    if (visible && initialValues) {
-      form.setFieldsValue(initialValues);
-    } else if (visible) {
+    if (visible) {
       form.resetFields();
+      if (initialValues) form.setFieldsValue(initialValues);
     }
   }, [visible, initialValues, form]);
 
@@ -27,31 +28,35 @@ const UnitModal = ({
     try {
       const values = await form.validateFields();
       onSave(values);
+       form.resetFields();
     } catch (error) {
       console.error('Validation failed:', error);
     }
   };
+  const handleCancel = () => {
+    form.resetFields();
+    onCancel();
+  }
 
   return (
     <Modal
+    key={initialValues?.id || 'add'} 
       title={isEdit ? t('editUnit') : t('addUnit')}
       open={visible}
-      onCancel={onCancel}
+      onCancel={handleCancel}
       onOk={handleOk}
       confirmLoading={loading}
       okText={isEdit ? t('edit') : t('add')}
       cancelText={t('cancel')}
       width={600}
       className="rtl-modal"
+      destroyOnHidden
     >
       <Form
         form={form}
         layout="vertical"
         dir="rtl"
-        initialValues={{
-          isActive: true,
-          ...initialValues,
-        }}
+        
       >
         <Form.Item
           name="name"
@@ -62,38 +67,6 @@ const UnitModal = ({
           ]}
         >
           <Input placeholder={t('enterUnitName')} size="large" />
-        </Form.Item>
-
-        <Form.Item
-          name="code"
-          label={t('unitCode')}
-          rules={[
-            { required: true, message: t('pleaseEnterUnitCode') },
-          ]}
-        >
-          <Input placeholder={t('enterUnitCode')} size="large" disabled />
-        </Form.Item>
-
-        <Form.Item
-          name="description"
-          label={t('description')}
-        >
-          <Input.TextArea 
-            placeholder={t('enterDescription')} 
-            rows={3}
-            size="large"
-          />
-        </Form.Item>
-
-        <Form.Item
-          name="isActive"
-          label={t('active')}
-          valuePropName="checked"
-        >
-          <Switch 
-            checkedChildren={t('yes')} 
-            unCheckedChildren={t('no')} 
-          />
         </Form.Item>
       </Form>
     </Modal>

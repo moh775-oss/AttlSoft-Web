@@ -13,17 +13,21 @@ const OmlatModal = ({
   const [form] = Form.useForm();
   const isEdit = !!initialValues;
 
+   useEffect(() => {
+    if (!visible) form.resetFields();
+  }, [visible, form]);
+
   useEffect(() => {
-    if (visible && initialValues) {
-      form.setFieldsValue(initialValues);
-    } else if (visible) {
+    if (visible) {
       form.resetFields();
-      form.setFieldsValue({
-        isDefault: false,
-        exchangeRate: 1,
-      });
+      if (initialValues) form.setFieldsValue(initialValues);
     }
   }, [visible, initialValues, form]);
+
+  const handleCancel = () => {
+    form.resetFields();
+    onCancel();
+  };
 
   const handleOk = async () => {
     try {
@@ -36,9 +40,10 @@ const OmlatModal = ({
 
   return (
     <Modal
+    key={initialValues?.id || 'add'}
       title={isEdit ? t('editCurrency') : t('addCurrency')}
       open={visible}
-      onCancel={onCancel}
+      onCancel={handleCancel}
       onOk={handleOk}
       confirmLoading={loading}
       okText={isEdit ? t('edit') : t('add')}
@@ -51,11 +56,7 @@ const OmlatModal = ({
         form={form}
         layout="vertical"
         dir="rtl"
-        initialValues={{
-          isDefault: false,
-          exchangeRate: 1,
-          ...initialValues,
-        }}
+        
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Form.Item

@@ -13,13 +13,21 @@ const BankModal = ({
   const [form] = Form.useForm();
   const isEdit = !!initialValues;
 
+   useEffect(() => {
+    if (!visible) form.resetFields();
+  }, [visible, form]);
+
   useEffect(() => {
-    if (visible && initialValues) {
-      form.setFieldsValue(initialValues);
-    } else if (visible) {
+    if (visible) {
       form.resetFields();
+      if (initialValues) form.setFieldsValue(initialValues);
     }
   }, [visible, initialValues, form]);
+
+  const handleCancel = () => {
+    form.resetFields();
+    onCancel();
+  };
 
   const handleOk = async () => {
     try {
@@ -38,9 +46,10 @@ const BankModal = ({
 
   return (
     <Modal
+    key={initialValues?.id || 'add'}
       title={isEdit ? t('editBank') : t('addBank')}
       open={visible}
-      onCancel={onCancel}
+      onCancel={handleCancel}
       onOk={handleOk}
       confirmLoading={loading}
       okText={isEdit ? t('edit') : t('add')}
@@ -53,9 +62,7 @@ const BankModal = ({
         form={form}
         layout="vertical"
         dir="rtl"
-        initialValues={{
-          ...initialValues,
-        }}
+       
       >
         <Form.Item
           name="bankName"

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Row, Col, Typography, Dropdown, Button } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import '/src/App.css';
+
 import { 
   PhoneOutlined, 
   MoreOutlined, 
@@ -20,10 +21,12 @@ export default function HomePage() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const navigate = useNavigate();
+  const location = useLocation();
   const { isDarkMode } = useTheme();
   const { t, i18n } = useTranslation();
   
   const isRightToLeft = i18n.language === 'ar';
+  const isHomePage = location.pathname === '/';
   
   const username = localStorage.getItem('username') || 'محمد عبدالحكيم قائد محمد';
   const branchName = localStorage.getItem('branchName') ||'فرع الرياض - الرئيسي - شارع العليا الفرعي';
@@ -103,11 +106,16 @@ export default function HomePage() {
         display: 'flex', 
         flexDirection: 'column', 
         height: '100vh',
-        overflow: 'hidden'
+        overflow: 'hidden',
       }}
     >
-      {/* المحتوى الرئيسي - قابل للتمرير */}
-      <div style={{ flex: 1, overflow: 'auto', paddingBottom: '70px' }}>
+      {/* المحتوى الرئيسي - السكرول الوحيد */}
+      <div style={{ 
+        flex: 1, 
+        overflow: 'auto',
+        paddingBottom: '140px',
+        paddingTop: '10px',
+      }}>
         <div className="vision-ticker">
           <div className="ticker-container">
             <div className="ticker-logo">
@@ -197,7 +205,7 @@ export default function HomePage() {
           direction: isRightToLeft ? 'rtl' : 'ltr'
         }}
       >
-        {/* جهة اليمين - اسم الفرع (دائماً ظاهر) */}
+        {/* جهة اليمين - اسم الفرع */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <ShopOutlined style={{ color: '#1890ff', fontSize: '20px' }} />
           <span style={{ 
@@ -209,10 +217,9 @@ export default function HomePage() {
           </span>
         </div>
 
-        {/* جهة اليسار - تعتمد على حجم الشاشة */}
+        {/* جهة اليسار */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
           {!isMobile ? (
-            // الشاشة الكبيرة: كل شيء يظهر
             <>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <UserOutlined style={{ color: '#1890ff', fontSize: '18px' }} />
@@ -240,7 +247,6 @@ export default function HomePage() {
               </div>
             </>
           ) : (
-            // الشاشة الصغيرة: اسم الفرع + ثلاث نقاط - باستخدام menu
             <Dropdown
               trigger={['click']}
               placement="topRight"

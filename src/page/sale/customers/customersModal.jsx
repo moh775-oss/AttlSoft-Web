@@ -16,26 +16,28 @@ const CustomerModal = ({
   const [form] = Form.useForm();
   const isEdit = !!initialValues;
 
+
+
   useEffect(() => {
-    if (visible && initialValues) {
-      form.setFieldsValue({
+    if (!visible) form.resetFields();
+  }, [visible, form]);
+
+  useEffect(() => {
+    if (visible) {
+      form.resetFields();
+       form.setFieldsValue({
         ...initialValues,
         branch: initialValues.branch || 1,
         debitLimit: initialValues.debitLimit || 0,
         balance: initialValues.balance || 0,
       });
-    } else if (visible) {
-      form.resetFields();
-      
-      form.setFieldsValue({
-        branch: 1,
-        debitLimit: 0,
-        balance: 0,
-        schemCode: 'CRN',
-        both: false,
-      });
     }
   }, [visible, initialValues, form]);
+
+  const handleCancel = () => {
+    form.resetFields();
+    onCancel();
+  };
 
   const handleOk = async () => {
     try {
@@ -48,9 +50,10 @@ const CustomerModal = ({
 
   return (
     <Modal
+    key={initialValues?.id || 'add'}
       title={isEdit ? t('editCustomer') : t('addCustomer')}
       open={visible}
-      onCancel={onCancel}
+      onCancel={handleCancel}
       onOk={handleOk}
       confirmLoading={loading}
       okText={isEdit ? t('edit') : t('add')}
@@ -63,15 +66,9 @@ const CustomerModal = ({
         form={form}
         layout="vertical"
         dir="rtl"
-        initialValues={{
-          branch: 1,
-          debitLimit: 0,
-          balance: 0,
-          schemCode: 'CRN',
-          both: false,
-        }}
+        
       >
-        {/* المعلومات الأساسية */}
+        
         <div className="mb-4">
           <h4 className="text-base font-semibold text-blue-600 mb-3">{t('infoBasic')}</h4>
           <Form.Item
