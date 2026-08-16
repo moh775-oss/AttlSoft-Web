@@ -23,7 +23,7 @@ import './ERPTopNav.css';
 
 const { Header } = Layout;
 
-export default function ERPTopNav() { // إزالة props
+export default function ERPTopNav() {
   const navigate = useNavigate();
   const { isDarkMode, toggleTheme } = useTheme();
   const { t, changeLanguage } = useTranslate();
@@ -31,9 +31,8 @@ export default function ERPTopNav() { // إزالة props
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1000);
   const [selectedKeys, setSelectedKeys] = useState([]);
-const [openKeys, setOpenKeys] = useState([]);
+  const [openKeys, setOpenKeys] = useState([]);
 
-  // جلب الاتجاه الحالي من i18n
   const isRightToLeft = i18n.language === 'ar';
 
   useEffect(() => {
@@ -44,20 +43,52 @@ const [openKeys, setOpenKeys] = useState([]);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  useEffect(() => {
+
+  if (drawerVisible) {
+    const mask = document.querySelector('.ant-drawer-mask');
+    if (mask && !mask.querySelector('.custom-drawer-close-btn')) {
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'custom-drawer-close-btn';
+      closeBtn.innerHTML = '';
+      closeBtn.onclick = () => setDrawerVisible(false);
+      mask.appendChild(closeBtn);
+    }
+  } else {
+
+    const btn = document.querySelector('.custom-drawer-close-btn');
+    if (btn) btn.remove();
+  }
+}, [drawerVisible]);
+
   const toggleLayout = () => {
-  const newLang = isRightToLeft ? 'en' : 'ar';
-
-  changeLanguage(newLang);
-
-  localStorage.setItem('language', newLang);
-
-  document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
-  document.documentElement.lang = newLang;
-};
+    const newLang = isRightToLeft ? 'en' : 'ar';
+    changeLanguage(newLang);
+    localStorage.setItem('language', newLang);
+    document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = newLang;
+  };
 
   const handleLogout = () => {
     console.log('تسجيل الخروج');
     navigate('/login');
+  };
+
+  
+  const getLevelKeys = (items) => {
+    const key = {};
+    const func = (items2, level = 1) => {
+      items2.forEach(item => {
+        if (item.key) {
+          key[item.key] = level;
+        }
+        if (item.children) {
+          func(item.children, level + 1);
+        }
+      });
+    };
+    func(items);
+    return key;
   };
 
   const arabicMenuItems = [
@@ -77,7 +108,7 @@ const [openKeys, setOpenKeys] = useState([]);
         { label: t('manageBanks'), key: '/setup/banks' },
         { label: t('safes'), key: '/setup/safes' },
         { label: t('taxes'), key: '/setup/taxes' },
-        {label: t('currencies'), key: '/setup/omlats'},
+        { label: t('currencies'), key: '/setup/omlats' },
         {
           label: t('zakat'),
           key: 'setup_zatca',
@@ -87,7 +118,6 @@ const [openKeys, setOpenKeys] = useState([]);
             { label: t('vatReturn'), key: '/setup/zatca/vat-return' },
           ],
         },
-
         { label: t('settings'), key: '/setup/settings' },
       ],
     },
@@ -103,7 +133,7 @@ const [openKeys, setOpenKeys] = useState([]);
             { label: t('categories'), key: '/inventory/setup/categories' },
             { label: t('units'), key: '/inventory/setup/units' },
             { label: t('items'), key: '/inventory/setup/items' },
-            { label: t('store'), key: '/inventory/setup/stores'},
+            { label: t('store'), key: '/inventory/setup/stores' },
             { label: t('stocktaking'), key: '/inventory/setup/stocktaking' },
           ]
         },
@@ -206,7 +236,6 @@ const [openKeys, setOpenKeys] = useState([]);
         },
       ],
     },
-
     {
       label: t('accounts'),
       key: 'accounts',
@@ -247,7 +276,6 @@ const [openKeys, setOpenKeys] = useState([]);
         },
       ],
     },
-
     {
       label: t('system'),
       key: 'system',
@@ -273,6 +301,26 @@ const [openKeys, setOpenKeys] = useState([]);
     },
   ];
 
+  const levelKeys = getLevelKeys(arabicMenuItems);
+
+  const onOpenChange = (openKeysNew) => {
+    const currentOpenKey = openKeysNew.find(key => !openKeys.includes(key));
+    
+    if (currentOpenKey !== undefined) {
+      const repeatIndex = openKeysNew
+        .filter(key => key !== currentOpenKey)
+        .findIndex(key => levelKeys[key] === levelKeys[currentOpenKey]);
+      
+      setOpenKeys(
+        openKeysNew
+          .filter((_, index) => index !== repeatIndex)
+          .filter(key => levelKeys[key] <= levelKeys[currentOpenKey])
+      );
+    } else {
+      setOpenKeys(openKeysNew);
+    }
+  };
+
   return (
     <Layout className="erp-layout" dir={isRightToLeft ? "rtl" : "ltr"}>
       <Header className={`erp-header ${isDarkMode ? 'dark-header' : 'light-header'}`}>
@@ -290,15 +338,16 @@ const [openKeys, setOpenKeys] = useState([]);
                 theme={isDarkMode ? 'dark' : 'light'}
                 items={arabicMenuItems}
                 className="main-menu"
-                triggerSubMenuAction={"click"}
-                onClick={({ key, keyPath }) => {
-    
-    if (key && key.startsWith('/')) {
-      navigate(key);
-      setDrawerVisible(false);
-    }
-    
-  }}
+                triggerSubMenuAction="click"
+                openKeys={openKeys}
+                onOpenChange={onOpenChange}
+                onClick={({ key }) => {
+                  if (key && key.startsWith('/')) {
+                    navigate(key);
+                    setDrawerVisible(false);
+                    setOpenKeys([]);
+                  }
+                }}
                 dir={isRightToLeft ? "rtl" : "ltr"}
                 overflowedIndicator={<MoreOutlined />}
               />
@@ -306,30 +355,20 @@ const [openKeys, setOpenKeys] = useState([]);
 
             <div className="icons-section">
               <div className="icons-container">
-
                 <Tooltip title={isDarkMode ? t('lightMode') : t('darkMode')}>
-                  <button
-                    className="icon-btn theme-btn"
-                    onClick={toggleTheme}
-                  >
+                  <button className="icon-btn theme-btn" onClick={toggleTheme}>
                     {isDarkMode ? <SunOutlined /> : <MoonOutlined />}
                   </button>
                 </Tooltip>
 
                 <Tooltip title={isRightToLeft ? t('english') : t('arabic')}>
-                  <button
-                    className="icon-btn lang-btn"
-                    onClick={toggleLayout}
-                  >
+                  <button className="icon-btn lang-btn" onClick={toggleLayout}>
                     {isRightToLeft ? '🇺🇸' : '🇸🇦'}
                   </button>
                 </Tooltip>
 
                 <Tooltip title={t('logout')}>
-                  <button
-                    className="icon-btn logout-btn"
-                    onClick={handleLogout}
-                  >
+                  <button className="icon-btn logout-btn" onClick={handleLogout}>
                     <LogoutOutlined />
                   </button>
                 </Tooltip>
@@ -344,23 +383,13 @@ const [openKeys, setOpenKeys] = useState([]);
               {isRightToLeft ? (
                 <>
                   <div className="mobile-icons">
-
-                    <button
-                      className="mobile-icon-btn theme-mobile-btn"
-                      onClick={toggleTheme}
-                    >
+                    <button className="mobile-icon-btn theme-mobile-btn" onClick={toggleTheme}>
                       {isDarkMode ? <SunOutlined /> : <MoonOutlined />}
                     </button>
-                    <button
-                      className="mobile-icon-btn lang-mobile-btn"
-                      onClick={toggleLayout}
-                    >
+                    <button className="mobile-icon-btn lang-mobile-btn" onClick={toggleLayout}>
                       🇺🇸
                     </button>
-                    <button
-                      className="mobile-icon-btn logout-mobile-btn"
-                      onClick={handleLogout}
-                    >
+                    <button className="mobile-icon-btn logout-mobile-btn" onClick={handleLogout}>
                       <LogoutOutlined />
                     </button>
                   </div>
@@ -388,22 +417,13 @@ const [openKeys, setOpenKeys] = useState([]);
                   </div>
 
                   <div className="mobile-icons">
-                    <button
-                      className="mobile-icon-btn logout-mobile-btn"
-                      onClick={handleLogout}
-                    >
+                    <button className="mobile-icon-btn logout-mobile-btn" onClick={handleLogout}>
                       <LogoutOutlined />
                     </button>
-                    <button
-                      className="mobile-icon-btn lang-mobile-btn"
-                      onClick={toggleLayout}
-                    >
+                    <button className="mobile-icon-btn lang-mobile-btn" onClick={toggleLayout}>
                       🇸🇦
                     </button>
-                    <button
-                      className="mobile-icon-btn theme-mobile-btn"
-                      onClick={toggleTheme}
-                    >
+                    <button className="mobile-icon-btn theme-mobile-btn" onClick={toggleTheme}>
                       {isDarkMode ? <SunOutlined /> : <MoonOutlined />}
                     </button>
                   </div>
@@ -414,64 +434,61 @@ const [openKeys, setOpenKeys] = useState([]);
         )}
       </Header>
 
-     <Drawer
-  title={
-    <div className="drawer-title">
-      <span className="drawer-company-name">
-        {t('appName')}
-      </span>
-    </div>
-  }
-  placement={isRightToLeft ? "left" : "left"}
-  onClose={() => setDrawerVisible(false)}
-  open={drawerVisible} 
-  className={`mobile-drawer ${isDarkMode ? 'dark-drawer' : 'light-drawer'}`}
-  width={280}
-  push={false} 
-  mask={true}
-  maskClosable={true}
-  closable={true}
-  
-  getContainer={false}
->
-  <div className="drawer-actions-horizontal">
-    <button className="drawer-action-icon-btn theme-drawer-btn" onClick={toggleTheme}>
-      {isDarkMode ? <SunOutlined /> : <MoonOutlined />}
-    </button>
+      <Drawer
+        title={
+          <div className="drawer-title">
+            <span className="drawer-company-name">{t('appName')}</span>
+          </div>
+        }
+        placement={isRightToLeft ? "left" : "left"}
+        onClose={() => setDrawerVisible(false)}
+        open={drawerVisible}
+        className={`mobile-drawer ${isDarkMode ? 'dark-drawer' : 'light-drawer'}`}
+        width={280}
+        push={false}
+        mask={true}
+        maskClosable={true}
+        closable={false}
+        getContainer={false}
+      >
+        <div className="drawer-actions-horizontal">
+          <button className="drawer-action-icon-btn theme-drawer-btn" onClick={toggleTheme}>
+            {isDarkMode ? <SunOutlined /> : <MoonOutlined />}
+          </button>
 
-    <button className="drawer-action-icon-btn lang-drawer-btn" onClick={toggleLayout}>
-      {isRightToLeft ? '🇺🇸' : '🇸🇦'}
-    </button>
+          <button className="drawer-action-icon-btn lang-drawer-btn" onClick={toggleLayout}>
+            {isRightToLeft ? '🇺🇸' : '🇸🇦'}
+          </button>
 
-    <button className="drawer-action-icon-btn logout-drawer-btn" onClick={handleLogout}>
-      <LogoutOutlined />
-    </button>
-  </div>
+          <button className="drawer-action-icon-btn logout-drawer-btn" onClick={handleLogout}>
+            <LogoutOutlined />
+          </button>
+        </div>
 
-  <Menu
-  mode="inline"  
-  theme={isDarkMode ? 'dark' : 'light'}
-  items={arabicMenuItems}
-  className="mobile-menu"
-  selectedKeys={selectedKeys}
-  openKeys={openKeys}
-  onOpenChange={(keys) => {
-    setOpenKeys(keys);
-  }}
-  onClick={({ key }) => {
-    if (key && key.startsWith('/')) {
-      setSelectedKeys([key]);
-      navigate(key);
-      setDrawerVisible(false);
-      setTimeout(() => {
-        setSelectedKeys([]);
-        setOpenKeys([]);
-      }, 200);
-    }
-  }}
-  dir={isRightToLeft ? "rtl" : "ltr"}
-/>
-</Drawer>
+        <Menu
+          mode="inline"
+          theme={isDarkMode ? 'dark' : 'light'}
+          items={arabicMenuItems}
+          className="mobile-menu"
+          selectedKeys={selectedKeys}
+          openKeys={openKeys}
+          onOpenChange={(keys) => {
+            setOpenKeys(keys);
+          }}
+          onClick={({ key }) => {
+            if (key && key.startsWith('/')) {
+              setSelectedKeys([key]);
+              navigate(key);
+              setDrawerVisible(false);
+              setTimeout(() => {
+                setSelectedKeys([]);
+                setOpenKeys([]);
+              }, 200);
+            }
+          }}
+          dir={isRightToLeft ? "rtl" : "ltr"}
+        />
+      </Drawer>
     </Layout>
   );
 }
