@@ -20,6 +20,17 @@
   z-index: 1000;
   height: 68px;
   background: #fff;
+  transition: all 0.3s ease !important;
+}
+
+/* ===== ظل الناف بار ===== */
+.light-mode .erp-header {
+  background: #ffffff !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+}
+.dark-mode .erp-header {
+  background: #0D1326 !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.2) !important;
 }
 
 /* ===== DESKTOP LAYOUT ===== */
@@ -97,6 +108,7 @@
   background: transparent !important;
   border: none !important;
   border-bottom: 2px solid transparent !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 .light-mode .main-menu .ant-menu-item,
 .light-mode .main-menu .ant-menu-submenu-title {
@@ -110,6 +122,7 @@
 .main-menu .ant-menu-submenu:hover .ant-menu-submenu-title {
   color: var(--color-primary) !important;
   background: transparent !important;
+  transform: translateY(-1px) !important;
 }
 .main-menu .ant-menu-item-selected,
 .main-menu .ant-menu-submenu-selected > .ant-menu-submenu-title {
@@ -118,54 +131,26 @@
   font-weight: 600;
 }
 
-/* ===== ICONS SECTION ===== */
-.icons-section {
-  flex: 0 0 auto;
-}
-.icons-container {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.icon-btn {
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent !important;
-  border-radius: 8px;
-  border: 1px solid;
-  cursor: pointer;
-  font-size: 16px;
-  transition: all 0.3s ease;
-}
-.light-mode .icon-btn {
-  color: var(--color-textPrimary);
-  border-color: var(--color-borderPrimary);
-}
-.dark-mode .icon-btn {
-  color: #ffffff;
-  border-color: #303030;
-}
-.icon-btn:hover {
-  background: transparent !important;
-  transform: translateY(-2px);
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-}
-.logout-btn:hover {
-  border-color: var(--color-danger) !important;
-  color: var(--color-danger) !important;
-}
-
-/* ===== SUBMENUS ===== */
+/* ===== القوائم المنسدلة - حركات ===== */
 .ant-menu-submenu-popup {
   border-radius: 8px !important;
   overflow: hidden;
   margin-top: 2px !important;
+  animation: slideDown 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transform-origin: top center !important;
 }
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-12px) scaleY(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
 .light-mode .ant-menu-submenu-popup {
   background: var(--color-bgCard) !important;
   border: 1px solid var(--color-borderCard) !important;
@@ -195,6 +180,7 @@
   background: transparent !important;
   border: 1px solid transparent !important;
   border-left: 3px solid transparent !important;
+  transition: all 0.2s ease !important;
 }
 .light-mode .ant-menu-submenu-popup .ant-menu-item {
   color: var(--color-textPrimary) !important;
@@ -206,11 +192,84 @@
   background: var(--color-hoverBg) !important;
   color: var(--color-primary) !important;
   border-left: 3px solid var(--color-primary) !important;
+  transform: translateX(4px) !important;
 }
 .ant-menu-submenu-popup .ant-menu-item-selected {
   color: var(--color-primary) !important;
   background: var(--color-activeBg) !important;
   border-left: 3px solid var(--color-primary) !important;
+}
+
+/* ===== زر "المزيد" ===== */
+.ant-menu-overflow-item-rest .ant-menu-submenu-title {
+  background: transparent !important;
+  border-radius: 0 !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 68px !important;
+  line-height: 68px !important;
+  margin: 0 5px !important;
+  padding: 0 !important;
+  border: none !important;
+  border-bottom: 2px solid transparent !important;
+  transition: all 0.3s ease !important;
+}
+.light-mode .ant-menu-overflow-item-rest .ant-menu-submenu-title {
+  color: var(--color-textPrimary) !important;
+}
+.dark-mode .ant-menu-overflow-item-rest .ant-menu-submenu-title {
+  color: #ffffff !important;
+}
+.ant-menu-overflow-item-rest .ant-menu-submenu-title:hover {
+  background: transparent !important;
+  transform: translateY(-1px) !important;
+  color: var(--color-primary) !important;
+  border-bottom: 2px solid var(--color-primary) !important;
+}
+
+/* ===== ICONS SECTION ===== */
+.icons-section {
+  flex: 0 0 auto;
+}
+.icons-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent !important;
+  border-radius: 8px;
+  border: 1px solid;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease !important;
+}
+.light-mode .icon-btn {
+  color: var(--color-textPrimary);
+  border-color: var(--color-borderPrimary);
+}
+.dark-mode .icon-btn {
+  color: #ffffff;
+  border-color: #303030;
+}
+.icon-btn:hover {
+  background: transparent !important;
+  transform: translateY(-2px) !important;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+.logout-btn:hover {
+  border-color: var(--color-danger) !important;
+  color: var(--color-danger) !important;
 }
 
 /* ===== MOBILE LAYOUT ===== */
@@ -250,6 +309,7 @@
   border: 1px solid;
   cursor: pointer;
   font-size: 16px;
+  transition: all 0.2s ease !important;
 }
 .light-mode .mobile-icon-btn {
   color: var(--color-textPrimary);
@@ -263,6 +323,7 @@
   background: var(--color-hoverBg);
   border-color: var(--color-primary);
   color: var(--color-primary);
+  transform: translateY(-2px) !important;
 }
 .mobile-menu-btn {
   width: 36px;
@@ -273,6 +334,7 @@
   background: transparent !important;
   border-radius: 8px;
   border: 1px solid;
+  transition: all 0.2s ease !important;
 }
 .light-mode .mobile-menu-btn {
   color: var(--color-textPrimary);
@@ -286,6 +348,7 @@
   background: var(--color-hoverBg) !important;
   border-color: var(--color-primary);
   color: var(--color-primary) !important;
+  transform: scale(1.05) !important;
 }
 
 /* ===== MEDIA QUERIES ===== */
@@ -331,7 +394,7 @@
   z-index: 1050 !important;
 }
 
-/* ===== زر الإغلاق الأحمر داخل الشفاف (على حدود الـ Drawer) ===== */
+/* ===== زر الإغلاق الأحمر ===== */
 .ant-drawer-close {
   position: absolute !important;
   top: 12px !important;
@@ -348,6 +411,7 @@
   z-index: 99999 !important;
   cursor: pointer !important;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+  transition: all 0.3s ease !important;
 }
 .ant-drawer-close:hover {
   background: #ff7875 !important;
@@ -358,13 +422,13 @@
   font-size: 16px !important;
 }
 
-/* ===== LTR: الزر في نهاية الـ Drawer (على يمين الشفاف) ===== */
+/* ===== LTR ===== */
 .ant-drawer:not(.ant-drawer-rtl) .ant-drawer-close {
   right: -22px !important;
   left: auto !important;
 }
 
-/* ===== RTL: الزر في نهاية الـ Drawer (على يسار الشفاف) ===== */
+/* ===== RTL ===== */
 .ant-drawer-rtl .ant-drawer-close {
   right: auto !important;
   left: -22px !important;
@@ -385,6 +449,7 @@
   overflow: hidden !important;
 }
 
+/* ===== دعم الثيمات للـ Drawer ===== */
 .light-mode .ant-drawer-header { border-bottom-color: #f0f0f0; }
 .dark-mode .ant-drawer-header { border-bottom-color: #28345E; }
 .light-mode .ant-drawer-content { background: #ffffff !important; }
@@ -417,10 +482,11 @@
   border: 1px solid;
   cursor: pointer;
   font-size: 20px;
+  transition: all 0.2s ease !important;
 }
 .light-mode .drawer-action-icon-btn { color: #000000; border-color: #d9d9d9; }
 .dark-mode .drawer-action-icon-btn { color: #ffffff; border-color: #28345E; }
-.drawer-action-icon-btn:hover { transform: translateY(-2px); }
+.drawer-action-icon-btn:hover { transform: translateY(-2px) !important; }
 
 /* ===== قائمة الموبايل ===== */
 .mobile-menu {
@@ -453,6 +519,7 @@
   border-left: 3px solid transparent;
   background: transparent !important;
   border-bottom: none !important;
+  transition: all 0.2s ease !important;
 }
 .light-mode .mobile-menu .ant-menu-item,
 .light-mode .mobile-menu .ant-menu-submenu-title { color: #000000 !important; }
@@ -464,12 +531,14 @@
   background: #e6f7ff !important;
   color: #1890ff !important;
   border-left: 3px solid #1890ff !important;
+  transform: translateX(4px) !important;
 }
 .dark-mode .mobile-menu .ant-menu-item:hover,
 .dark-mode .mobile-menu .ant-menu-submenu-title:hover {
   background: #1F2A4D !important;
   color: #7A6BFF !important;
   border-left: 3px solid #7A6BFF !important;
+  transform: translateX(4px) !important;
 }
 
 .mobile-menu .ant-menu-sub .ant-menu-item {
@@ -502,25 +571,24 @@
     width: 280px !important;
     left: 0 !important;
     right: auto !important;
+    overflow: hidden !important;
   }
   .ant-drawer-close {
+    display: none !important;
     top: 12px !important;
     right: -22px !important;
     left: auto !important;
   }
   .ant-drawer-rtl .ant-drawer-close {
-    position: absolute !important;
-    z-index: 99999  !important;
-    top: 12px !important;
-    right: -22px !important;
-    left: auto !important;
+    right: auto !important;
+    left: -22px !important;
   }
   .mobile-menu .ant-menu-submenu-open > .ant-menu-submenu-title {
     background: transparent !important;
   }
 }
 
-/* ===== عند تكبير الشاشة من موبايل إلى ديسكتوب ===== */
+
 @media (min-width: 1001px) {
   .ant-drawer {
     display: none !important;
@@ -534,45 +602,4 @@
   .ant-drawer-open {
     display: none !important;
   }
-}
-
-
-
-.ant-drawer-open .ant-drawer-mask::before {
-  content: '✕';
-  position: fixed !important;
-  top: 12px !important;
-  right: calc(280px - 18px) !important;
-  width: 36px !important;
-  height: 36px !important;
-  border-radius: 50% !important;
-  background: #ff4d4f !important;
-  color: white !important;
-  font-size: 18px !important;
-  font-weight: bold !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  z-index: 99999 !important;
-  cursor: pointer !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
-  line-height: 1 !important;
-  font-family: Arial, sans-serif !important;
-  transition: all 0.3s ease !important;
-}
-
-.ant-drawer-open .ant-drawer-mask::before:hover {
-  background: #ff7875 !important;
-  transform: scale(1.1) !important;
-}
-
-/* ===== RTL ===== */
-.ant-drawer-rtl.ant-drawer-open .ant-drawer-mask::before {
-  right: auto !important;
-  left: calc(300px - 18px) !important;
-}
-
-/* ===== إضافة حدث النقر للزر ===== */
-.ant-drawer-open .ant-drawer-mask {
-  cursor: default !important;
 }

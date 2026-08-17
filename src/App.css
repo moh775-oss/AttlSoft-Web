@@ -21,14 +21,14 @@ body.home-page-body {
   flex-direction: column;
   transition: background-color 0.3s ease;
   overflow-x: hidden;
-  padding-top: 75px !important;
+  padding-top: 5px !important;
   padding-bottom: 70px !important;
 }
 
 .app-content {
   flex: 1;
   padding: 5px 10px;
-  margin-top: 0 !important;
+  margin-top: 70px !important;
   background: var(--color-bgPrimary);
   transition: background-color 0.3s ease;
   overflow-x: hidden;
@@ -43,6 +43,7 @@ body.home-page-body {
   overflow-x: hidden;
   height: 100vh;
   overflow: hidden;
+  margin-top: 70px !important;
 
 }
 
