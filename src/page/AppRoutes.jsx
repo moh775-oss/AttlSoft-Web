@@ -11,6 +11,9 @@ import BranchPage from './setup/Branch/index.jsx';
 import TaxPage from './setup/Taxes/index.jsx';
 import OmlatPage from './setup/Omlats/index.jsx';
 import StorePage from './inventory/Stores/index.jsx';
+import CountriesPage from './setup/General/Countries/index.jsx';
+import CitiesPage from './setup/General/Cities/index.jsx';
+import AreasPage from './setup/General/AreaOfCity/index.jsx';
 
 
 
@@ -29,6 +32,9 @@ export default function AppRoutes() {
       <Route path="/setup/taxes" element={<TaxPage />} />
       <Route path="/setup/omlats" element={<OmlatPage />} />
       <Route path="/inventory/setup/stores" element={<StorePage />} />
+      <Route path="/setup/general/countries" element={<CountriesPage />} />
+      <Route path="/setup/general/cities" element={<CitiesPage />} />
+      <Route path="/setup/general/areas" element={<AreasPage />} />
     </Routes>
   ); 
 }

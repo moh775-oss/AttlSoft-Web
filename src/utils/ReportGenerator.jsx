@@ -602,10 +602,10 @@ const ReportGenerator = ({
 
   const renderPageSizeSelector = () => {
     if (!showPagination) return null;
-
+    
     return (
       <div className="flex items-center gap-3 mb-3 flex-wrap">
-        <span className="text-sm text-gray-600 whitespace-nowrap">عدد الصفوف:</span>
+        <span className="text-sm text-gray-600 whitespace-nowrap">{t('rowsPerPage')} :</span>
         <Select
           value={pageSize}
           onChange={handlePageSizeChange}

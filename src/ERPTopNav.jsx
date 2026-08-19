@@ -32,6 +32,7 @@ export default function ERPTopNav() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1000);
   const [selectedKeys, setSelectedKeys] = useState([]);
   const [openKeys, setOpenKeys] = useState([]);
+  const [isNavigating, setIsNavigating] = useState(false);
 
   const isRightToLeft = i18n.language === 'ar';
 
@@ -44,22 +45,20 @@ export default function ERPTopNav() {
   }, []);
 
   useEffect(() => {
-
-  if (drawerVisible) {
-    const mask = document.querySelector('.ant-drawer-mask');
-    if (mask && !mask.querySelector('.custom-drawer-close-btn')) {
-      const closeBtn = document.createElement('button');
-      closeBtn.className = 'custom-drawer-close-btn';
-      closeBtn.innerHTML = '';
-      closeBtn.onclick = () => setDrawerVisible(false);
-      mask.appendChild(closeBtn);
+    if (drawerVisible) {
+      const mask = document.querySelector('.ant-drawer-mask');
+      if (mask && !mask.querySelector('.custom-drawer-close-btn')) {
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'custom-drawer-close-btn';
+        closeBtn.innerHTML = '✕';
+        closeBtn.onclick = () => setDrawerVisible(false);
+        mask.appendChild(closeBtn);
+      }
+    } else {
+      const btn = document.querySelector('.custom-drawer-close-btn');
+      if (btn) btn.remove();
     }
-  } else {
-
-    const btn = document.querySelector('.custom-drawer-close-btn');
-    if (btn) btn.remove();
-  }
-}, [drawerVisible]);
+  }, [drawerVisible]);
 
   const toggleLayout = () => {
     const newLang = isRightToLeft ? 'en' : 'ar';
@@ -74,7 +73,6 @@ export default function ERPTopNav() {
     navigate('/login');
   };
 
-  
   const getLevelKeys = (items) => {
     const key = {};
     const func = (items2, level = 1) => {
@@ -103,6 +101,11 @@ export default function ERPTopNav() {
       key: 'setup',
       icon: <BuildOutlined />,
       children: [
+        { label: t('general'), key: 'general', children: [
+          { label: t('countries'), key: '/setup/general/countries' },
+          { label: t('cities'), key: '/setup/general/cities' },
+          { label: t('areas'), key: '/setup/general/areas' },
+        ]},
         { label: t('companyInfo'), key: '/setup/company' },
         { label: t('branches'), key: '/setup/branches' },
         { label: t('manageBanks'), key: '/setup/banks' },
@@ -304,6 +307,13 @@ export default function ERPTopNav() {
   const levelKeys = getLevelKeys(arabicMenuItems);
 
   const onOpenChange = (openKeysNew) => {
+    // إذا كان المستخدم ينتقل لصفحة، لا تفتح القوائم
+    if (isNavigating) {
+      setOpenKeys([]);
+      setIsNavigating(false);
+      return;
+    }
+
     const currentOpenKey = openKeysNew.find(key => !openKeys.includes(key));
     
     if (currentOpenKey !== undefined) {
@@ -318,6 +328,21 @@ export default function ERPTopNav() {
       );
     } else {
       setOpenKeys(openKeysNew);
+    }
+  };
+
+  // دالة للتعامل مع النقر على عناصر القائمة
+  const handleMenuClick = (key) => {
+    if (key && key.startsWith('/')) {
+      setIsNavigating(true);
+      navigate(key);
+      setDrawerVisible(false);
+      setOpenKeys([]);
+      
+      // إعادة تعيين isNavigating بعد انتقال الصفحة
+      setTimeout(() => {
+        setIsNavigating(false);
+      }, 300);
     }
   };
 
@@ -341,13 +366,7 @@ export default function ERPTopNav() {
                 triggerSubMenuAction="click"
                 openKeys={openKeys}
                 onOpenChange={onOpenChange}
-                onClick={({ key }) => {
-                  if (key && key.startsWith('/')) {
-                    navigate(key);
-                    setDrawerVisible(false);
-                    setOpenKeys([]);
-                  }
-                }}
+                onClick={({ key }) => handleMenuClick(key)}
                 dir={isRightToLeft ? "rtl" : "ltr"}
                 overflowedIndicator={<MoreOutlined />}
               />
@@ -473,17 +492,20 @@ export default function ERPTopNav() {
           selectedKeys={selectedKeys}
           openKeys={openKeys}
           onOpenChange={(keys) => {
+            // في الموبايل نسمح بفتح قائمة واحدة فقط
             setOpenKeys(keys);
           }}
           onClick={({ key }) => {
             if (key && key.startsWith('/')) {
+              setIsNavigating(true);
               setSelectedKeys([key]);
               navigate(key);
               setDrawerVisible(false);
+              setOpenKeys([]);
               setTimeout(() => {
                 setSelectedKeys([]);
-                setOpenKeys([]);
-              }, 200);
+                setIsNavigating(false);
+              }, 300);
             }
           }}
           dir={isRightToLeft ? "rtl" : "ltr"}
