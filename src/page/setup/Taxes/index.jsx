@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons';
 import ReportGenerator from "@/utils/ReportGenerator";
 import TaxModal from './TaxModal';
-import { fetchTaxes, addTax, updateTax, deleteTax } from '@/api/Tax';
+import { fetchTaxes, createTaxGroup, deleteTaxGroup, updateTaxGroup } from '@/api/Tax';
 import { useTranslate } from '@/hooks/useTranslate';
 import notify from "@/utils/notify.jsx";
 
@@ -38,58 +38,80 @@ const TaxesPage = () => {
   }, []);
 
   const handleAdd = () => {
-    setSelectedTax(null);
-    setModalVisible(true);
-  };
+  setSelectedTax(null);
+  setModalVisible(true);
+};
 
-  const handleEdit = (tax) => {
-    loadTaxes().then(() => {
-      setSelectedTax(tax);
-      setModalVisible(true);
-    });
-  };
+const handleEdit = (tax) => {
+  setSelectedTax(tax);
+  setModalVisible(true);
+};
 
-  const handleDelete = async (id) => {
-    try {
-      await deleteTax(id);
-      notify.success(t('deleteSuccess'));
+const handleDelete = async (id) => {
+  try {
+    const result = await deleteTaxGroup(id);
+    if (result.success) {
+      notify.success(result.message || t('deleteSuccess'));
       loadTaxes();
-    } catch (error) {
-      notify.error(t('deleteError'));
+    } else {
+      notify.error(result.message || t('deleteError'));
     }
-  };
+  } catch (error) {
+    notify.error(t('deleteError'));
+  }
+};
 
-  const handleSave = async (values) => {
-    setSaving(true);
-    try {
-      if (selectedTax) {
-        await updateTax(selectedTax.id, values);
-        notify.success(t('updateSuccess'));
-      } else {
-        await addTax(values);
-        notify.success(t('saveSuccess'));
-      }
+const handleSave = async (values) => {
+  setSaving(true);
+  try {
+    let result;
+    if (selectedTax) {
+      result = await updateTaxGroup({
+        id: selectedTax.id,
+        ...values,
+        createDate: selectedTax.createDate,
+        updateDate: new Date().toISOString(),
+        userId: values.userId ?? 0,
+        branch: values.branch ?? 0,
+        userUpd: values.userUpd ?? 0,
+      });
+    } else {
+      result = await createTaxGroup({
+        ...values,
+        createDate: new Date().toISOString(),
+        updateDate: new Date().toISOString(),
+        userId: values.userId ?? 0,
+        branch: values.branch ?? 0,
+        userUpd: values.userUpd ?? 0,
+      });
+    }
+
+    if (result.success) {
+      notify.success(result.message || (selectedTax ? t('updateSuccess') : t('saveSuccess')));
       setModalVisible(false);
       loadTaxes();
-    } catch (error) {
-      notify.error(selectedTax ? t('updateError') : t('saveError'));
-    } finally {
-      setSaving(false);
+    } else {
+      notify.error(result.message || (selectedTax ? t('updateError') : t('saveError')));
     }
-  };
+  } catch (error) {
+    notify.error(selectedTax ? t('updateError') : t('saveError'));
+  } finally {
+    setSaving(false);
+  }
+};
 
   const columns = [
     {
       key: 'id',
       label: t('code'),
-      
+      width: '10%',
       sortable: true,
       render: (value) => <span className="font-mono text-sm">{value || '—'}</span>,
     },
     {
       key: 'nameAr',
       label: t('taxName'),
-      
+      width: '35%',
       sortable: true,
       render: (value, record) => (
         <div>
@@ -103,7 +125,7 @@ const TaxesPage = () => {
     {
       key: 'taxPercent',
       label: t('taxRate'),
-      
+      width: '15%',
       sortable: true,
       render: (value) => (
         <span className="font-mono font-medium text-blue-600">
@@ -114,7 +136,7 @@ const TaxesPage = () => {
     {
       key: 'isDefault',
       label: t('taxDefault'),
-      
+      width: '15%',
       render: (value) => (
         <Tag color={value ? 'gold' : 'default'}>
           {value ? t('yes') : t('no')}
@@ -124,7 +146,7 @@ const TaxesPage = () => {
     {
       key: 'isActive',
       label: t('status'),
-      
+      width: '15%',
       render: (value) => (
         <Tag color={value !== false ? 'green' : 'red'}>
           {value !== false ? t('active') : t('inactive')}
@@ -211,7 +233,7 @@ const TaxesPage = () => {
           size="middle"
           fixedColumns={false}
           enableStickyHeader={true}
-          scroll={{ x: 'max-content', y: 55 * 5 }}
+          scroll={{ x: 1000 }}
         />
       </Card>
 

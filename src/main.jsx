@@ -9,6 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ConfigProvider, App as AntdApp } from 'antd';
 import i18n from './i18n.js';
 import { I18nextProvider } from 'react-i18next';
+import { CompanyProvider } from '@/context/CompanyContext';
 
 function Root() {
   const [lang, setLang] = useState(i18n.language);
@@ -35,7 +36,10 @@ function Root() {
 
         <ThemeProvider>
           <AntdApp>
-            <App key={lang} /> 
+            <CompanyProvider>
+               <App key={lang} /> 
+              </CompanyProvider>
+           
           </AntdApp>
         </ThemeProvider>
 

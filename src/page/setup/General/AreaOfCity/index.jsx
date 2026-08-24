@@ -103,34 +103,62 @@ const AreasPage = () => {
     });
   };
 
-  const handleDelete = async (id) => {
-    try {
-      await deleteArea(id);
-      notify.success(t('deleteSuccess'));
-      loadAreas(filterCountry, filterCity);
-    } catch (error) {
-      notify.error(t('deleteError'));
-    }
-  };
+  
 
-  const handleSave = async (values) => {
-    setSaving(true);
-    try {
-      if (selectedArea) {
-        await updateArea(selectedArea.id, values);
-        notify.success(t('updateSuccess'));
-      } else {
-        await addArea(values);
-        notify.success(t('saveSuccess'));
-      }
+  const handleDelete = async (id) => {
+  try {
+    const result = await deleteArea(id);
+    if (result.success) {
+      notify.success(result.message || t('deleteSuccess'));
+      loadAreas(filterCountry, filterCity);
+    } else {
+      notify.error(result.message || t('deleteError'));
+    }
+  } catch (error) {
+    notify.error(t('deleteError'));
+  }
+};
+
+const handleSave = async (values) => {
+  setSaving(true);
+  try {
+    let result;
+    if (selectedArea) {
+      result = await updateArea(
+        selectedArea.id,
+        {
+          countryId: values.countryId,
+          cityId: values.cityId,
+          areaName: values.name,
+          areaNameEn: values.nameEn,
+          branch: values.branch ?? 0,
+          userId: values.userId ?? 0,
+        }
+      );
+    } else {
+      result = await addArea({
+        countryId: values.countryId,
+        cityId: values.cityId,
+         areaName: values.name,
+          areaNameEn: values.nameEn,
+        branch: values.branch ?? 0,
+        userId: values.userId ?? 0,
+      });
+    }
+
+    if (result.success) {
+      notify.success(result.message || (selectedArea ? t('updateSuccess') : t('saveSuccess')));
       setModalVisible(false);
       loadAreas(filterCountry, filterCity);
-    } catch (error) {
-      notify.error(selectedArea ? t('updateError') : t('saveError'));
-    } finally {
-      setSaving(false);
+    } else {
+      notify.error(result.message || (selectedArea ? t('updateError') : t('saveError')));
     }
-  };
+  } catch (error) {
+    notify.error(selectedArea ? t('updateError') : t('saveError'));
+  } finally {
+    setSaving(false);
+  }
+};
 
   const handleCountryFilterChange = (value) => {
     setFilterCountry(value);

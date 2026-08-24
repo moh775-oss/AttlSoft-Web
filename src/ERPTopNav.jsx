@@ -32,7 +32,6 @@ export default function ERPTopNav() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1000);
   const [selectedKeys, setSelectedKeys] = useState([]);
   const [openKeys, setOpenKeys] = useState([]);
-  const [isNavigating, setIsNavigating] = useState(false);
 
   const isRightToLeft = i18n.language === 'ar';
 
@@ -45,20 +44,29 @@ export default function ERPTopNav() {
   }, []);
 
   useEffect(() => {
-    if (drawerVisible) {
+  if (drawerVisible) {
+    // نستخدم setTimeout عشان نضمن وجود الماسك في DOM
+    setTimeout(() => {
       const mask = document.querySelector('.ant-drawer-mask');
-      if (mask && !mask.querySelector('.custom-drawer-close-btn')) {
-        const closeBtn = document.createElement('button');
-        closeBtn.className = 'custom-drawer-close-btn';
-        closeBtn.innerHTML = '✕';
-        closeBtn.onclick = () => setDrawerVisible(false);
-        mask.appendChild(closeBtn);
+      if (mask) {
+        let closeBtn = mask.querySelector('.custom-drawer-close-btn');
+        if (!closeBtn) {
+          closeBtn = document.createElement('button');
+          closeBtn.className = 'custom-drawer-close-btn';
+          closeBtn.innerHTML = '✕';
+          closeBtn.onclick = () => setDrawerVisible(false);
+          mask.appendChild(closeBtn);
+          
+        }
+      } else {
+        console.log('الماسك غير موجود');
       }
-    } else {
-      const btn = document.querySelector('.custom-drawer-close-btn');
-      if (btn) btn.remove();
-    }
-  }, [drawerVisible]);
+    }, 220);
+  } else {
+    const btn = document.querySelector('.custom-drawer-close-btn');
+    if (btn) btn.remove();
+  }
+}, [drawerVisible]);
 
   const toggleLayout = () => {
     const newLang = isRightToLeft ? 'en' : 'ar';
@@ -106,7 +114,7 @@ export default function ERPTopNav() {
           { label: t('cities'), key: '/setup/general/cities' },
           { label: t('areas'), key: '/setup/general/areas' },
         ]},
-        { label: t('companyInfo'), key: '/setup/company' },
+        { label: t('companyInfo'), key: 'setup/company' },
         { label: t('branches'), key: '/setup/branches' },
         { label: t('manageBanks'), key: '/setup/banks' },
         { label: t('safes'), key: '/setup/safes' },
@@ -306,45 +314,20 @@ export default function ERPTopNav() {
 
   const levelKeys = getLevelKeys(arabicMenuItems);
 
+  // نفس onOpenChange حق المكتبة بالضبط
   const onOpenChange = (openKeysNew) => {
-    // إذا كان المستخدم ينتقل لصفحة، لا تفتح القوائم
-    if (isNavigating) {
-      setOpenKeys([]);
-      setIsNavigating(false);
-      return;
-    }
+  // ببساطة خليها تفتح وتغلق بدون تعقيد
+  setOpenKeys(openKeysNew);
+};
 
-    const currentOpenKey = openKeysNew.find(key => !openKeys.includes(key));
-    
-    if (currentOpenKey !== undefined) {
-      const repeatIndex = openKeysNew
-        .filter(key => key !== currentOpenKey)
-        .findIndex(key => levelKeys[key] === levelKeys[currentOpenKey]);
-      
-      setOpenKeys(
-        openKeysNew
-          .filter((_, index) => index !== repeatIndex)
-          .filter(key => levelKeys[key] <= levelKeys[currentOpenKey])
-      );
-    } else {
-      setOpenKeys(openKeysNew);
-    }
-  };
-
-  // دالة للتعامل مع النقر على عناصر القائمة
   const handleMenuClick = (key) => {
-    if (key && key.startsWith('/')) {
-      setIsNavigating(true);
-      navigate(key);
-      setDrawerVisible(false);
-      setOpenKeys([]);
-      
-      // إعادة تعيين isNavigating بعد انتقال الصفحة
-      setTimeout(() => {
-        setIsNavigating(false);
-      }, 300);
-    }
-  };
+  if (key && key.startsWith('/')) {
+    navigate(key);
+    setDrawerVisible(false);
+    // أغلق كل القوائم
+    setOpenKeys([]);
+  }
+};
 
   return (
     <Layout className="erp-layout" dir={isRightToLeft ? "rtl" : "ltr"}>
@@ -491,21 +474,16 @@ export default function ERPTopNav() {
           className="mobile-menu"
           selectedKeys={selectedKeys}
           openKeys={openKeys}
-          onOpenChange={(keys) => {
-            // في الموبايل نسمح بفتح قائمة واحدة فقط
-            setOpenKeys(keys);
-          }}
+          onOpenChange={onOpenChange}
           onClick={({ key }) => {
             if (key && key.startsWith('/')) {
-              setIsNavigating(true);
               setSelectedKeys([key]);
               navigate(key);
               setDrawerVisible(false);
               setOpenKeys([]);
               setTimeout(() => {
                 setSelectedKeys([]);
-                setIsNavigating(false);
-              }, 300);
+              }, 200);
             }
           }}
           dir={isRightToLeft ? "rtl" : "ltr"}

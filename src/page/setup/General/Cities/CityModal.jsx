@@ -22,7 +22,11 @@ const CityModal = ({
     if (visible) {
       form.resetFields();
       if (initialValues) {
-        form.setFieldsValue(initialValues);
+        form.setFieldsValue({
+          cityName: initialValues.name,
+          cityNameEn: initialValues.nameEn,
+          countryId: initialValues.countryId,
+        });
       }
     }
   }, [visible, initialValues, form]);
@@ -66,14 +70,14 @@ const CityModal = ({
             placeholder={t('selectCountry')}
             size="large"
             showSearch
-            optionFilterProp="children"
+            optionFilterProp="label"
             options={countries.map(c => ({ value: c.id, label: c.name }))}
           />
         </Form.Item>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Form.Item
-            name="name"
+            name="cityName"
             label={t('cityName')}
             rules={[
               { required: true, message: t('pleaseEnterCityName') },
@@ -84,7 +88,7 @@ const CityModal = ({
           </Form.Item>
 
           <Form.Item
-            name="nameEn"
+            name="cityNameEn"
             label={t('cityNameEn')}
           >
             <Input placeholder={t('enterCityNameEn')} size="large" />

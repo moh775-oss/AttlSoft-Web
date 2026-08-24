@@ -83,16 +83,85 @@ export const fetchAreasByCity = async (cityId) => {
 };
 
 // إضافة منطقة 
-export const addArea = async (values) => {
-  
+
+export const addArea = async (areaData) => {
+   try {
+        const response = await axios.post(`${API_URL}/AreaOfCity`, {
+            countryId: areaData.countryId ?? 0,
+            cityId: areaData.cityId ?? 0,
+            areaName: areaData.areaName,
+            areaNameEn: areaData.areaNameEn,
+            branch: areaData.branch ?? 0,
+            userId: areaData.userId ?? 0,
+        });
+
+        return {
+            success: response.data.success,
+            message: response.data.message,
+            data: response.data.data ?? response.data,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء إنشاء المنطقة",
+            error: error.response?.data || error.message,
+        };
+    }
 };
 
 // تحديث منطقة 
 export const updateArea = async (id, values) => {
-  
+    try {
+        const response = await axios.put(
+            `${API_URL}/AreaOfCity/${id}`,
+            {
+                countryId: values.countryId ?? 0,
+                cityId: values.cityId ?? 0,
+                areaName: values.areaName,
+                areaNameEn: values.areaNameEn,
+                branch: values.branch ?? 0,
+                userId: values.userId ?? 0,
+                
+            }
+        );
+
+        return {
+            success: response.data.success,
+            message: response.data.message,
+            data: response.data.data ?? response.data,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء تعديل المنطقة",
+            error: error.response?.data || error.message,
+        };
+    }
 };
 
 // حذف منطقة 
 export const deleteArea = async (id) => {
-  
+   try {
+        const response = await axios.delete(
+            `${API_URL}/AreaOfCity/${id}`
+        );
+
+        return {
+            success: response.data.success,
+            message: response.data.message,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء حذف المنطقة",
+            error: error.response?.data || error.message,
+        };
+    }
 };
+

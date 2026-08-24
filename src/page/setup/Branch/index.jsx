@@ -49,33 +49,65 @@ const BranchesPage = () => {
   };
 
   const handleDelete = async (id) => {
-    try {
-      await deleteBranch(id);
-      notify.success(t('deleteSuccess'));
+  try {
+    const result = await deleteBranch(id);
+    if (result.success) {
+      notify.success(result.message || t('deleteSuccess'));
       loadBranches();
-    } catch (error) {
-      notify.error(t('deleteError'));
+    } else {
+      notify.error(result.message || t('deleteError'));
     }
-  };
+  } catch (error) {
+    notify.error(t('deleteError'));
+  }
+};
 
-  const handleSave = async (values) => {
-    setSaving(true);
-    try {
-      if (selectedBranch) {
-        await updateBranch(selectedBranch.id, values);
-        notify.success(t('updateSuccess'));
-      } else {
-        await addBranch(values);
-        notify.success(t('saveSuccess'));
-      }
+const handleSave = async (values) => {
+  setSaving(true);
+  try {
+    let result;
+    if (selectedBranch) {
+      result = await updateBranch(
+        selectedBranch.id,
+        {
+          name: values.branchName,
+          address: values.branchAddress,
+          phone: values.branchPhone,
+          manager: values.branchManger,
+          branch: values.branch ?? 0,
+          userId: values.userId ?? 0,
+          needSyncronize: values.needSyncronize ?? false,
+            serialDevice: values.serialDevice,
+            nameDevice: values.nameDevice,
+        }
+      );
+    } else {
+      result = await addBranch({
+        name: values.branchName,
+        address: values.branchAddress,
+        phone: values.branchPhone,
+        manager: values.branchManger,
+        branch: values.branch ?? 0,
+        userId: values.userId ?? 0,
+        needSyncronize: values.needSyncronize ?? false,
+        serialDevice: values.serialDevice,
+        nameDevice: values.nameDevice,
+      });
+    }
+
+    if (result.success) {
+      notify.success(result.message || (selectedBranch ? t('updateSuccess') : t('saveSuccess')));
       setModalVisible(false);
       loadBranches();
-    } catch (error) {
-      notify.error(selectedBranch ? t('updateError') : t('saveError'));
-    } finally {
-      setSaving(false);
+    } else {
+      notify.error(result.message || (selectedBranch ? t('updateError') : t('saveError')));
     }
-  };
+  } catch (error) {
+    notify.error(selectedBranch ? t('updateError') : t('saveError'));
+  } finally {
+    setSaving(false);
+  }
+};
 
   const columns = [
     {

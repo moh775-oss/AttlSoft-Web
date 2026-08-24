@@ -14,6 +14,7 @@ import StorePage from './inventory/Stores/index.jsx';
 import CountriesPage from './setup/General/Countries/index.jsx';
 import CitiesPage from './setup/General/Cities/index.jsx';
 import AreasPage from './setup/General/AreaOfCity/index.jsx';
+import CompanyPage from './setup/Company/index.jsx';
 
 
 
@@ -35,6 +36,7 @@ export default function AppRoutes() {
       <Route path="/setup/general/countries" element={<CountriesPage />} />
       <Route path="/setup/general/cities" element={<CitiesPage />} />
       <Route path="/setup/general/areas" element={<AreasPage />} />
+      <Route path="/setup/company" element={<CompanyPage />} />
     </Routes>
   ); 
 }

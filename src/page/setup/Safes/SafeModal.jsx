@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Modal, Form, Input, Switch, Select, Button, Space } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import { Modal, Form, Input, Switch, Select } from 'antd';
 import { useTranslate } from '@/hooks/useTranslate';
 import { fetchBranches } from '@/api/Branch';
 
@@ -15,8 +14,8 @@ const SafeModal = ({
   const [form] = Form.useForm();
   const isEdit = !!initialValues;
   const [branches, setBranches] = useState([]);
-  const [allBranches, setAllBranches] = useState(false);
   const [searching, setSearching] = useState(false);
+  const [allBranchesChecked, setAllBranchesChecked] = useState(false);
 
   // جلب الفروع
   const loadBranches = async () => {
@@ -34,24 +33,38 @@ const SafeModal = ({
   useEffect(() => {
     if (visible) {
       loadBranches();
-      form.resetFields();
     }
-  }, [visible  , form]);
+  }, [visible]);
 
   useEffect(() => {
     if (visible) {
-      form.resetFields();
-      if (initialValues) form.setFieldsValue(initialValues);
+      if (initialValues) {
+        // تعيين القيم عند التعديل
+        const isAllBranches = initialValues.allBranches || false;
+        setAllBranchesChecked(isAllBranches);
+        
+        form.setFieldsValue({
+          name: initialValues.name,
+          allBranches: isAllBranches,
+          branch: isAllBranches ? undefined : (initialValues.branchId || initialValues.branch),
+        });
+      } else {
+        // إضافة جديدة
+        setAllBranchesChecked(false);
+        form.resetFields();
+        form.setFieldsValue({ allBranches: false });
+      }
     }
   }, [visible, initialValues, form]);
 
   const handleCancel = () => {
     form.resetFields();
+    setAllBranchesChecked(false);
     onCancel();
   };
 
   const handleAllBranchesChange = (checked) => {
-    setAllBranches(checked);
+    setAllBranchesChecked(checked);
     if (checked) {
       form.setFieldsValue({ branch: undefined });
     }
@@ -80,12 +93,7 @@ const SafeModal = ({
       className="rtl-modal"
       destroyOnHidden
     >
-      <Form
-        form={form}
-        layout="vertical"
-        dir="rtl"
-        
-      >
+      <Form form={form} layout="vertical" dir="rtl">
         <Form.Item
           name="name"
           label={t('safeName')}
@@ -97,15 +105,13 @@ const SafeModal = ({
           <Input placeholder={t('enterSafeName')} size="large" />
         </Form.Item>
 
-        
-
         <Form.Item
           name="allBranches"
           label={t('allBranches')}
           valuePropName="checked"
         >
           <Switch
-            checked={allBranches}
+            checked={allBranchesChecked}
             onChange={handleAllBranchesChange}
             checkedChildren={t('yes')}
             unCheckedChildren={t('no')}
@@ -117,7 +123,7 @@ const SafeModal = ({
           label={t('branch')}
           rules={[
             {
-              required: !allBranches,
+              required: !allBranchesChecked,
               message: t('pleaseSelectBranch'),
             },
           ]}
@@ -125,9 +131,9 @@ const SafeModal = ({
           <Select
             placeholder={t('searchAndSelectBranch')}
             size="large"
-            disabled={allBranches}
+            disabled={allBranchesChecked}
             showSearch
-            optionFilterProp="children"
+            optionFilterProp="label"
             loading={searching}
             notFoundContent={t('noBranchesFound')}
             filterOption={(input, option) =>
@@ -141,7 +147,7 @@ const SafeModal = ({
         </Form.Item>
 
         <div className="text-xs text-gray-400 mt-2">
-          {allBranches ? t('allBranchesSelected') : t('selectBranch')}
+          {allBranchesChecked ? t('allBranchesSelected') : t('selectBranch')}
         </div>
       </Form>
     </Modal>

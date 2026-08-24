@@ -3,6 +3,8 @@ import axios from 'axios';
 import { API_URL } from '@/config/api';
 
 // جلب البنوك
+
+
 export const fetchBanks = async () => {
   try {
     const response = await axios.get(`${API_URL}/Bank`);
@@ -35,71 +37,93 @@ export const fetchBanks = async () => {
 };
 
 // إضافة بنك
-export const addBank = async (values) => {
-  const params = {
-    BankName: values.bankName,
-    BranchName: values.branchName,
-    AccountNo: values.accNo,
-    AccountType: values.accType,
-    AccountIban: values.accIban || '',
-    UserId: values.userId || 1,
-    Branch: values.branch || 1,
-  };
 
+export const addBank = async (bankData) => {
   try {
-    const { data } = await axios.post(
-      `${API_URL}/Bank/addBank`,
-      null,
-      { params }
-    );
-    return data;
-  } catch (error) {
-    console.error('Error adding bank:', error);
-    throw error;
-  }
+    console.log(bankData);
+        const response = await axios.post(
+            `${API_URL}/Bank`,
+            {
+                bankName: bankData.bankName,
+                branchName: bankData.branchName,
+                accountType: bankData.accountType,
+                accountIban: "j",
+                accountBalance: 0,
+                userId: bankData.userId || 1,
+                branch: bankData.branch || 1,
+            }
+        );
+
+        return {
+            success: response.data.success ?? response.data.Success ?? false,
+            message: response.data.message ?? response.data.Message,
+            bankId: response.data.bankId ?? null,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء إضافة البنك",
+            error: error.response?.data || error.message,
+        };
+    }
 };
 
 // تحديث بنك
-export const updateBank = async (id, values) => {
-  const params = {
-    BankId: id,
-    BankName: values.bankName,
-    BranchName: values.branchName,
-    AccountNo: values.accNo,
-    AccountType: values.accType,
-    AccountIban: values.accIban || '',
-    UserId: values.userId || 1,
-    Branch: values.branch || 1,
-  };
-
+export const updateBank = async (id, bankData) => {
   try {
-    const { data } = await axios.put(
-      `${API_URL}/Bank/PutBank`,
-      null,
-      { params }
-    );
-    return data;
-  } catch (error) {
-    console.error('Error updating bank:', error);
-    throw error;
-  }
+        const response = await axios.put(
+            `${API_URL}/Bank/${id}`,
+            {
+                 bankName: bankData.bankName,
+                branchName: bankData.branchName,
+                accountType: bankData.accountType,
+                accountIban: "j",
+                accountBalance: 0,
+                userId: bankData.userId || 1,
+                branch: bankData.branch || 1,
+            }
+        );
+
+        return {
+            success: response.data.success ?? false,
+            message: response.data.message,
+            bankId: response.data.bankId ?? null,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء تعديل البنك",
+            error: error.response?.data || error.message,
+        };
+    }
 };
 
 // حذف بنك
-export const deleteBank = async (id, userId = 1) => {
-  const params = {
-    BankId: id,
-    UserId: userId,
-  };
-
+export const deleteBank = async (id) => {
   try {
-    const { data } = await axios.delete(
-      `${API_URL}/Bank/delBank`,
-      { params }
-    );
-    return data;
-  } catch (error) {
-    console.error('Error deleting bank:', error);
-    throw error;
-  }
+        const response = await axios.delete(
+            `${API_URL}/Bank/${id}`
+        );
+
+        return {
+            success: response.data.success ?? false,
+            message: response.data.message,
+            canDelete: response.data.canDelete ?? false,
+            bankId: response.data.bankId ?? null,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء حذف البنك",
+            error: error.response?.data || error.message,
+        };
+    }
 };
+
+

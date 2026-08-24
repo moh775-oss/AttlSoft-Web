@@ -4,9 +4,9 @@ import { API_URL } from '@/config/api';
 
 
 export const fetchSuppliers = async () => {
-  const { data } = await axios.get(`${API_URL}/Importer/get`);
+  const { data } = await axios.get(`${API_URL}/Importer`);
 
-  return data.map(item => ({
+  return data.data.map(item => ({
     id: item.importerId,
     code: item.importerId,
     name: item.impName,
@@ -36,97 +36,115 @@ export const fetchSuppliers = async () => {
 };
 
 
-export const addSupplier = async (values) => {
-   const params = {
-    ImpName: values.name,
-    VatNo: values.vatNo || '',
-    AccNo: values.accNo || 10000076,
-    Address: values.address || '',
-    Phone: values.phone || '',
-    DepitLimit: values.debitLimit || 0,
-    Balance: values.balance || 0,
-    Branch: values.branch || 1,
-    UserId: values.userId || null,
-    Address2: values.address2 || '',
-    BussnsNo: values.bussnsNo || '',
-    Country: values.country || '',
-    City: values.city || '',
-    Street: values.street || '',
-    AreaLocation: values.areaLocation || '',
-    BuildNumber: values.buildNumber || '',
-    TheCode: values.theCode || '',
-    SchemCode: values.schemCode || 'CRN',
-    Both: values.both || false,
-  };
+export const addSupplier = async (importerData) => {
+   try {
+    console.log(importerData);
+        const response = await axios.post(
+            `${API_URL}/Importer`,
+            {
+                impName: importerData.name,
+                vatNo: importerData.vatNo,
+                address: importerData.address,
+                phone: importerData.phone,
+                depitLimit: importerData.depitLimit,
+                balance: importerData.balance,
+                branch: importerData.branch,
+                userId: importerData.userId,
+                address2: importerData.address2,
+                bussnsNo: importerData.bussnsNo,
+                country: importerData.country,
+                city: importerData.city,
+                street: importerData.street,
+                areaLocation: importerData.areaLocation,
+                buildNumber: importerData.buildNumber,
+                theCode: importerData.theCode,
+                schemCode: importerData.schemCode,
+                both: importerData.both,
+            }
+        );
 
-
-  try {
-    const { data } = await axios.post(
-      `${API_URL}/Importer/addImporter`,
-      null,
-      { params }
-    );
-    return data;
-  } catch (error) {
-    console.error('Error adding supplier:', error);
-    throw error;
-  }
+        return {
+            success: response.data.success ?? false,
+            message: response.data.message,
+            data: response.data.data ?? null,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء إضافة المورد",
+            error: error.response?.data || error.message,
+        };
+    }
 };
 
-// تحديث مورد
-export const updateSupplier = async (id, values) => {
-  const params = {
-    ID_IM: id,
-    ImpName: values.name,
-    VatNo: values.vatNo || '',
-    AccNo: values.accNo || 0,
-    Address: values.address || '',
-    Phone: values.phone || '',
-    DepitLimit: values.debitLimit || 0,
-    Balance: values.balance || 0,
-    Branch: values.branch || 1,
-    UserId: values.userId || null,
-    Address2: values.address2 || '',
-    BussnsNo: values.bussnsNo || '',
-    Country: values.country || '',
-    City: values.city || '',
-    Street: values.street || '',
-    AreaLocation: values.areaLocation || '',
-    BuildNumber: values.buildNumber || '',
-    TheCode: values.theCode || '',
-    SchemCode: values.schemCode || 'CRN',
-    Both: values.both || false,
-  };
 
+export const updateSupplier = async (id, importerData) => {
   try {
-    const { data } = await axios.put(
-      `${API_URL}/Importer/PutImporter/`,
-      null,
-      { params }
-    );
-    return data;
-  } catch (error) {
-    console.error('Error updating supplier:', error);
-    throw error;
-  }
+    console.log(importerData);
+        const response = await axios.put(
+            `${API_URL}/Importer?ID_IM=${id}`,
+            {
+                impName: importerData.name,
+                vatNo: importerData.vatNo,
+                address: importerData.address,
+                phone: importerData.phone,
+                depitLimit: importerData.depitLimit,
+                balance: importerData.balance,
+                branch: 1,
+                userId: importerData.userId,
+                address2: importerData.address2,
+                bussnsNo: 1,
+                country: importerData.country,
+                city: importerData.city,
+                street: importerData.street,
+                areaLocation: importerData.areaLocation,
+                buildNumber: importerData.buildNumber,
+                theCode: importerData.theCode,
+                schemCode: "cno",
+                both: importerData.both,
+            }
+        );
+
+        return {
+            success: response.data.success ?? false,
+            message: response.data.message,
+            data: response.data.data ?? null,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء تعديل المورد",
+            error: error.response?.data || error.message,
+        };
+    }
 };
 
 // حذف مورد
-export const deleteSupplier = async (id, branchId = 1, userId = null) => {
-  const params = {
-    id: id,
-    BranchId: branchId,
-    UserId: userId,
-  };
-
+export const deleteSupplier = async (id, branchId = 1, userId = 1) => {
   try {
-    const { data } = await axios.delete(
-      `${API_URL}/Importer/delImpor`,
-      { params }
-    );
-    return data;
-  } catch (error) {
-    console.error('Error deleting supplier:', error);
-    throw error;
-  }
+        const response = await axios.delete(
+            `${API_URL}/Importer?id=${id}&BranchId=${branchId}&UserId=${userId}`
+        );
+
+        return {
+            success: response.data.success ?? false,
+            message: response.data.message,
+            data: response.data.data ?? null,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء حذف المورد",
+            error: error.response?.data || error.message,
+        };
+    }
 };
+
+
+

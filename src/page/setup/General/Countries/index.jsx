@@ -37,45 +37,68 @@ const CountriesPage = () => {
   }, []);
 
   const handleAdd = () => {
-    setSelectedCountry(null);
-    setModalVisible(true);
-  };
+  setSelectedCountry(null);
+  setModalVisible(true);
+};
 
-  const handleEdit = (country) => {
-    loadCountries().then(() => {
-      setSelectedCountry(country);
-      setModalVisible(true);
-    });
-  };
+const handleEdit = (country) => {
+  setSelectedCountry(country);
+  setModalVisible(true);
+};
 
-  const handleDelete = async (id) => {
-    try {
-      await deleteCountry(id);
-      notify.success(t('deleteSuccess'));
+const handleDelete = async (id) => {
+  try {
+    const result = await deleteCountry(id);
+    if (result.success) {
+      notify.success(result.message || t('deleteSuccess'));
       loadCountries();
-    } catch (error) {
-      notify.error(t('deleteError'));
+    } else {
+      notify.error(result.message || t('deleteError'));
     }
-  };
+  } catch (error) {
+    notify.error(t('deleteError'));
+  }
+};
+const handleSave = async (values) => {
+  setSaving(true);
+  try {
+    let result;
+    if (selectedCountry) {
+      result = await updateCountry(
+        selectedCountry.id,
+        {
+          name: values.name,
+          nameEn: values.nameEn,
+          countryCode: values.countryCode,
+          phoneCode: values.phoneCode,
+          userId: values.userId ?? 0,
+          branch: values.branch ?? 0,
+        }
+      );
+    } else {
+      result = await addCountry({
+        name: values.name,
+        nameEn: values.nameEn,
+        countryCode: values.countryCode,
+        phoneCode: values.phoneCode,
+        branch: values.branch ?? 1,
+        userId: values.userId ?? 1,
+      });
+    }
 
-  const handleSave = async (values) => {
-    setSaving(true);
-    try {
-      if (selectedCountry) {
-        await updateCountry(selectedCountry.id, values);
-        notify.success(t('updateSuccess'));
-      } else {
-        await addCountry(values);
-        notify.success(t('saveSuccess'));
-      }
+    if (result.success) {
+      notify.success(result.message || (selectedCountry ? t('updateSuccess') : t('saveSuccess')));
       setModalVisible(false);
       loadCountries();
-    } catch (error) {
-      notify.error(selectedCountry ? t('updateError') : t('saveError'));
-    } finally {
-      setSaving(false);
+    } else {
+      notify.error(result.message || (selectedCountry ? t('updateError') : t('saveError')));
     }
-  };
+  } catch (error) {
+    notify.error(selectedCountry ? t('updateError') : t('saveError'));
+  } finally {
+    setSaving(false);
+  }
+};
 
   const columns = [
     {

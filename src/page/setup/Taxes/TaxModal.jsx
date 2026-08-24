@@ -59,7 +59,7 @@ const TaxModal = ({
         >
         <Form.Item
           name="nameAr"
-          label={t('taxNameAr')}
+          label={t('taxNameArabic')}
           rules={[
             { required: true, message: t('pleaseEnterTaxName') },
             { min: 2, message: t('nameMustBeAtLeastTwoCharacters') },
@@ -71,6 +71,10 @@ const TaxModal = ({
         <Form.Item
           name="nameEn"
           label={t('taxNameEnglish')}
+          rules={[
+            { required: true, message: t('pleaseEnterTaxNameEnglish') },
+            { min: 2, message: t('nameMustBeAtLeastTwoCharacters') }, 
+          ]}
         >
           <Input placeholder={t('taxNameEnglish')} size="large" />
         </Form.Item>

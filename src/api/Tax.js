@@ -5,7 +5,7 @@ import { API_URL } from '@/config/api';
 // جلب الضرائب
 export const fetchTaxes = async () => {
   try {
-    const response = await axios.get(`${API_URL}/GroupsTax/get`);
+    const response = await axios.get(`${API_URL}/TaxGroups`);
     
     // التحقق من وجود data في الاستجابة
     const data = response.data?.data || response.data || [];
@@ -34,95 +34,105 @@ export const fetchTaxes = async () => {
   }
 };
 
-// إضافة ضريبة
-export const addTax = async (values) => {
-  const params = {
-    NameAr: values.nameAr || values.name,
-    NameEn: values.nameEn || '',
-    TaxPercent: values.taxPercent || 0,
-    IsDefault: values.isDefault || false,
-    IsActive: values.isActive !== undefined ? values.isActive : true,
-    Branch: values.branch || 1,
-    UserId: values.userId || 1,
-  };
+/**
+ * إضافة مجموعة ضريبة
+ *
+ * POST /api/TaxGroups/addGroupTax
+ */
+export const createTaxGroup = async (taxData) => {
+    try {
+        const response = await axios.post(
+            `${API_URL}/TaxGroups/addGroupTax`,
+            {
+                nameAr: taxData.nameAr,
+                nameEn: taxData.nameEn,
+                taxPercent: taxData.taxPercent ?? 0,
+                isDefault: taxData.isDefault ?? false,
+                isActive: taxData.isActive ?? true,
+                createDate: taxData.createDate,
+                userId: taxData.userId ?? 0,
+                branch: taxData.branch ?? 0,
+                updateDate: taxData.updateDate,
+                userUpd: taxData.userUpd ?? 0,
+            }
+        );
 
-  try {
-    const { data } = await axios.post(
-      `${API_URL}/GroupsTax/addGroupsTax`,
-      null,
-      { params }
-    );
-    return data;
-  } catch (error) {
-    console.error('Error adding tax:', error);
-    throw error;
-  }
+        return {
+            success: response.data.success ?? true,
+            message: response.data.message,
+            data: response.data.data ?? response.data,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء إضافة مجموعة الضريبة",
+            error: error.response?.data || error.message,
+        };
+    }
 };
 
-// تحديث ضريبة
-export const updateTax = async (id, values) => {
-  const params = {
-    Id: id,
-    NameAr: values.nameAr || values.name,
-    NameEn: values.nameEn || '',
-    TaxPercent: values.taxPercent || 0,
-    IsDefault: values.isDefault || false,
-    IsActive: values.isActive !== undefined ? values.isActive : true,
-    Branch: values.branch || 1,
-    UserId: values.userId || 1,
-    UserUpd: values.userUpd || 1,
-  };
 
-  try {
-    const { data } = await axios.put(
-      `${API_URL}/GroupsTax/PutGroupsTax`,
-      null,
-      { params }
-    );
-    return data;
-  } catch (error) {
-    console.error('Error updating tax:', error);
-    throw error;
-  }
+/**
+ * حذف مجموعة ضريبة
+ *
+ * DELETE /api/TaxGroups/DelTax
+ */
+export const deleteTaxGroup = async (id) => {
+    try {
+        const response = await axios.delete(`${API_URL}/TaxGroups/DelTax?id=${id}`);
+
+        return {
+            success: response.data.success ?? true,
+            message: response.data.message,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message: error.response?.data?.message || "حدث خطأ أثناء حذف مجموعة الضريبة",
+            error: error.response?.data || error.message,
+        };
+    }
 };
 
-// حذف ضريبة
-export const deleteTax = async (id, userId = 1) => {
-  const params = {
-    Id: id,
-    UserId: userId,
-  };
 
-  try {
-    const { data } = await axios.delete(
-      `${API_URL}/GroupsTax/delGroupsTax`,
-      { params }
-    );
-    return data;
-  } catch (error) {
-    console.error('Error deleting tax:', error);
-    throw error;
-  }
-};
+/**
+ * تعديل مجموعة ضريبة
+ *
+ * PUT /api/TaxGroups
+ */
+export const updateTaxGroup = async (taxData) => {
+    try {
+        const response = await axios.put(
+            `${API_URL}/TaxGroups?id=${taxData.id}`,
+            {
+                id: taxData.id,
+                nameAr: taxData.nameAr,
+                nameEn: taxData.nameEn,
+                taxPercent: taxData.taxPercent ?? 0,
+                isDefault: taxData.isDefault ?? false,
+                isActive: taxData.isActive ?? true,
+                createDate: taxData.createDate,
+                userId: taxData.userId ?? 0,
+                branch: taxData.branch ?? 0,
+                updateDate: taxData.updateDate,
+                userUpd: taxData.userUpd ?? 0,
+            }
+        );
 
-// جلب الضريبة الافتراضية
-export const fetchDefaultTax = async () => {
-  try {
-    const taxes = await fetchTaxes();
-    return taxes.find(tax => tax.isDefault === true) || taxes[0] || null;
-  } catch (error) {
-    console.error('Error fetching default tax:', error);
-    throw error;
-  }
-};
-
-// جلب الضريبة حسب النسبة
-export const fetchTaxByPercent = async (percent) => {
-  try {
-    const taxes = await fetchTaxes();
-    return taxes.find(tax => tax.taxPercent === percent) || null;
-  } catch (error) {
-    console.error('Error fetching tax by percent:', error);
-    throw error;
-  }
+        return {
+            success: response.data.success ?? true,
+            message: response.data.message,
+            data: response.data.data ?? response.data,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء تعديل مجموعة الضريبة",
+            error: error.response?.data || error.message,
+        };
+    }
 };

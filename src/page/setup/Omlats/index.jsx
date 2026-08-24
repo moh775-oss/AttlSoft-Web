@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons';
 import ReportGenerator from "@/utils/ReportGenerator";
 import OmlatModal from './OmlatModal';
-import { fetchOmlat, addOmlat, updateOmlat, deleteOmlat } from '@/api/Omlat';
+import { fetchOmlat, createOmla, updateOmla, deleteOmla } from '@/api/Omlat';
 import { useTranslate } from '@/hooks/useTranslate';
 import notify from "@/utils/notify.jsx";
 
@@ -66,7 +66,7 @@ const OmlatPage = () => {
         await updateOmlat(selectedOmla.id, values);
         notify.success(t('updateSuccess'));
       } else {
-        await addOmlat(values);
+        await createOmla(values);
         notify.success(t('saveSuccess'));
       }
       setModalVisible(false);

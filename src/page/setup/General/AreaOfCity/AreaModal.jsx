@@ -101,7 +101,8 @@ const AreaModal = ({
             placeholder={t('selectCountry')}
             size="large"
             showSearch
-            optionFilterProp="children"
+            optionFilterProp="label"
+            
             onChange={handleCountryChange}
             options={countries.map(c => ({ value: c.id, label: c.name }))}
           />
@@ -116,7 +117,7 @@ const AreaModal = ({
             placeholder={t('selectCity')}
             size="large"
             showSearch
-            optionFilterProp="children"
+            optionFilterProp="label"
             options={filteredCities.map(c => ({ value: c.id, label: c.name }))}
           />
         </Form.Item>

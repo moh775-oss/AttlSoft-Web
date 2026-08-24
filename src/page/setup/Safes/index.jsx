@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button, Space, message, App, Tooltip, Card, Dropdown, Modal,   Tag, Switch } from 'antd';
+import { Button, Space, message, App, Tooltip, Card, Dropdown, Modal, Tag, Switch } from 'antd';
 import { 
   PlusOutlined, 
   EditOutlined, 
@@ -9,6 +9,7 @@ import {
 import ReportGenerator from "@/utils/ReportGenerator";
 import SafeModal from './SafeModal';
 import { fetchSafes, addSafe, updateSafe, deleteSafe } from '@/api/Safe';
+import { getBranchById } from '@/api/Branch';
 import { useTranslate } from '@/hooks/useTranslate';
 import notify from "@/utils/notify.jsx";
 
@@ -18,6 +19,7 @@ const SafesPage = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedSafe, setSelectedSafe] = useState(null);
   const [saving, setSaving] = useState(false);
+  const [branchesMap, setBranchesMap] = useState({});
   const { t } = useTranslate();
   const { message } = App.useApp();
 
@@ -26,7 +28,29 @@ const SafesPage = () => {
     try {
       const data = await fetchSafes();
       
-      setSafes(data);
+      // جلب أسماء الفروع لكل صندوق
+      const branchesMapTemp = {};
+      for (const safe of data) {
+        if (safe.branchId && !branchesMapTemp[safe.branchId]) {
+          try {
+            const result = await getBranchById(safe.branchId);
+            if (result.success && result.data) {
+              branchesMapTemp[safe.branchId] = result.data.branchName;
+            }
+          } catch (error) {
+            console.error('Error fetching branch:', error);
+          }
+        }
+      }
+      setBranchesMap(branchesMapTemp);
+      
+      // إضافة اسم الفرع للبيانات
+      const safesWithBranchName = data.map(safe => ({
+        ...safe,
+        branchName: branchesMapTemp[safe.branchId] || safe.branch || '—',
+      }));
+      
+      setSafes(safesWithBranchName);
     } catch (error) {
       notify.error(t('error.general.operationFailed'));
     } finally {
@@ -44,18 +68,19 @@ const SafesPage = () => {
   };
 
   const handleEdit = (safe) => {
-    // جلب أحدث البيانات قبل التعديل
-    loadSafes().then(() => {
-      setSelectedSafe(safe);
-      setModalVisible(true);
-    });
+    setSelectedSafe(safe);
+    setModalVisible(true);
   };
 
   const handleDelete = async (id) => {
     try {
-      await deleteSafe(id);
-      notify.success(t('deleteSuccess'));
-      loadSafes();
+      const result = await deleteSafe(id);
+      if (result.success) {
+        notify.success(result.message || t('deleteSuccess'));
+        loadSafes();
+      } else {
+        notify.error(result.message || t('deleteError'));
+      }
     } catch (error) {
       notify.error(t('deleteError'));
     }
@@ -64,15 +89,35 @@ const SafesPage = () => {
   const handleSave = async (values) => {
     setSaving(true);
     try {
+      let result;
       if (selectedSafe) {
-        await updateSafe(selectedSafe.id, values);
-        notify.success(t('updateSuccess'));
+        result = await updateSafe(
+          selectedSafe.id,
+          {
+            safeName: values.name,
+            safeBalance: values.safeBalance || 0,
+            branchId: values.branch,
+            userId: values.userId ?? 1,
+            allBranch: values.allBranches || false,
+          }
+        );
       } else {
-        await addSafe(values);
-        notify.success(t('saveSuccess'));
+        result = await addSafe({
+          safeName: values.name,
+          safeBalance: values.safeBalance || 0,
+          branchId: values.branch,
+          userId: values.userId ?? 1,
+          allBranch: values.allBranches || false,
+        });
       }
-      setModalVisible(false);
-      loadSafes();
+
+      if (result.success) {
+        notify.success(result.message || (selectedSafe ? t('updateSuccess') : t('saveSuccess')));
+        setModalVisible(false);
+        loadSafes();
+      } else {
+        notify.error(result.message || (selectedSafe ? t('updateError') : t('saveError')));
+      }
     } catch (error) {
       notify.error(selectedSafe ? t('updateError') : t('saveError'));
     } finally {
@@ -84,35 +129,30 @@ const SafesPage = () => {
     {
       key: 'code',
       label: t('code'),
-     
       sortable: true,
       render: (value) => <span className="font-mono text-sm">{value || '—'}</span>,
     },
     {
       key: 'name',
       label: t('safeName'),
-      
       sortable: true,
       render: (value) => <span className="font-medium">{value}</span>,
     },
     {
       key: 'accNo',
       label: t('accountNumber'),
-      
       sortable: true,
       render: (value) => <span className="font-mono">{value || '—'}</span>,
     },
     {
-      key: 'branch',
+      key: 'branchName',
       label: t('branch'),
-      
       sortable: true,
       render: (value) => value || '—',
     },
     {
       key: 'allBranches',
       label: t('allBranches'),
-      
       sortable: true,
       render: (value) => (
         <Tag color={value ? 'green' : 'gray'}>
@@ -124,7 +164,6 @@ const SafesPage = () => {
       key: 'actions',
       label: t('actions'),
       align: 'center',
-    
       render: (_, record) => (
         <Dropdown
           trigger={['click']}
@@ -176,9 +215,7 @@ const SafesPage = () => {
               {t('add')}
             </Button>
             <span className="text-lg font-semibold">{t('safes')}</span>
-            <span className="text-sm text-gray-400">
-              
-            </span>
+            <span className="text-sm text-gray-400"></span>
           </div>
         }
       >

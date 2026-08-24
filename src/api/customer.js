@@ -1,132 +1,149 @@
-// src/api/customer.js
 import axios from 'axios';
 import { API_URL } from '@/config/api';
 
-// جلب العملاء
-export const fetchCustomers = async () => {
-  const { data } = await axios.get(`${API_URL}/Amail/get`);
 
-  return data.map(item => ({
-    id: item.customerId,
-    code: item.customerId,
-    name: item.cusName,
-    vatNo: item.vatNo || '',
-    accNo: item.accNo,
-    address: item.address || '',
-    phone: item.phone || '',
-    debitLimit: item.depitLimit || 0,
-    balance: item.balance || 0,
-    branch: item.branch,
-    userId: item.userId,
-    srlCode: item.srlCode || '',
-    address2: item.address2 || '',
-    bussnsNo: item.bussnsNo || '',
-    country: item.country || '',
-    city: item.city || '',
-    street: item.street || '',
-    areaLocation: item.areaLocation || '',
-    buildNumber: item.buildNumber || '',
-    theCode: item.theCode || '',
-    schemCode: item.schemCode || 'CRN',
-    paidType: item.paidType || '',
-    both: item.both || false,
-    ...item
-  }));
+export const fetchCustomers=async()=>{
+try{
+const {data}=await axios.get(`${API_URL}/Customer`);
+
+return data.data.map(cust=>({
+id:cust.customerId,
+cusName :cust.cusName,
+vatNo:cust.vatNo,
+
+accoNo:cust.accoNo,
+address:cust.address,
+phone:cust.phone,
+depitLimit:cust.depitLimit,
+balance:cust.balance,
+branch:cust.branch,
+userId:cust.userId,
+srlCode:cust.srlCode,
+address2:cust.address2,
+bussnsNo:cust.bussnsNo,
+country:cust.country,
+city:cust.city,
+street:cust.street,
+arealocation:cust.arealocation,
+buildNumber:cust.buildNumber,
+theCode:cust.theCode,
+schemCode:cust.schemCode,
+paidType:cust.paidType,
+both:cust.both
+}));
+console.log("تم جلب البيانات");
+}catch(error){
+
+    console.log(error);
+}
 };
+//add custome
+export const addCustomer=async(customerData)=>{
+ try {
+    console.log(customerData);
+        const response = await axios.post(
+            `${API_URL}/Customer`,
+            {
+                cus_Name: customerData.cus_Name,
+                vatNo: customerData.vatNo,
+                address: customerData.address,
+                phone: customerData.phone,
+                depitLimit: customerData.depitLimit,
+                balance: customerData.balance,
+                branch: customerData.branch,
+                userId: customerData.userId,
+                address2: customerData.address2,
+                bussns_no: customerData.bussns_no,
+                country: customerData.country,
+                city: customerData.city,
+                street: customerData.street,
+                areaLocation: customerData.areaLocation,
+                buildNumber: customerData.buildNumber,
+                theCode: customerData.theCode,
+                paid_type: customerData.paid_type,
+                schemCode: customerData.schemCode,
+                both: customerData.both,
+            }
+        );
 
-// إضافة عميل
-export const addCustomer = async (values) => {
-  const params = {
-    Cus_Name: values.name,
-    VatNo: values.vatNo || '',
-    AccNo: values.accNo || 10000076,
-    Address: values.address || '',
-    Phone: values.phone || '',
-    DepitLimit: values.debitLimit || 0,
-    Balance: values.balance || 0,
-    Branch: values.branch || 1,
-    UserId: values.userId || null,
-    address2: values.address2 || '',
-    bussns_no: values.bussnsNo || '',
-    country: values.country || '',
-    city: values.city || '',
-    Street: values.street || '',
-    AreaLocation: values.areaLocation || '',
-    BuildNumber: values.buildNumber || '',
-    TheCode: values.theCode || '',
-    SchemCode: values.schemCode || 'CRN',
-    paid_type: values.paidType || '',
-    both: values.both || false,
-  };
-
-  try {
-    const { data } = await axios.post(
-      `${API_URL}/Amail/addAmail`,
-      null,
-      { params }
-    );
-    return data;
-  } catch (error) {
-    console.error('Error adding customer:', error);
-    throw error;
-  }
+        return {
+            success: response.data.success ?? false,
+            message: response.data.message,
+            data: response.data.data ?? null,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء إضافة العميل",
+            error: error.response?.data || error.message,
+        };
+    }
 };
+//update customer
+export const updateCustomer=async(id,Branch=2,customerData)=>{
+ try {
+    console.log(customerData);
+        const response = await axios.put(
+            `${API_URL}/Customer?id=${id}&Branch=${Branch}`,
+            {
+                cus_Name: customerData.cus_Name,
+                vatNo: customerData.vatNo,
+                address: customerData.address,
+                phone: customerData.phone,
+                depitLimit: customerData.depitLimit,
+                balance: customerData.balance,
+                branch: customerData.branch,
+                userId: customerData.userId,
+                address2: customerData.address2,
+                bussns_no: customerData.bussns_no,
+                country: customerData.country,
+                city: customerData.city,
+                street: customerData.street,
+                areaLocation: customerData.areaLocation,
+                buildNumber: customerData.buildNumber,
+                theCode: customerData.theCode,
+                paid_type: customerData.paid_type,
+                schemCode: customerData.schemCode,
+                both: customerData.both,
+            }
+        );
 
-// تحديث عميل
-export const updateCustomer = async (id, values) => {
-  const params = {
-    id: id,
-    Branch: values.branch || 1,
-    Cus_Name: values.name,
-    VatNo: values.vatNo || '',
-    AccNo: values.accNo || 0,
-    Address: values.address || '',
-    Phone: values.phone || '',
-    DepitLimit: values.debitLimit || 0,
-    Balance: values.balance || 0,
-    UserId: values.userId || null,
-    address2: values.address2 || '',
-    bussns_no: values.bussnsNo || '',
-    country: values.country || '',
-    city: values.city || '',
-    Street: values.street || '',
-    AreaLocation: values.areaLocation || '',
-    BuildNumber: values.buildNumber || '',
-    TheCode: values.theCode || '',
-    paid_type: values.paidType || '',
-    SchemCode: values.schemCode || 'CRN',
-    both: values.both || false,
-  };
-
-  try {
-    const { data } = await axios.put(
-      `${API_URL}/Amail/PutAmail/`,
-      null,
-      { params }
-    );
-    return data;
-  } catch (error) {
-    console.error('Error updating customer:', error);
-    throw error;
-  }
+        return {
+            success: response.data.success ?? false,
+            message: response.data.message,
+            data: response.data.data ?? null,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء تعديل العميل",
+            error: error.response?.data || error.message,
+        };
+    }
 };
+//api/deleteCustomer
+export const deleteCustomer=async(id,BranchId=2,UserId=2)=>{
+ try {
+        const response = await axios.delete(
+            `${API_URL}/Customer?id=${id}&BranchId=${BranchId}&UserId=${UserId}`
+        );
 
-// حذف عميل
-export const deleteCustomer = async (id, branchId = 1, userId = null) => {
-  const params = {
-    id: id,
-    BranchId: branchId,
-    UserId: userId,
-  };
-
-  try {
-    const { data } = await axios.delete(
-      `${API_URL}/Amail/DelAmail`,
-      { params }
-    );
-    return data;
-  } catch (error) {
-    console.error('Error deleting customer:', error);
-    throw error;
-  }
+        return {
+            success: response.data.success ?? false,
+            message: response.data.message,
+            data: response.data.data ?? null,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء حذف العميل",
+            error: error.response?.data || error.message,
+        };
+    }
 };

@@ -5,20 +5,15 @@ import { API_URL } from '@/config/api';
 // جلب الصناديق
 export const fetchSafes = async () => {
   try {
-    const response = await axios.get(`${API_URL}/Safe`);
-    
-
-    const data = response.data?.data || response.data || [];
-    
-    if (!Array.isArray(data)) {
-      return [];
-    }
-
-    return data.map(item => ({
+        const response = await axios.get(
+            `${API_URL}/Safe`
+        );
+ const data=response.data.data|| [];
+        return data.map(item => ({
       id: item.safeId || item.id,
       code: item.safeId || item.id,
-      name: item.safeName || item.name,
-      accNo: item.accCode || item.accNo || '',
+      name: item.safeName ,
+      accNo: item.accCode || '',
       branch: item.branchId ,
       branchId: item.branchId ,
       allBranches: item.allBranch || item.allBranches || false,
@@ -28,75 +23,102 @@ export const fetchSafes = async () => {
       srlCode: item.srlCode || '',
       ...item
     }));
-  } catch (error) {
-    console.error('Error fetching safes:', error);
-    throw error;
-  }
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء جلب الصناديق",
+            error: error.response?.data || error.message,
+        };
+    }
 };
 
 // إضافة صندوق
 export const addSafe = async (values) => {
-  const params = {
-    SafeName: values.name,
-    AccCode: values.accNo,
-    BranchId: values.allBranches ? null : values.branch,
-    AllBranch: values.allBranches || false,
-    UserId: values.userId || 1,
-  };
+   try {
+   
 
-  try {
-    const { data } = await axios.post(
-      `${API_URL}/Safe/addSafe`,
-      null,
-      { params }
-    );
-    return data;
-  } catch (error) {
-    console.error('Error adding safe:', error);
-    throw error;
-  }
+        const response = await axios.post(
+            `${API_URL}/Safe`,
+            {
+                safeName:values.safeName,
+                safeBalance: values.safeBalance,
+                branchId: values.branchId,
+                userId: values.userId,
+                allBranch: values.allBranch,
+            }
+        );
+
+        return {
+            success: response.data.success ?? false,
+            message: response.data.message,
+            data: response.data.data ?? null,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء إضافة الصندوق",
+            error: error.response?.data || error.message,
+        };
+    }
+  
 };
 
 // تحديث صندوق
-export const updateSafe = async (id, values) => {
-  const params = {
-    SafeId: id,
-    SafeName: values.name,
-    AccCode: values.accNo,
-    BranchId: values.allBranches ? null : values.branch,
-    AllBranch: values.allBranches || false,
-    UserId: values.userId || 1,
-  };
-
+export const updateSafe = async (id, safeData) => {
   try {
-    const { data } = await axios.put(
-      `${API_URL}/Safe/PutSafe`,
-      null,
-      { params }
-    );
-    return data;
-  } catch (error) {
-    console.error('Error updating safe:', error);
-    throw error;
-  }
+
+        const response = await axios.put(
+            `${API_URL}/Safe/${id}`,
+            {
+               safeName:safeData.safeName,
+                safeBalance: safeData.safeBalance,
+                branchId: safeData.branchId,
+                userId: safeData.userId,
+                allBranch: safeData.allBranch,
+            }
+        );
+
+        return {
+            success: response.data.success ?? false,
+            message: response.data.message,
+            data: response.data.data ?? null,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء تعديل الصندوق",
+            error: error.response?.data || error.message,
+        };
+    }
 };
 
 // حذف صندوق
-export const deleteSafe = async (id, branchId = 1, userId = 1) => {
-  const params = {
-    SafeId: id,
-    BranchId: branchId,
-    UserId: userId,
-  };
+export const deleteSafe = async (id) => {
+   try {
+        const response = await axios.delete(
+            `${API_URL}/Safe/${id}`
+        );
 
-  try {
-    const { data } = await axios.delete(
-      `${API_URL}/Safe/delSafe`,
-      { params }
-    );
-    return data;
-  } catch (error) {
-    console.error('Error deleting safe:', error);
-    throw error;
-  }
+        return {
+            success: response.data.success ?? false,
+            message: response.data.message,
+            data: response.data.data ?? null,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء حذف الصندوق",
+            error: error.response?.data || error.message,
+        };
+    }
 };
+
+

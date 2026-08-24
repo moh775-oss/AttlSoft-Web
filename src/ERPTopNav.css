@@ -131,26 +131,12 @@
   font-weight: 600;
 }
 
-/* ===== القوائم المنسدلة - حركات ===== */
+/* ===== القوائم المنسدلة ===== */
 .ant-menu-submenu-popup {
   border-radius: 8px !important;
   overflow: hidden;
   margin-top: 2px !important;
-  animation: slideDown 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  transform-origin: top center !important;
 }
-
-@keyframes slideDown {
-  0% {
-    opacity: 0;
-    transform: translateY(-12px) scaleY(0.96);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scaleY(1);
-  }
-}
-
 .light-mode .ant-menu-submenu-popup {
   background: var(--color-bgCard) !important;
   border: 1px solid var(--color-borderCard) !important;
@@ -520,27 +506,13 @@
 .dark-mode .drawer-action-icon-btn { color: #ffffff; border-color: #28345E; }
 .drawer-action-icon-btn:hover { transform: translateY(-2px) !important; }
 
-/* ===== قائمة الموبايل - سكرول فقط للقوائم ===== */
+/* ===== قائمة الموبايل ===== */
 .mobile-menu {
   background: transparent !important;
   max-height: calc(100vh - 160px) !important;
   overflow-y: auto !important;
   padding-bottom: 20px !important;
   overflow-x: hidden !important;
-}
-
-/* ===== منع فتح أكثر من قائمة فرعية في الموبايل ===== */
-.mobile-menu .ant-menu-submenu .ant-menu-sub {
-  display: none !important;
-}
-.mobile-menu .ant-menu-submenu-open .ant-menu-sub {
-  display: block !important;
-}
-.mobile-menu .ant-menu-submenu-open > .ant-menu-submenu-title {
-  background: transparent !important;
-}
-.mobile-menu .ant-menu-submenu-selected > .ant-menu-submenu-title {
-  background: transparent !important;
 }
 
 .mobile-menu .ant-menu-item,
@@ -636,9 +608,6 @@
     right: auto !important;
     left: calc(280px - 18px) !important;
   }
-  .mobile-menu .ant-menu-submenu-open > .ant-menu-submenu-title {
-    background: transparent !important;
-  }
   
   /* منع السكرول الزائد */
   .ant-drawer-body {
@@ -668,4 +637,50 @@
   .custom-drawer-close-btn {
     display: none !important;
   }
+}
+
+
+/* ===== زر الإغلاق المخصص داخل الشفاف ===== */
+.custom-drawer-close-btn {
+  position: fixed !important;
+  top: 1px !important;
+  right: calc(280px - 18px) !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  background: #ff4d4f !important;
+  color: white !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  border: none !important;
+  display: none !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 99999 !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 12px rgba(255, 77, 79, 0.4) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  font-family: 'Arial', sans-serif !important;
+  line-height: 1 !important;
+  opacity: 0 !important;
+  transform: scale(0.7) !important;
+}
+
+.custom-drawer-close-btn:hover {
+  background: #ff7875 !important;
+  transform: scale(1.15) !important;
+  box-shadow: 0 4px 20px rgba(255, 77, 79, 0.5) !important;
+}
+
+
+.ant-drawer-open .custom-drawer-close-btn {
+  display: flex !important;
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+
+/* ===== RTL ===== */
+.ant-drawer-rtl .custom-drawer-close-btn {
+  right: auto !important;
+  left: calc(297px - 15px) !important;
 }

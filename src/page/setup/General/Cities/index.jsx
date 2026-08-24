@@ -42,7 +42,6 @@ const CitiesPage = () => {
       } else {
         data = await fetchCities();
       }
-      // إضافة اسم الدولة لكل مدينة
       const citiesWithCountry = data.map(city => ({
         ...city,
         countryName: countries.find(c => c.id === city.countryId)?.name || '',
@@ -71,17 +70,19 @@ const CitiesPage = () => {
   };
 
   const handleEdit = (city) => {
-    loadCities(filterCountry).then(() => {
-      setSelectedCity(city);
-      setModalVisible(true);
-    });
+    setSelectedCity(city);
+    setModalVisible(true);
   };
 
   const handleDelete = async (id) => {
     try {
-      await deleteCity(id);
-      notify.success(t('deleteSuccess'));
-      loadCities(filterCountry);
+      const result = await deleteCity(id);
+      if (result.success) {
+        notify.success(result.message || t('deleteSuccess'));
+        loadCities(filterCountry);
+      } else {
+        notify.error(result.message || t('deleteError'));
+      }
     } catch (error) {
       notify.error(t('deleteError'));
     }
@@ -90,15 +91,36 @@ const CitiesPage = () => {
   const handleSave = async (values) => {
     setSaving(true);
     try {
+      let result;
       if (selectedCity) {
-        await updateCity(selectedCity.id, values);
-        notify.success(t('updateSuccess'));
+        result = await updateCity(
+          selectedCity.id,
+          {
+            cityId: selectedCity.id,
+            cityName: values.cityName,
+            cityNameEn: values.cityNameEn,
+            countryId: values.countryId,
+            branch: values.branch ?? 0,
+            userId: values.userId ?? 0,
+          }
+        );
       } else {
-        await addCity(values);
-        notify.success(t('saveSuccess'));
+        result = await addCity({
+          cityName: values.cityName,
+          cityNameEn: values.cityNameEn,
+          countryId: values.countryId,
+          branch: values.branch ?? 0,
+          userId: values.userId ?? 0,
+        });
       }
-      setModalVisible(false);
-      loadCities(filterCountry);
+
+      if (result.success) {
+        notify.success(result.message || (selectedCity ? t('updateSuccess') : t('saveSuccess')));
+        setModalVisible(false);
+        loadCities(filterCountry);
+      } else {
+        notify.error(result.message || (selectedCity ? t('updateError') : t('saveError')));
+      }
     } catch (error) {
       notify.error(selectedCity ? t('updateError') : t('saveError'));
     } finally {
@@ -185,7 +207,6 @@ const CitiesPage = () => {
     },
   ];
 
-  // خيارات الفلتر
   const filterOptions = [
     { value: null, label: t('allCountries') },
     ...countries.map(c => ({ value: c.id, label: c.name })),
@@ -193,29 +214,29 @@ const CitiesPage = () => {
 
   return (
     <div className="p-4">
-        <Card
-          title={
-            <div className="flex items-start  w-full">
-                <span className="text-lg font-semibold">{t('filter')}</span>
-            </div>
-        }>
-            <div className="flex items-center justify-between w-full">
-            <div className="flex items-center gap-3">
-                 <Select
-                placeholder={t('filterByCountry')}
-                allowClear
-                style={{ width: 200 }}
-                onChange={handleFilterChange}
-                options={filterOptions}
-                showSearch
-                optionFilterProp="label" 
-                size="middle"
-              />
+      <Card
+        title={
+          <div className="flex items-start w-full">
+            <span className="text-lg font-semibold">{t('filter')}</span>
+          </div>
+        }
+      >
+        <div className="flex items-center justify-between w-full">
+          <div className="flex items-center gap-3">
+            <Select
+              placeholder={t('filterByCountry')}
+              allowClear
+              style={{ width: 200 }}
+              onChange={handleFilterChange}
+              options={filterOptions}
+              showSearch
+              optionFilterProp="label"
+              size="middle"
+            />
+          </div>
+        </div>
+      </Card>
 
-            </div>
-            </div>
-
-        </Card>
       <Card
         title={
           <div className="flex items-center justify-between w-full">
@@ -223,12 +244,9 @@ const CitiesPage = () => {
               <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
                 {t('add')}
               </Button>
-             
             </div>
             <span className="text-lg font-semibold">{t('cities')}</span>
-            <span className="text-sm text-gray-400">
-              
-            </span>
+            <span className="text-sm text-gray-400"></span>
           </div>
         }
       >

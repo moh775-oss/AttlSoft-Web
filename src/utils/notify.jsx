@@ -7,7 +7,7 @@ import {
   InfoCircleOutlined,
 } from "@ant-design/icons";
 
-const successSound = new Audio("/sounds/success.mp3");
+const successSound = new Audio("/sounds/success_3.mp3");
 const errorSound = new Audio("/sounds/error.mp3");
 const warningSound = new Audio("/sounds/warning.mp3");
 const infoSound = new Audio("/sounds/info.mp3");

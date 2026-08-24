@@ -43,75 +43,95 @@ const BanksPage = () => {
   };
 
   const handleEdit = (bank) => {
-    // جلب أحدث البيانات قبل التعديل
-    loadBanks().then(() => {
-      setSelectedBank(bank);
-      setModalVisible(true);
-    });
+    setSelectedBank(bank);
+    setModalVisible(true);
   };
 
   const handleDelete = async (id) => {
     try {
-      await deleteBank(id);
-      notify.success(t('deleteSuccess'));
-      loadBanks();
+      const result = await deleteBank(id);
+      if (result.success) {
+        notify.success(result.message || t('deleteSuccess'));
+        loadBanks();
+      } else {
+        notify.error(result.message || t('deleteError'));
+      }
     } catch (error) {
       notify.error(t('deleteError'));
     }
   };
 
   const handleSave = async (values) => {
-    setSaving(true);
-    try {
-      if (selectedBank) {
-        await updateBank(selectedBank.id, values);
-        notify.success(t('updateSuccess'));
-      } else {
-        await addBank(values);
-        notify.success(t('saveSuccess'));
-      }
+  setSaving(true);
+  try {
+    let result;
+    if (selectedBank) {
+      result = await updateBank(
+        selectedBank.id,
+        {
+          bankName: values.bankName,
+        branchName: values.branchName,
+        accountType: values.accType,
+        accountIban: values.accountIban || '',
+        accountBalance: values.accountBalance || 0,
+        userId: values.userId || 1,
+        branch: values.branch || 1,
+        }
+      );
+    } else {
+      result = await addBank({
+        bankName: values.bankName,
+        branchName: values.branchName,
+        accountType: values.accType,
+        accountIban: values.accountIban || '',
+        accountBalance: values.accountBalance || 0,
+        userId: values.userId || 1,
+        branch: values.branch || 1,
+      });
+    }
+
+    if (result.success) {
+      notify.success(result.message || (selectedBank ? t('updateSuccess') : t('saveSuccess')));
       setModalVisible(false);
       loadBanks();
-    } catch (error) {
-      notify.error(selectedBank ? t('updateError') : t('saveError'));
-    } finally {
-      setSaving(false);
+    } else {
+      notify.error(result.message || (selectedBank ? t('updateError') : t('saveError')));
     }
-  };
+  } catch (error) {
+    notify.error(selectedBank ? t('updateError') : t('saveError'));
+  } finally {
+    setSaving(false);
+  }
+};
 
   const columns = [
     {
       key: 'code',
       label: t('code'),
-      
       sortable: true,
       render: (value) => <span className="font-mono text-sm">{value || '—'}</span>,
     },
     {
       key: 'bankName',
       label: t('bankName'),
-      
       sortable: true,
       render: (value) => <span className="font-medium">{value}</span>,
     },
     {
       key: 'branchName',
       label: t('branchName'),
-      
       sortable: true,
       render: (value) => value || '—',
     },
     {
       key: 'accNo',
       label: t('accountNumber'),
-     
       sortable: true,
       render: (value) => <span className="font-mono">{value || '—'}</span>,
     },
     {
       key: 'accType',
       label: t('accountType'),
-     
       sortable: true,
       render: (value) => value || '—',
     },
@@ -119,7 +139,6 @@ const BanksPage = () => {
       key: 'actions',
       label: t('actions'),
       align: 'center',
-
       render: (_, record) => (
         <Dropdown
           trigger={['click']}
@@ -171,9 +190,7 @@ const BanksPage = () => {
               {t('add')}
             </Button>
             <span className="text-lg font-semibold">{t('banks')}</span>
-            <span className="text-sm text-gray-400">
-                
-            </span>
+            <span className="text-sm text-gray-400"></span>
           </div>
         }
       >

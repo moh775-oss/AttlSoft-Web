@@ -13,14 +13,21 @@ const BankModal = ({
   const [form] = Form.useForm();
   const isEdit = !!initialValues;
 
-   useEffect(() => {
+  useEffect(() => {
     if (!visible) form.resetFields();
   }, [visible, form]);
 
   useEffect(() => {
     if (visible) {
-      form.resetFields();
-      if (initialValues) form.setFieldsValue(initialValues);
+      if (initialValues) {
+        form.setFieldsValue({
+          bankName: initialValues.bankName,
+          branchName: initialValues.branchName,
+          accType: initialValues.accType,
+        });
+      } else {
+        form.resetFields();
+      }
     }
   }, [visible, initialValues, form]);
 
@@ -39,14 +46,14 @@ const BankModal = ({
   };
 
   const accountTypes = [
-    { value: t('current'), label: t('current') },
-    { value: t('savings'), label: t('savings') },
-    { value: t('investment'), label: t('investment') },
+    { value: 'جاري', label: 'جاري' },
+    { value: 'توفير', label: 'توفير' },
+    { value: 'استثماري', label: 'استثماري' },
   ];
 
   return (
     <Modal
-    key={initialValues?.id || 'add'}
+      key={initialValues?.id || 'add'}
       title={isEdit ? t('editBank') : t('addBank')}
       open={visible}
       onCancel={handleCancel}
@@ -58,12 +65,7 @@ const BankModal = ({
       className="rtl-modal"
       destroyOnHidden
     >
-      <Form
-        form={form}
-        layout="vertical"
-        dir="rtl"
-       
-      >
+      <Form form={form} layout="vertical" dir="rtl">
         <Form.Item
           name="bankName"
           label={t('bankName')}
@@ -84,9 +86,7 @@ const BankModal = ({
         >
           <Input placeholder={t('enterBranchName')} size="large" />
         </Form.Item>
-
-        
-
+      
         <Form.Item
           name="accType"
           label={t('accountType')}
@@ -97,7 +97,7 @@ const BankModal = ({
           <Select
             placeholder={t('selectAccountType')}
             size="large"
-            options={accountTypes}
+            options={accountTypes.map(type => ({ value: type.value, label: type.label }))}
           />
         </Form.Item>
       </Form>

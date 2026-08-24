@@ -5,9 +5,9 @@ import { API_URL } from '@/config/api';
 // جلب الفروع
 export const fetchBranches = async () => {
   try {
-    const response = await axios.get(`${API_URL}/syncUser/getbranch`);
+    const response = await axios.get(`${API_URL}/Branch`);
     
-   
+    
     const data = response.data?.data || response.data || [];
     
     if (!Array.isArray(data)) {
@@ -31,69 +31,121 @@ export const fetchBranches = async () => {
     throw error;
   }
 };
+/**
+ * جلب فرع حسب ID
+ *
+ * GET /api/Branch/{id}
+ */
+export const getBranchById = async (branchId) => {
+    try {
+        const response = await axios.get(
+            `${API_URL}/Branch/${branchId}`
+        );
+
+        return {
+            success: response.data.success ?? true,
+            message: response.data.message,
+            data: response.data.data ?? null,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء جلب الفرع",
+            error: error.response?.data || error.message,
+        };
+    }
+};
+
 
 // إضافة فرع
-export const addBranch = async (values) => {
-  const params = {
-    BranchName: values.name,
-    BranchAddress: values.address || '',
-    BranchPhone: values.phone || '',
-    BranchManger: values.manager || '',
-    UserId: values.userId || 1,
-  };
+export const addBranch = async (branchData) => {
+   try {
+        const response = await axios.post(`${API_URL}/Branch`, {
+            branchName: branchData.branchName,
+            branchAddress: branchData.branchAddress,
+            branchPhone: branchData.branchPhone,
+            branchManger: branchData.branchManger,
+            branch: branchData.branch ?? 0,
+            userId: branchData.userId ?? 0,
+            needSyncronize: branchData.needSyncronize ?? false,
+            serialDevice: branchData.serialDevice,
+            nameDevice: branchData.nameDevice,
+        });
 
-  try {
-    const { data } = await axios.post(
-      `${API_URL}/Branch/addBranch`,
-      null,
-      { params }
-    );
-    return data;
-  } catch (error) {
-    console.error('Error adding branch:', error);
-    throw error;
-  }
+        return {
+            success: response.data.success ?? true,
+            message: response.data.message,
+            id: response.data.id,
+            data: response.data.data ?? null,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء إضافة الفرع",
+            error: error.response?.data || error.message,
+        };
+    }
 };
 
 // تحديث فرع
-export const updateBranch = async (id, values) => {
-  const params = {
-    BranchId: id,
-    BranchName: values.name,
-    BranchAddress: values.address || '',
-    BranchPhone: values.phone || '',
-    BranchManger: values.manager || '',
-    UserId: values.userId || 1,
-  };
+export const updateBranch = async (id, branchData) => {
+   try {
+        const response = await axios.put(
+            `${API_URL}/Branch/${id}`,
+            {
+                branchName: branchData.branchName,
+                branchAddress: branchData.branchAddress,
+                branchPhone: branchData.branchPhone,
+                branchManger: branchData.branchManger,
+                branch: branchData.branch ?? 0,
+                userId: branchData.userId ?? 0,
+                needSyncronize: branchData.needSyncronize ?? false,
+                serialDevice: branchData.serialDevice,
+                nameDevice: branchData.nameDevice,
+            }
+        );
 
-  try {
-    const { data } = await axios.put(
-      `${API_URL}/Branch/PutBranch`,
-      null,
-      { params }
-    );
-    return data;
-  } catch (error) {
-    console.error('Error updating branch:', error);
-    throw error;
-  }
+        return {
+            success: response.data.success ?? true,
+            message: response.data.message,
+            data: response.data.data ?? null,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء تعديل الفرع",
+            error: error.response?.data || error.message,
+        };
+    }
 };
 
 // حذف فرع
 export const deleteBranch = async (id, userId = 1) => {
-  const params = {
-    BranchId: id,
-    UserId: userId,
-  };
-
   try {
-    const { data } = await axios.delete(
-      `${API_URL}/Branch/delBranch`,
-      { params }
-    );
-    return data;
-  } catch (error) {
-    console.error('Error deleting branch:', error);
-    throw error;
-  }
+        const response = await axios.delete(
+            `${API_URL}/${branchId}`
+        );
+
+        return {
+            success: response.data.success ?? true,
+            message: response.data.message,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                error.response?.data?.message ||
+                "حدث خطأ أثناء حذف الفرع",
+            error: error.response?.data || error.message,
+        };
+    }
 };
+
+
+
