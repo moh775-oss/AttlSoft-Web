@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import { API_URL } from '@/config/api';
-
+import { fetchBranches } from './Branch';
 // جلب المخازن
 export const fetchStore = async () => {
   try {
@@ -15,15 +15,23 @@ export const fetchStore = async () => {
       return [];
     }
 
+      const branches = await fetchBranches();
+    const branchesMap = {};
+    branches.forEach(b => {
+      branchesMap[b.id] = b.name;
+    });
+
     return data.map(item => ({
       id: item.id || item.storeId,
-      code: item.code || item.storeCode || item.id,
-      name: item.name || item.storeName,
-      manager: item.manager || item.storeManager || '',
-      phone: item.phone || item.storePhone || '',
-      address: item.address || item.storeAddress || '',
-      branch: item.branch || item.branchName || '',
-      allBranches: item.allBranches || false,
+      code: item.storeId || item.id,
+      name:  item.storeName,
+      manager:  item.storeManger || '',
+      phone:  item.storePhone || '',
+      address:  item.storeAddress || '',
+      branch: item.branch || '',
+      userId: item.userId || null,
+      branchName: branchesMap[item.branchId] ||  '',
+      allBranches: item.allBranch || false,
       isActive: item.isActive !== undefined ? item.isActive : true,
       ...item
     }));
@@ -129,10 +137,10 @@ export const addStore = async (storeData) => {
 };
 
 // تحديث مخزن
-export const updateStore = async (id, values) => {
+export const updateStore = async (id, storeData) => {
   try {
         const response = await axios.put(
-            `${API_URL}/store/${storeId}`,
+            `${API_URL}/store/${id}`,
             {
                 storeName: storeData.storeName,
                 storePhone: storeData.storePhone,
@@ -168,7 +176,7 @@ export const updateStore = async (id, values) => {
 export const deleteStore = async (id) => {
    try {
         const response = await axios.delete(
-            `${API_URL}/store/${storeId}`
+            `${API_URL}/store/${id}`
         );
 
         return {

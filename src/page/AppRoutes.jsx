@@ -1,5 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import HomePage from './HomePage';
+import LoginPage from '@/page/Auth/login.jsx';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 import CategoryHome from './inventory/categories/index.jsx';
 import SuppliersPage from './purchase/Suppliers/index.jsx';
@@ -15,28 +17,50 @@ import CountriesPage from './setup/General/Countries/index.jsx';
 import CitiesPage from './setup/General/Cities/index.jsx';
 import AreasPage from './setup/General/AreaOfCity/index.jsx';
 import CompanyPage from './setup/Company/index.jsx';
-
-
-
+import UsersPage from './system/Users/index.jsx';
+import UserForm from './system/Users/UserForm.jsx';
 
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/inventory/setup/categories" element={<CategoryHome />} />
-      <Route path="/purchase/setup/suppliers" element={<SuppliersPage />} />
-      <Route path="/sales/setup/customers" element={<CustomersPage />} />
-      <Route path="/inventory/setup/units" element={<UnitsPage />} />
-      <Route path="/setup/banks" element={<BankPage />} />
-      <Route path="/setup/safes" element={<SafePage />} />
-      <Route path="/setup/branches" element={<BranchPage />} />
-      <Route path="/setup/taxes" element={<TaxPage />} />
-      <Route path="/setup/omlats" element={<OmlatPage />} />
-      <Route path="/inventory/setup/stores" element={<StorePage />} />
-      <Route path="/setup/general/countries" element={<CountriesPage />} />
-      <Route path="/setup/general/cities" element={<CitiesPage />} />
-      <Route path="/setup/general/areas" element={<AreasPage />} />
-      <Route path="/setup/company" element={<CompanyPage />} />
+
+      <Route path="/login" element={<LoginPage />} />
+
+      <Route path="/" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
+      
+      <Route path="/inventory/setup/categories" element={<ProtectedRoute><CategoryHome /></ProtectedRoute>} />
+      
+      <Route path="/purchase/setup/suppliers" element={<ProtectedRoute><SuppliersPage /></ProtectedRoute>} />
+      
+      <Route path="/sales/setup/customers" element={<ProtectedRoute><CustomersPage /></ProtectedRoute>} />
+      
+      <Route path="/inventory/setup/units" element={<ProtectedRoute><UnitsPage /></ProtectedRoute>} />
+      
+      <Route path="/setup/banks" element={<ProtectedRoute><BankPage /></ProtectedRoute>} />
+      
+      <Route path="/setup/safes" element={<ProtectedRoute><SafePage /></ProtectedRoute>} />
+      
+      <Route path="/setup/branches" element={<ProtectedRoute><BranchPage /></ProtectedRoute>} />
+      
+      <Route path="/setup/taxes" element={<ProtectedRoute><TaxPage /></ProtectedRoute>} />
+      
+      <Route path="/setup/omlats" element={<ProtectedRoute><OmlatPage /></ProtectedRoute>} />
+      
+      <Route path="/inventory/setup/stores" element={<ProtectedRoute><StorePage /></ProtectedRoute>} />
+      
+      <Route path="/setup/general/countries" element={<ProtectedRoute><CountriesPage /></ProtectedRoute>} />
+      
+      <Route path="/setup/general/cities" element={<ProtectedRoute><CitiesPage /></ProtectedRoute>} />
+      
+      <Route path="/setup/general/areas" element={<ProtectedRoute><AreasPage /></ProtectedRoute>} />
+      
+      <Route path="/setup/company" element={<ProtectedRoute><CompanyPage /></ProtectedRoute>} />
+      
+      <Route path="/system/users" element={<ProtectedRoute><UsersPage /></ProtectedRoute>} />
+      
+      <Route path="/system/users/add" element={<ProtectedRoute><UserForm /></ProtectedRoute>} />
+      
+      <Route path="/system/users/edit/:id" element={<ProtectedRoute><UserForm /></ProtectedRoute>} />
     </Routes>
-  ); 
+  );
 }

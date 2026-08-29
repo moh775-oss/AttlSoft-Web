@@ -56,42 +56,88 @@ const CustomersPage = () => {
     setModalVisible(true);
   };
 
-  // حذف
-  const handleDelete = async (id) => {
-    try {
-      await deleteCustomer(id);
-      notify.success(t('deleteSuccess'));
+  // حذف عميل
+const handleDelete = async (id) => {
+  try {
+    const result = await deleteCustomer(id);
+    if (result.success) {
+      notify.success(result.message || t('deleteSuccess'));
       loadCustomers();
-    } catch (error) {
-      notify.error(t('deleteError'));
+    } else {
+      notify.error(result.message || t('deleteError'));
     }
-  };
+  } catch (error) {
+    notify.error(t('deleteError'));
+  }
+};
 
-  // حفظ
-  const handleSave = async (values) => {
-    setSaving(true);
-    try {
-      if (selectedCustomer) {
-        // تعديل
-        await updateCustomer(selectedCustomer.id, values);
-        notify.success(t('updateSuccess'));
-      } else {
-        // إضافة
-        await addCustomer(values);
-        notify.success(t('saveSuccess'));
-      }
+// حفظ عميل
+const handleSave = async (values) => {
+  setSaving(true);
+  try {
+    let result;
+    if (selectedCustomer && selectedCustomer.id) {
+      // تعديل
+      result = await updateCustomer(selectedCustomer.id, {
+        name: values.name,
+        vatNo: values.vatNo,
+        address: values.address,
+        phone: values.phone,
+        depitLimit: values.depitLimit || 0,
+        balance: values.balance || 0,
+        branch: values.branch || 1,
+        userId: values.userId || 1,
+        address2: values.address2 || '',
+        bussnsNo: values.bussnsNo || '',
+        country: values.country || '',
+        city: values.city || '',
+        street: values.street || '',
+        areaLocation: values.areaLocation || '',
+        buildNumber: values.buildNumber || '',
+        theCode: values.theCode || '',
+        paidType: values.paidType || 'نقدي',
+        schemCode: values.schemCode || '',
+        both: values.both || false,
+      });
+    } else {
+      // إضافة
+      result = await addCustomer({
+        name: values.name,
+        vatNo: values.vatNo,
+        address: values.address,
+        phone: values.phone,
+        depitLimit: values.depitLimit || 0,
+        balance: values.balance || 0,
+        branch: values.branch || 1,
+        userId: values.userId || 1,
+        address2: values.address2 || '',
+        bussnsNo: values.bussnsNo || '',
+        country: values.country || '',
+        city: values.city || '',
+        street: values.street || '',
+        areaLocation: values.areaLocation || '',
+        buildNumber: values.buildNumber || '',
+        theCode: values.theCode || '',
+        paidType: values.paidType || 'نقدي',
+        schemCode: values.schemCode || '',
+        both: values.both || false,
+      });
+    }
+
+    if (result.success) {
+      notify.success(result.message || (selectedCustomer ? t('updateSuccess') : t('saveSuccess')));
       setModalVisible(false);
       loadCustomers();
-    } catch (error) {
-      notify.error(
-        selectedCustomer 
-          ? t('updateError') 
-          : t('saveError')
-      );
-    } finally {
-      setSaving(false);
+    } else {
+      notify.error(result.message || (selectedCustomer ? t('updateError') : t('saveError')));
     }
-  };
+  } catch (error) {
+    notify.error(selectedCustomer ? t('updateError') : t('saveError'));
+  } finally {
+    setSaving(false);
+  }
+};
+  
 
   const columns = [
     {
@@ -119,7 +165,7 @@ const CustomersPage = () => {
       render: (value) => value || '—',
     },
     {
-      key: 'accNo',
+      key: 'accoNo',
       label: t('account'),
       sortable: true,
       width: 130,
@@ -261,7 +307,7 @@ const CustomersPage = () => {
         visible={modalVisible}
         onCancel={() => setModalVisible(false)}
         onSave={handleSave}
-        initialValues={selectedCustomer}
+        initialValues={selectedCustomer ?? {}}
         loading={saving}
       />
     </div>

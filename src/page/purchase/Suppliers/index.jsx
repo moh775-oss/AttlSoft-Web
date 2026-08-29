@@ -57,49 +57,92 @@ const SuppliersPage = () => {
     setModalVisible(true);
   };
 
-  // حذف
-  const handleDelete = async (id) => {
-    try {
-      await deleteSupplier(id);
-      notify.success(t('deleteSuccess'));
+ // حذف مورد
+const handleDelete = async (id) => {
+  try {
+    const result = await deleteSupplier(id);
+    if (result.success) {
+      notify.success(result.message || t('deleteSuccess'));
       loadSuppliers();
-    } catch (error) {
-      notify.error(t('deleteError'));
+    } else {
+      notify.error(result.message || t('deleteError'));
     }
-  };
+  } catch (error) {
+    notify.error(t('deleteError'));
+  }
+};
 
-  // حفظ
-  const handleSave = async (values) => {
-    setSaving(true);
-    try {
-      if (selectedSupplier) {
-        // تعديل
-        await updateSupplier(selectedSupplier.id, values);
-        notify.success(t('updateSuccess'));
-      } else {
-        // إضافة
-        await addSupplier(values);
-        notify.success(t('saveSuccess'));
-      }
+// حفظ مورد
+const handleSave = async (values) => {
+  setSaving(true);
+  try {
+    let result;
+    if (selectedSupplier) {
+      // تعديل
+      result = await updateSupplier(selectedSupplier.id, {
+        name: values.name,
+        vatNo: values.vatNo,
+        address: values.address,
+        phone: values.phone,
+        debitLimit: values.debitLimit || 0,
+        balance: values.balance || 0,
+        branch: values.branch || 1,
+        userId: values.userId || 1,
+        address2: values.address2 || '',
+        bussnsNo: values.bussnsNo || '',
+        country: values.country || '',
+        city: values.city || '',
+        street: values.street || '',
+        areaLocation: values.areaLocation || '',
+        buildNumber: values.buildNumber || '',
+        theCode: values.theCode || '',
+        schemCode: values.schemCode || 'CRN',
+        both: values.both || false,
+      });
+    } else {
+      // إضافة
+      result = await addSupplier({
+        name: values.name,
+        vatNo: values.vatNo,
+        address: values.address,
+        phone: values.phone,
+        debitLimit: values.debitLimit || 0,
+        balance: values.balance || 0,
+        branch: values.branch || 1,
+        userId: values.userId || 1,
+        address2: values.address2 || '',
+        bussnsNo: values.bussnsNo || '',
+        country: values.country || '',
+        city: values.city || '',
+        street: values.street || '',
+        areaLocation: values.areaLocation || '',
+        buildNumber: values.buildNumber || '',
+        theCode: values.theCode || '',
+        schemCode: values.schemCode || 'CRN',
+        both: values.both || false,
+      });
+    }
+
+    if (result.success) {
+      notify.success(result.message || (selectedSupplier ? t('updateSuccess') : t('saveSuccess')));
       setModalVisible(false);
       loadSuppliers();
-    } catch (error) {
-      notify.error(
-        selectedSupplier 
-          ? t('updateError') 
-          : t('saveError')
-      );
-    } finally {
-      setSaving(false);
+    } else {
+      notify.error(result.message || (selectedSupplier ? t('updateError') : t('saveError')));
     }
-  };
-
+  } catch (error) {
+    notify.error(selectedSupplier ? t('updateError') : t('saveError'));
+  } finally {
+    setSaving(false);
+  }
+};
+ 
 
   const columns = [
     {
       key: 'code',
       label: ` ${t('code')}`,
-      width: 120,
+      
       sortable: true,
       render: (value) => <span className="font-mono text-xs">{value}</span>,
     },
@@ -118,14 +161,14 @@ const SuppliersPage = () => {
       key: 'phone',
       label: t('phone'),
       sortable: true,
-      width: 150,
+     
       render: (value) => value || '—',
     },
     {
       key: 'accNo',
       label: t('account'),
       sortable: true,
-      width: 130,
+      
       render: (value) => (
         <span className="font-mono text-sm">{value || '—'}</span>
       ),
@@ -145,7 +188,7 @@ const SuppliersPage = () => {
     {
       key: 'balance',
       label: t('balance'),
-      width: 130,
+     
       sortable: true,
       render: (value) => (
         <span className={value < 0 ? 'text-red-500' : 'text-green-600'}>
@@ -156,7 +199,7 @@ const SuppliersPage = () => {
     {
       key: 'debitLimit',
       label: t('supplierCreditLimit'),
-      width: 130,
+      
       sortable: true,
       render: (value) => value?.toLocaleString() || 0,
     },
@@ -180,7 +223,7 @@ const SuppliersPage = () => {
       key: 'actions',
       label: t('actions'),
       align: 'center',
-      width: 90,
+     
       render: (_, record) => (
   <Dropdown
     trigger={['click']}

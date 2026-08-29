@@ -3,7 +3,8 @@ import { Card, Row, Col, Typography, Dropdown, Button } from 'antd';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import '/src/App.css';
-
+import { useApp } from '@/context/AppContext';
+import { useAuth } from '@/context/AuthContext';
 import { 
   PhoneOutlined, 
   MoreOutlined, 
@@ -27,9 +28,10 @@ export default function HomePage() {
   
   const isRightToLeft = i18n.language === 'ar';
   const isHomePage = location.pathname === '/';
-  
-  const username = localStorage.getItem('username') || 'محمد عبدالحكيم قائد محمد';
-  const branchName = localStorage.getItem('branchName') ||'فرع الرياض - الرئيسي - شارع العليا الفرعي';
+   const { userId, branchId, token, username } = useAuth();
+  const {  branchName,    companyName  } = useApp();
+
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -109,7 +111,7 @@ export default function HomePage() {
         overflow: 'hidden',
       }}
     >
-      {/* المحتوى الرئيسي - السكرول الوحيد */}
+
       <div style={{ 
         flex: 1, 
         overflow: 'auto',
@@ -213,11 +215,11 @@ export default function HomePage() {
             fontSize: isMobile ? '16px' : '18px',
             fontWeight: 'bold'
           }}>
-            {branchName}
+          {companyName} - {branchName}
           </span>
         </div>
 
-        {/* جهة اليسار */}
+      
         <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
           {!isMobile ? (
             <>

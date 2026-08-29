@@ -4,12 +4,13 @@ import App from './App';
 import 'antd/dist/reset.css';
 import "./index.css";
 import { ThemeProvider } from './context/ThemeContext';
+import { AuthProvider } from '@/context/AuthContext';
 import "./styles/globalTheme.css";
 import { BrowserRouter } from 'react-router-dom';
 import { ConfigProvider, App as AntdApp } from 'antd';
 import i18n from './i18n.js';
 import { I18nextProvider } from 'react-i18next';
-import { CompanyProvider } from '@/context/CompanyContext';
+import { AppProvider } from '@/context/AppContext';
 
 function Root() {
   const [lang, setLang] = useState(i18n.language);
@@ -36,10 +37,16 @@ function Root() {
 
         <ThemeProvider>
           <AntdApp>
-            <CompanyProvider>
-               <App key={lang} /> 
-              </CompanyProvider>
-           
+            
+              <AuthProvider>
+                <AppProvider>
+<App key={lang} /> 
+                </AppProvider>
+                
+              </AuthProvider>
+              
+              
+            
           </AntdApp>
         </ThemeProvider>
 

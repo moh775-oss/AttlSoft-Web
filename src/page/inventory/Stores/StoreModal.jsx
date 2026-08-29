@@ -30,21 +30,42 @@ const StoreModal = ({
   };
 
   useEffect(() => {
-    if (!visible) form.resetFields();
-  }, [visible, form]);
+    if (visible) {
+      loadBranches();
+    }
+  }, [visible]);
 
   useEffect(() => {
     if (visible) {
-      form.resetFields();
-      if (initialValues) form.setFieldsValue(initialValues);
+      if (initialValues) {
+        const isAllBranches = initialValues.allBranches || false;
+        setAllBranches(isAllBranches);
+        
+        form.setFieldsValue({
+          name: initialValues.name,
+          manager: initialValues.manager,
+          phone: initialValues.phone,
+          address: initialValues.address,
+          branch: isAllBranches ? undefined : initialValues.branchId,
+          allBranches: isAllBranches,
+          isActive: initialValues.isActive !== undefined ? initialValues.isActive : true,
+        });
+      } else {
+        setAllBranches(false);
+        form.resetFields();
+        form.setFieldsValue({ 
+          allBranches: false,
+          isActive: true 
+        });
+      }
     }
   }, [visible, initialValues, form]);
 
   const handleCancel = () => {
     form.resetFields();
+    setAllBranches(false);
     onCancel();
   };
-
 
   const handleAllBranchesChange = (checked) => {
     setAllBranches(checked);
@@ -76,12 +97,7 @@ const StoreModal = ({
       className="rtl-modal"
       destroyOnHidden
     >
-      <Form
-        form={form}
-        layout="vertical"
-        dir="rtl"
-       
-      >
+      <Form form={form} layout="vertical" dir="rtl">
         <Form.Item
           name="name"
           label={t('storeName')}
@@ -93,7 +109,6 @@ const StoreModal = ({
           <Input placeholder={t('enterStoreName')} size="large" />
         </Form.Item>
 
-        
         <Form.Item
           name="manager"
           label={t('manager')}
@@ -116,9 +131,6 @@ const StoreModal = ({
             <Input placeholder={t('address')} size="large" />
           </Form.Item>
         </div>
-        
-
-       
 
         <Form.Item
           name="branch"
@@ -135,7 +147,7 @@ const StoreModal = ({
             size="large"
             disabled={allBranches}
             showSearch
-            optionFilterProp="children"
+            optionFilterProp="label"
             loading={loadingBranches}
             notFoundContent={t('noBranchesFound')}
             filterOption={(input, option) =>
@@ -147,33 +159,33 @@ const StoreModal = ({
             }))}
           />
         </Form.Item>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-             <Form.Item
-          name="allBranches"
-          label={t('allBranches')}
-          valuePropName="checked"
-        >
-          <Switch
-            checked={allBranches}
-            onChange={handleAllBranchesChange}
-            checkedChildren={t('yes')}
-            unCheckedChildren={t('no')}
-          />
-        </Form.Item>
-        <Form.Item
-          name="isActive"
-          label={t('active')}
-          valuePropName="checked"
-        >
-          <Switch
-            checkedChildren={t('yes')}
-            unCheckedChildren={t('no')}
-          />
-        </Form.Item>
+          <Form.Item
+            name="allBranches"
+            label={t('allBranches')}
+            valuePropName="checked"
+          >
+            <Switch
+              checked={allBranches}
+              onChange={handleAllBranchesChange}
+              checkedChildren={t('yes')}
+              unCheckedChildren={t('no')}
+            />
+          </Form.Item>
 
+          <Form.Item
+            name="isActive"
+            label={t('active')}
+            valuePropName="checked"
+          >
+            <Switch
+              checkedChildren={t('yes')}
+              unCheckedChildren={t('no')}
+              defaultChecked
+            />
+          </Form.Item>
         </div>
-
-        
 
         {isEdit && (
           <div className="text-xs text-gray-400 mt-2">

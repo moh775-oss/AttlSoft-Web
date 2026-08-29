@@ -414,9 +414,7 @@
   "currencyNameAr": "اسم العملة (عربي)",
   "currencyNameEn": "اسم العملة (إنجليزي)",
   "currencyCode": "كود العملة",
-  "currencySymbol": "رمز العملة",
-  "addCurrency": "إضافة عملة",
-  "editCurrency": "تعديل عملة",
+
   "pleaseEnterCurrencyNameAr": "الرجاء إدخال اسم العملة بالعربي",
   "pleaseEnterCurrencyNameEn": "الرجاء إدخال اسم العملة بالإنجليزي",
   "enterCurrencyNameAr": "أدخل اسم العملة بالعربي",
@@ -436,8 +434,29 @@
   "defaultCurrency": "عملة افتراضية",
   "editCurrencyNote": "ملاحظة: تغيير العملة الافتراضية سيؤثر على النظام بأكمله",
 
-  "taxType": "نوع الضريبة",
-  "taxName": "اسم الضريبة",
+  "userName": "اسم المستخدم",
+ 
+  "userType": "نوع المستخدم",
+  "branch": "الفرع",
+  "roleStatus": "حالة الدور",
+
+  "pleaseEnterUsername": "الرجاء إدخال اسم المستخدم",
+  "pleaseEnterFullName": "الرجاء إدخال الاسم الكامل",
+  "pleaseEnterPassword": "الرجاء إدخال كلمة المرور",
+  "pleaseConfirmPassword": "الرجاء تأكيد كلمة المرور",
+  "passwordMismatch": "كلمة المرور غير متطابقة",
+  "passwordMinLength": "كلمة المرور يجب أن تكون 3 أحرف على الأقل",
+  "passwordTooShort": "كلمة المرور قصيرة جداً (الحد الأدنى 3 أحرف)",
+  "selectUserType": "اختر نوع المستخدم",
+
+  "admin": "مدير",
+  "user": "مستخدم",
+
+  "yesDelete": "نعم، حذف",
+
+  "permissionsList": "قائمة الصلاحيات",
+  "allPermissions": "جميع الصلاحيات",
+
   "taxPeriod": "الفترة الضريبية",
   "taxableAmount": "المبلغ الخاضع للضريبة",
   "nonTaxableAmount": "المبلغ غير الخاضع للضريبة",

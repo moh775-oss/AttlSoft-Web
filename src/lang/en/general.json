@@ -728,6 +728,27 @@
   "pleaseEnterCompanyName": "Please enter company name",
   "vatNumber": "VAT Number",
   "enterVatNumber": "Enter VAT number",
+ 
+  "userName": "Username",
+  
+  "userType": "User Type",
+
+  "roleStatus": "Role Status",
+
+  "pleaseEnterUsername": "Please enter username",
+  "pleaseEnterFullName": "Please enter full name",
+  "pleaseEnterPassword": "Please enter password",
+  "pleaseConfirmPassword": "Please confirm password",
+  "passwordMismatch": "Passwords do not match",
+  "passwordMinLength": "Password must be at least 3 characters",
+  "passwordTooShort": "Password is too short (minimum 3 characters)",
+  "selectUserType": "Select user type",
+
+  "admin": "Admin",
+  "user": "User",
+
+  "permissionsList": "Permissions List",
+  "allPermissions": "All Permissions",
 
   "enterCommercialRegister": "Enter commercial register",
   "schemCode": "Scheme Code",

@@ -19,16 +19,15 @@ const StorePage = () => {
   const [selectedStore, setSelectedStore] = useState(null);
   const [saving, setSaving] = useState(false);
   const { t } = useTranslate();
-  const { message } = App.useApp();
-
 
   const loadStore = async () => {
     setLoading(true);
     try {
       const data = await fetchStore();
-      setStore(data);
+      setStore(Array.isArray(data) ? data : []);
     } catch (error) {
       notify.error(t('operationFailed'));
+      setStore([]);
     } finally {
       setLoading(false);
     }
@@ -44,85 +43,107 @@ const StorePage = () => {
   };
 
   const handleEdit = (storeItem) => {
-    loadStore().then(() => {
-      setSelectedStore(storeItem);
-      setModalVisible(true);
-    });
+    setSelectedStore(storeItem);
+    setModalVisible(true);
   };
 
   const handleDelete = async (id) => {
     try {
-      await deleteStore(id);
-      notify.success(t('deleteSuccess'));
-      loadStore();
+      const result = await deleteStore(id);
+      if (result.success) {
+        notify.success(result.message || t('deleteSuccess'));
+        loadStore();
+      } else {
+        notify.error(result.message || t('deleteError'));
+      }
     } catch (error) {
       notify.error(t('deleteError'));
     }
   };
 
   const handleSave = async (values) => {
-    setSaving(true);
-    try {
-      if (selectedStore) {
-        await updateStore(selectedStore.id, values);
-        notify.success(t('updateSuccess'));
-      } else {
-        await addStore(values);
-        notify.success(t('saveSuccess'));
-      }
+  setSaving(true);
+  try {
+    let result;
+    if (selectedStore) {
+      result = await updateStore(
+        selectedStore.id,
+        {
+          storeName: values.name,
+          storeManger: values.manager || '',
+          storePhone: values.phone || '',
+          storeAddress: values.address || '',
+          branchId: values.branch || 1,
+          branch: values.branch || 1,
+          allBranch: values.allBranches ?? false,
+          stoped: values.isActive !== undefined ? !values.isActive : false,
+          userId: values.userId || 1,
+        }
+      );
+    } else {
+      result = await addStore({
+        storeName: values.name,
+        storeManger: values.manager || '',
+        storePhone: values.phone || '',
+        storeAddress: values.address || '',
+        branchId: values.branch ?? 1,
+        allBranch: values.allBranches ?? false,
+        stoped: values.isActive !== undefined ? !values.isActive : false,
+        userId: values.userId || 1,
+      });
+    }
+
+    if (result.success) {
+      notify.success(result.message || (selectedStore ? t('updateSuccess') : t('saveSuccess')));
       setModalVisible(false);
       loadStore();
-    } catch (error) {
-      notify.error(selectedStore ? t('updateError') : t('saveError'));
-    } finally {
-      setSaving(false);
+    } else {
+      notify.error(result.message || (selectedStore ? t('updateError') : t('saveError')));
     }
-  };
+  } catch (error) {
+    notify.error(selectedStore ? t('updateError') : t('saveError'));
+  } finally {
+    setSaving(false);
+  }
+};
 
   const columns = [
     {
       key: 'code',
       label: t('code'),
-      
       sortable: true,
       render: (value) => <span className="font-mono text-sm">{value || '—'}</span>,
     },
     {
       key: 'name',
       label: t('storeName'),
-      
       sortable: true,
       render: (value) => <span className="font-medium">{value}</span>,
     },
     {
       key: 'manager',
       label: t('manager'),
-      
       sortable: true,
       render: (value) => value || '—',
     },
     {
       key: 'phone',
       label: t('phone'),
-      
       render: (value) => value || '—',
     },
     {
       key: 'address',
       label: t('address'),
-      
       render: (value) => value || '—',
     },
     {
-      key: 'branch',
+      key: 'branchName',
       label: t('branch'),
-      
       render: (value) => value || '—',
     },
     {
       key: 'allBranches',
       label: t('allBranches'),
-      
       render: (value) => (
         <Tag color={value ? 'green' : 'gray'}>
           {value ? t('yes') : t('no')}
@@ -132,7 +153,6 @@ const StorePage = () => {
     {
       key: 'isActive',
       label: t('status'),
-      
       render: (value) => (
         <Tag color={value !== false ? 'green' : 'red'}>
           {value !== false ? t('active') : t('inactive')}
@@ -143,7 +163,6 @@ const StorePage = () => {
       key: 'actions',
       label: t('actions'),
       align: 'center',
-      
       render: (_, record) => (
         <Dropdown
           trigger={['click']}
@@ -174,7 +193,7 @@ const StorePage = () => {
                   okButtonProps: { danger: true },
                   onOk: () => handleDelete(record.id),
                   className: 'custom-delete-modal',
-                 overlayClassName: 'custom-delete-overlay',
+                  overlayClassName: 'custom-delete-overlay',
                 });
               }
             },
@@ -195,9 +214,7 @@ const StorePage = () => {
               {t('add')}
             </Button>
             <span className="text-lg font-semibold">{t('store')}</span>
-            <span className="text-sm text-gray-400">
-              
-            </span>
+            <span className="text-sm text-gray-400"></span>
           </div>
         }
       >

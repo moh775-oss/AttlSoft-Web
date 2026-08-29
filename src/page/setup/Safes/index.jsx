@@ -28,7 +28,7 @@ const SafesPage = () => {
     try {
       const data = await fetchSafes();
       
-      // جلب أسماء الفروع لكل صندوق
+
       const branchesMapTemp = {};
       for (const safe of data) {
         if (safe.branchId && !branchesMapTemp[safe.branchId]) {
@@ -43,8 +43,7 @@ const SafesPage = () => {
         }
       }
       setBranchesMap(branchesMapTemp);
-      
-      // إضافة اسم الفرع للبيانات
+
       const safesWithBranchName = data.map(safe => ({
         ...safe,
         branchName: branchesMapTemp[safe.branchId] || safe.branch || '—',

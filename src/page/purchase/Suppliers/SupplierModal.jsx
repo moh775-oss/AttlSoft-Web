@@ -23,16 +23,36 @@ const SupplierModal = ({
   }, [visible, form]);
 
   useEffect(() => {
-    if (visible) {
-      form.resetFields();
+  if (visible) {
+    form.resetFields();
+    if (initialValues) {
       form.setFieldsValue({
-        ...initialValues,
-        branch: initialValues.branch || 1,
+        name: initialValues.name,
+        vatNo: initialValues.vatNo,
+        bussnsNo: initialValues.bussnsNo,
+        phone: initialValues.phone,
+        accNo: initialValues.accNo,
+        address: initialValues.address,
+        country: initialValues.country,
+        city: initialValues.city,
+        street: initialValues.street,
+        buildNumber: initialValues.buildNumber,
+        areaLocation: initialValues.areaLocation,
         debitLimit: initialValues.debitLimit || 0,
         balance: initialValues.balance || 0,
+        both: initialValues.both || false,
+        branch: initialValues.branch || 1,
+      });
+    } else {
+      form.setFieldsValue({
+        branch: 1,
+        debitLimit: 0,
+        balance: 0,
+        both: false,
       });
     }
-  }, [visible, initialValues, form]);
+  }
+}, [visible, initialValues, form]);
 
   const handleCancel = () => {
     form.resetFields();
@@ -155,8 +175,8 @@ const SupplierModal = ({
             </Form.Item>
           </div>
 
-          <Form.Item name="areaLocation" label={t('areaLocation')}>
-            <Input placeholder={t('areaLocation')} />
+          <Form.Item name="areaLocation" label={t('area')}>
+            <Input placeholder={t('area')} />
           </Form.Item>
         </div>
 

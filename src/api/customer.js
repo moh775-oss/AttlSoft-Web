@@ -8,7 +8,8 @@ const {data}=await axios.get(`${API_URL}/Customer`);
 
 return data.data.map(cust=>({
 id:cust.customerId,
-cusName :cust.cusName,
+code:cust.customerId,
+name :cust.cusName,
 vatNo:cust.vatNo,
 
 accoNo:cust.accoNo,
@@ -40,31 +41,33 @@ console.log("تم جلب البيانات");
 //add custome
 export const addCustomer=async(customerData)=>{
  try {
-    console.log(customerData);
+
+
         const response = await axios.post(
             `${API_URL}/Customer`,
             {
-                cus_Name: customerData.cus_Name,
-                vatNo: customerData.vatNo,
-                address: customerData.address,
-                phone: customerData.phone,
-                depitLimit: customerData.depitLimit,
-                balance: customerData.balance,
-                branch: customerData.branch,
-                userId: customerData.userId,
-                address2: customerData.address2,
-                bussns_no: customerData.bussns_no,
-                country: customerData.country,
-                city: customerData.city,
-                street: customerData.street,
-                areaLocation: customerData.areaLocation,
-                buildNumber: customerData.buildNumber,
-                theCode: customerData.theCode,
-                paid_type: customerData.paid_type,
-                schemCode: customerData.schemCode,
-                both: customerData.both,
+                 cus_Name: customerData.name,
+  vatNo: customerData.vatNo,
+  address: customerData.address,
+  phone: customerData.phone,
+  depitLimit: customerData.depitLimit,
+  balance: customerData.balance || 0,
+  branch: customerData.branch || 1,
+  userId: customerData.userId || 1,
+  address2: customerData.address2,
+  bussns_no: customerData.bussnsNo,
+  country: customerData.country,
+  city: customerData.city,
+  street: customerData.street,
+  areaLocation: customerData.areaLocation,
+  buildNumber: customerData.buildNumber,
+  theCode: customerData.theCode,
+  paid_type: customerData.paidType || "نقدي",
+  schemCode: customerData.schemCode,
+  both: customerData.both
             }
         );
+        console.log(response.data.message,);
 
         return {
             success: response.data.success ?? false,
@@ -82,34 +85,41 @@ export const addCustomer=async(customerData)=>{
     }
 };
 //update customer
-export const updateCustomer=async(id,Branch=2,customerData)=>{
+export const updateCustomer=async(id,customerData)=>{
  try {
-    console.log(customerData);
+    
         const response = await axios.put(
-            `${API_URL}/Customer?id=${id}&Branch=${Branch}`,
+            `${API_URL}/Customer`,
             {
-                cus_Name: customerData.cus_Name,
-                vatNo: customerData.vatNo,
-                address: customerData.address,
-                phone: customerData.phone,
-                depitLimit: customerData.depitLimit,
-                balance: customerData.balance,
-                branch: customerData.branch,
-                userId: customerData.userId,
-                address2: customerData.address2,
-                bussns_no: customerData.bussns_no,
-                country: customerData.country,
-                city: customerData.city,
-                street: customerData.street,
-                areaLocation: customerData.areaLocation,
-                buildNumber: customerData.buildNumber,
-                theCode: customerData.theCode,
-                paid_type: customerData.paid_type,
-                schemCode: customerData.schemCode,
-                both: customerData.both,
+                  cus_Name: customerData.name,
+  vatNo: customerData.vatNo,
+  address: customerData.address,
+  phone: customerData.phone,
+  depitLimit: customerData.depitLimit,
+  balance: customerData.balance || 0,
+
+  userId: customerData.userId || 1,
+  address2: customerData.address2,
+  bussns_no: customerData.bussnsNo,
+  country: customerData.country,
+  city: customerData.city,
+  street: customerData.street,
+  areaLocation: customerData.areaLocation,
+  buildNumber: customerData.buildNumber,
+  theCode: customerData.theCode,
+  paid_type: customerData.paidType || "نقدي",
+  schemCode: customerData.schemCode,
+  both: customerData.both
+            },{
+
+                params:{
+id:id,
+branch:1
+
+                }
             }
         );
-
+ console.log(response.data.message,);
         return {
             success: response.data.success ?? false,
             message: response.data.message,

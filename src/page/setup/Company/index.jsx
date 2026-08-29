@@ -2,22 +2,23 @@
 import { useEffect, useState } from 'react';
 import { Card, Form, Input, Button, Row, Col, Upload, Image, Space, message } from 'antd';
 import { SaveOutlined, ReloadOutlined, UploadOutlined } from '@ant-design/icons';
-import { useCompany } from '@/context/CompanyContext';
-// import { useAuth } from '@/context/AuthContext';
+import { useApp } from '@/context/AppContext';
+import { useAuth } from '@/context/AuthContext';
 import { useTranslate } from '@/hooks/useTranslate';
 import notify from '@/utils/notify';
 
 const CompanyPage = () => {
   const { t } = useTranslate();
-  const { branch } = 1;
+  const { user, branch } = useAuth();
   const { 
     company, 
     loading, 
     logoPreview, 
     loadCompany, 
     updateCompanyData,
-    handleLogoChange 
-  } = useCompany();
+    handleLogoChange,
+    refreshCompany
+  } = useApp();
   
   const [form] = Form.useForm();
   const [saving, setSaving] = useState(false);
@@ -49,7 +50,7 @@ const CompanyPage = () => {
   }, [company, form]);
 
   const handleRefresh = async () => {
-    await loadCompany(branch?.id);
+    await refreshCompany();
     notify.success(t('companyDataRefreshed'));
   };
 
@@ -59,15 +60,15 @@ const CompanyPage = () => {
       const updatedData = {
         ...company,
         ...values,
-        branch: branch?.id || 1,
-        userId: 1,
+        branch: branch?.branchId || 1,
+        userId: user?.userId || 1,
       };
       
       const result = await updateCompanyData(updatedData);
       
       if (result.success) {
         notify.success(t('companyDataUpdated'));
-        await loadCompany(branch?.id);
+        await refreshCompany();
       } else {
         notify.error(result.message || t('updateError'));
       }
@@ -78,7 +79,7 @@ const CompanyPage = () => {
     }
   };
 
-   const uploadProps = {
+  const uploadProps = {
     beforeUpload: (file) => {
       const isImage = file.type === 'image/jpeg' || 
                       file.type === 'image/png' || 
@@ -112,14 +113,13 @@ const CompanyPage = () => {
             <span className="text-lg font-semibold">{t('companyInfo')}</span>
             <Space>
               <Button icon={<ReloadOutlined />} onClick={handleRefresh} loading={loading}>
-                
+                {t('refresh')}
               </Button>
             </Space>
           </div>
         }
       >
         <Row gutter={24}>
-          
           <Col xs={24} md={6}>
             <Card title={t('logo')} className="text-center">
               <div className="flex flex-col items-center">
@@ -137,8 +137,6 @@ const CompanyPage = () => {
               </div>
             </Card>
           </Col>
-          
-
 
           <Col xs={24} md={18}>
             <Form
@@ -266,13 +264,12 @@ const CompanyPage = () => {
               </Row>
 
               <Form.Item>
-                <Button type="primary" htmlType="submit"  loading={saving} size="large">
+                <Button type="primary" htmlType="submit" icon={<SaveOutlined />} loading={saving} size="large">
                   {t('save')}
                 </Button>
               </Form.Item>
             </Form>
           </Col>
-          
         </Row>
       </Card>
     </div>

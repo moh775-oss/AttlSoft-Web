@@ -7,8 +7,9 @@ import { useEffect } from 'react';
 
 export default function App() {
   const { i18n } = useTranslation();
-    const location = useLocation();
+  const location = useLocation();
   const isHomePage = location.pathname === '/';
+  const isLoginPage = location.pathname === '/login';
   const isRightToLeft = i18n.language === 'ar';
 
   useEffect(() => {
@@ -22,7 +23,7 @@ export default function App() {
   useEffect(() => {
     document.documentElement.dir = isRightToLeft ? 'rtl' : 'ltr';
     document.documentElement.lang = i18n.language;
-    console.log('Language changed to:', i18n.language); // للتأكد
+    console.log('Language changed to:', i18n.language);
   }, [i18n.language, isRightToLeft]);
 
   return (
@@ -30,7 +31,8 @@ export default function App() {
       className="app-container" 
       dir={isRightToLeft ? "rtl" : "ltr"}
     >
-      <ERPTopNav />
+
+      {!isLoginPage && <ERPTopNav />}
       <main className="app-content" key={i18n.language}>
         <AppRoutes />
       </main>

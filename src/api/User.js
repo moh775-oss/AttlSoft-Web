@@ -6,25 +6,80 @@ import { API_URL } from '@/config/api';
  *
  * GET /api/Users
  */
-export const getAllUsers = async () => {
-    try {
-        const response = await axios.get(API_URL);
 
-        return {
-            success: response.data.success ?? true,
-            message: response.data.message,
-            data: response.data.data ?? response.data,
-        };
+export const fetchUsers = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/Users`);
+        
+        // استخراج البيانات
+        const data = response.data?.data || response.data || [];
+        
+        // التأكد من أن البيانات مصفوفة
+        if (!Array.isArray(data)) {
+            return [];
+        }
+
+
+        return data.map(item => ({
+            id: item.userId || item.id,
+            userId: item.userId || item.id,
+            userName: item.userName || '',
+            fullName: item.fullName || '',
+            userEmail: item.userEmail || '',
+            userType: item.userType || '',
+            branchId: item.branchId || null,
+            roleStatus: item.roleStatus ?? true,
+            allBranch: item.allBranch ?? 1,
+            // الصلاحيات
+            branch: item.branch ?? false,
+            settings: item.settings ?? false,
+            cat: item.cat ?? false,
+            unit: item.unit ?? false,
+            addPrd: item.addPrd ?? false,
+            prdManage: item.prdManage ?? false,
+            prdManageStore: item.prdManageStore ?? false,
+            store: item.store ?? false,
+            transferStore: item.transferStore ?? false,
+            transferManage: item.transferManage ?? false,
+            sale: item.sale ?? false,
+            reSale: item.reSale ?? false,
+            saleManage: item.saleManage ?? false,
+            reSaleManage: item.reSaleManage ?? false,
+            buy: item.buy ?? false,
+            reBuy: item.reBuy ?? false,
+            buyManage: item.buyManage ?? false,
+            reBuyManage: item.reBuyManage ?? false,
+            barcode1: item.barcode1 ?? false,
+            barcode2: item.barcode2 ?? false,
+            customer: item.customer ?? false,
+            supplier: item.supplier ?? false,
+            supplierAccount: item.supplierAccount ?? false,
+            paidManage: item.paidManage ?? false,
+            logs: item.logs ?? false,
+            pos: item.pos ?? false,
+            users: item.users ?? false,
+            qabdManage: item.qabdManage ?? false,
+            allMoves: item.allMoves ?? false,
+            expenseType: item.expenseType ?? false,
+            expense: item.expense ?? false,
+            addEmp: item.addEmp ?? false,
+            job: item.job ?? false,
+            dep: item.dep ?? false,
+            salary: item.salary ?? false,
+            empManage: item.empManage ?? false,
+            records: item.records ?? false,
+            dbBackRestore: item.dbBackRestore ?? false,
+            expdate: item.expdate ?? false,
+            rolesManage: item.rolesManage ?? false,
+            mandoobId: item.mandoobId ?? -1,
+            resSafeId: item.resSafeId ?? -1,
+        }));
     } catch (error) {
-        return {
-            success: false,
-            message:
-                error.response?.data?.message ||
-                "حدث خطأ أثناء جلب المستخدمين",
-            error: error.response?.data || error.message,
-        };
+        console.error('Error fetching users:', error);
+        return []; 
     }
 };
+
 /**
  * إنشاء مستخدم جديد
  *
@@ -32,7 +87,7 @@ export const getAllUsers = async () => {
  */
 export const createUser = async (userData) => {
     try {
-        const response = await axios.post(API_URL, {
+        const response = await axios.post(`${API_URL}/Users`, {
             userName: userData.userName,
             userPassWord: userData.userPassWord,
             userType: userData.userType,
@@ -114,7 +169,7 @@ export const createUser = async (userData) => {
 export const getUserById = async (userId) => {
     try {
         const response = await axios.get(
-            `${API_URL}/${userId}`
+            `${API_URL}/Users/${userId}`
         );
 
         return {
@@ -142,7 +197,7 @@ export const getUserById = async (userId) => {
 export const updateUser = async (userId, userData) => {
     try {
         const response = await axios.put(
-            `${API_URL}/${userId}`,
+            `${API_URL}/Users/${userId}`,
             {
                 userName: userData.userName,
                 userPassWord: userData.userPassWord,
@@ -226,7 +281,7 @@ export const updateUser = async (userId, userData) => {
 export const deleteUser = async (userId) => {
     try {
         const response = await axios.delete(
-            `${API_URL}/${userId}`
+            `${API_URL}/Users/${userId}`
         );
 
         return {
@@ -257,7 +312,7 @@ export const deleteUser = async (userId) => {
 export const getUsersByBranch = async (branchId) => {
     try {
         const response = await axios.get(
-            `${API_URL}/${branchId}`
+            `${API_URL}/Users/${branchId}`
         );
 
         return {
