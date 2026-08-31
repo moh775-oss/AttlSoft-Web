@@ -9,7 +9,7 @@ import { API_URL } from '@/config/api';
  */
 export const fetchOmlat = async () => {
     try {
-        const response = await axios.get(API_URL);
+        const response = await api.get(API_URL);
 
         return {
             success: response.data.success ?? true,
@@ -35,7 +35,7 @@ export const fetchOmlat = async () => {
  */
 export const createOmla = async (omlaData) => {
     try {
-        const response = await axios.post(API_URL, {
+        const response = await api.post(API_URL, {
             name: omlaData.name,
             exchange: omlaData.exchange ?? 0,
             isDefault: omlaData.isDefault ?? false,
@@ -80,8 +80,8 @@ export const createOmla = async (omlaData) => {
  */
 export const getOmlaById = async (omlaId) => {
     try {
-        const response = await axios.get(
-            `${API_URL}/${omlaId}`
+        const response = await api.get(
+            `/${omlaId}`
         );
 
         return {
@@ -108,8 +108,8 @@ export const getOmlaById = async (omlaId) => {
  */
 export const updateOmla = async (omlaId, omlaData) => {
     try {
-        const response = await axios.put(
-            `${API_URL}/${omlaId}`,
+        const response = await api.put(
+            `/${omlaId}`,
             {
                 name: omlaData.name,
                 exchange: omlaData.exchange ?? 0,
@@ -154,8 +154,8 @@ export const updateOmla = async (omlaId, omlaData) => {
  */
 export const deleteOmla = async (omlaId) => {
     try {
-        const response = await axios.delete(
-            `${API_URL}/${omlaId}`
+        const response = await api.delete(
+            `/${omlaId}`
         );
 
         return {

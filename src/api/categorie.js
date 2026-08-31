@@ -1,10 +1,10 @@
-import axios from 'axios';
+import api from './api';
 import { API_URL } from '@/config/api';
 
 // جلب المجموعات
 export const fetchCategories = async () => {
   try {
-    const { data } = await axios.get(`${API_URL}/Cat/get`);
+    const { data } = await api.get(`/Cat/get`);
     
     if (!Array.isArray(data)) {
       return [];
@@ -42,7 +42,7 @@ export const addCategory = async (values) => {
   };
 
   try {
-    const { data } = await axios.post(`${API_URL}/Cat/addCat`, params);
+    const { data } = await api.post(`/Cat/addCat`, params);
     return data;
   } catch (error) {
     console.error('Error adding category:', error);
@@ -60,7 +60,7 @@ export const updateCategory = async (id, categoryData) => {
       cat_Status: categoryData.isActive !== undefined ? categoryData.isActive : true,
     };
     
-    const response = await axios.put(`${API_URL}/Cat/PutCat?id=${id}`, params);
+    const response = await api.put(`/Cat/PutCat?id=${id}`, params);
     return response.data;
   } catch (error) {
     console.error('Error updating category:', error);
@@ -71,7 +71,7 @@ export const updateCategory = async (id, categoryData) => {
 // حذف مجموعة
 export const deleteCategory = async (id) => {
   try {
-    const response = await axios.delete(`${API_URL}/Cat/delCat?id=${id}`);
+    const response = await api.delete(`/Cat/delCat?id=${id}`);
     return response.data;
   } catch (error) {
     console.error('Error deleting category:', error);

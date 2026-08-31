@@ -5,7 +5,7 @@ import { API_URL } from '@/config/api';
 // جلب الضرائب
 export const fetchTaxes = async () => {
   try {
-    const response = await axios.get(`${API_URL}/TaxGroups`);
+    const response = await api.get(`${API_URL}/TaxGroups`);
     
     // التحقق من وجود data في الاستجابة
     const data = response.data?.data || response.data || [];
@@ -41,7 +41,7 @@ export const fetchTaxes = async () => {
  */
 export const createTaxGroup = async (taxData) => {
     try {
-        const response = await axios.post(
+        const response = await api.post(
             `${API_URL}/TaxGroups/addGroupTax`,
             {
                 nameAr: taxData.nameAr,
@@ -81,7 +81,7 @@ export const createTaxGroup = async (taxData) => {
  */
 export const deleteTaxGroup = async (id) => {
     try {
-        const response = await axios.delete(`${API_URL}/TaxGroups/DelTax?id=${id}`);
+        const response = await api.delete(`${API_URL}/TaxGroups/DelTax?id=${id}`);
 
         return {
             success: response.data.success ?? true,
@@ -104,7 +104,7 @@ export const deleteTaxGroup = async (id) => {
  */
 export const updateTaxGroup = async (taxData) => {
     try {
-        const response = await axios.put(
+        const response = await api.put(
             `${API_URL}/TaxGroups?id=${taxData.id}`,
             {
                 id: taxData.id,

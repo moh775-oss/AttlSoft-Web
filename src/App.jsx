@@ -1,3 +1,4 @@
+// src/App.jsx
 import ERPTopNav from "./ERPTopNav";
 import AppRoutes from "./page/AppRoutes"; 
 import "./App.css";
@@ -10,7 +11,12 @@ export default function App() {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
   const isLoginPage = location.pathname === '/login';
+  const isRegisterPage = location.pathname === '/register';
   const isRightToLeft = i18n.language === 'ar';
+
+  // الصفحات التي لا يظهر فيها الناف بار
+  const hideNavPages = ['/login', '/register'];
+  const showNav = !hideNavPages.includes(location.pathname);
 
   useEffect(() => {
     if (isHomePage) {
@@ -31,8 +37,7 @@ export default function App() {
       className="app-container" 
       dir={isRightToLeft ? "rtl" : "ltr"}
     >
-
-      {!isLoginPage && <ERPTopNav />}
+      {showNav && <ERPTopNav />}
       <main className="app-content" key={i18n.language}>
         <AppRoutes />
       </main>

@@ -8,7 +8,7 @@ import { API_URL } from '@/config/api';
  */
 export const getAllLogs = async () => {
     try {
-        const response = await axios.get(`${API_URL}/Logs`);
+        const response = await api.get(`/Logs`);
 
         return {
             success: response.data.success ?? true,
@@ -34,8 +34,8 @@ export const getAllLogs = async () => {
  */
 export const getLogById = async (logId) => {
     try {
-        const response = await axios.get(
-            `${API_URL}/Logs/${logId}`
+        const response = await api.get(
+            `/Logs/${logId}`
         );
 
         return {
@@ -62,8 +62,8 @@ export const getLogById = async (logId) => {
  */
 export const getLogsByBranch = async (branchId) => {
     try {
-        const response = await axios.get(
-            `${API_URL}/Logs/branch/${branchId}`
+        const response = await api.get(
+            `/Logs/branch/${branchId}`
         );
 
         return {
@@ -90,8 +90,8 @@ export const getLogsByBranch = async (branchId) => {
  */
 export const getLogsByUser = async (userId) => {
     try {
-        const response = await axios.get(
-            `${API_URL}/Logs/user/${userId}`
+        const response = await api.get(
+            `/Logs/user/${userId}`
         );
 
         return {
@@ -118,7 +118,7 @@ export const getLogsByUser = async (userId) => {
  */
 export const createLog = async (logData) => {
     try {
-        const response = await axios.post(`${API_URL}/Logs`, {
+        const response = await api.post(`/Logs`, {
             userId: logData.userId,
             operation: logData.operation,
             date: logData.date,
@@ -151,8 +151,8 @@ export const createLog = async (logData) => {
  */
 export const updateLog = async (logId, logData) => {
     try {
-        const response = await axios.put(
-            `${API_URL}/Logs/${logId}`,
+        const response = await api.put(
+            `/Logs/${logId}`,
             {
                 userId: logData.userId,
                 operation: logData.operation,
@@ -187,8 +187,8 @@ export const updateLog = async (logId, logData) => {
  */
 export const deleteLog = async (logId) => {
     try {
-        const response = await axios.delete(
-            `${API_URL}/Logs/${logId}`
+        const response = await api.delete(
+            `/Logs/${logId}`
         );
 
         return {

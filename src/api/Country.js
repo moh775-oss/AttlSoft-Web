@@ -1,11 +1,11 @@
-import axios from 'axios';
+import api from './api';
 import { API_URL } from '@/config/api';
 
 
 // جلب الدول
 export const fetchCountries = async () => {
   try {
-    const response = await axios.get(`${API_URL}/Country`);
+    const response = await api.get(`/Country`);
     const data = response.data?.data || response.data || [];
 
     if (!Array.isArray(data)) {
@@ -32,7 +32,7 @@ export const fetchCountries = async () => {
 // إضافة دولة
 export const addCountry = async (countryData) => {
     try {
-        const response = await axios.post(`${API_URL}/Country`, {
+        const response = await api.post(`/Country`, {
             countryId: countryData.id ?? 10,
             countryName: countryData.name,
             countryNameEn: countryData.nameEn || '',
@@ -60,8 +60,8 @@ export const addCountry = async (countryData) => {
 
 export const updateCountry = async (id,countryData) => {
   try {
-        const response = await axios.put(
-            `${API_URL}/Country/${id}`,
+        const response = await api.put(
+            `/Country/${id}`,
             {
             
             countryName: countryData.name,
@@ -92,8 +92,8 @@ export const updateCountry = async (id,countryData) => {
 // حذف دولة
 export const deleteCountry = async (id) => {
    try {
-        const response = await axios.delete(
-            `${API_URL}/Country/${id}`
+        const response = await api.delete(
+            `/Country/${id}`
         );
 
         return {

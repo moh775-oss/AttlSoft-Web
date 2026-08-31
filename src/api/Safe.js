@@ -1,12 +1,12 @@
 // src/api/safe.js
-import axios from 'axios';
+import api from './api';
 import { API_URL } from '@/config/api';
 
 // جلب الصناديق
 export const fetchSafes = async () => {
   try {
-        const response = await axios.get(
-            `${API_URL}/Safe`
+        const response = await api.get(
+            `/Safe`
         );
  const data=response.data.data|| [];
         return data.map(item => ({
@@ -39,8 +39,8 @@ export const addSafe = async (values) => {
    try {
    
 
-        const response = await axios.post(
-            `${API_URL}/Safe`,
+        const response = await api.post(
+            `/Safe`,
             {
                 safeName:values.safeName,
                 safeBalance: values.safeBalance,
@@ -71,8 +71,8 @@ export const addSafe = async (values) => {
 export const updateSafe = async (id, safeData) => {
   try {
 
-        const response = await axios.put(
-            `${API_URL}/Safe/${id}`,
+        const response = await api.put(
+            `/Safe/${id}`,
             {
                safeName:safeData.safeName,
                 safeBalance: safeData.safeBalance,
@@ -101,8 +101,8 @@ export const updateSafe = async (id, safeData) => {
 // حذف صندوق
 export const deleteSafe = async (id) => {
    try {
-        const response = await axios.delete(
-            `${API_URL}/Safe/${id}`
+        const response = await api.delete(
+            `/Safe/${id}`
         );
 
         return {

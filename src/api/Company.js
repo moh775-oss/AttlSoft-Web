@@ -9,7 +9,7 @@ import { API_URL } from '@/config/api';
  */
 export const getCompanyByBranch = async (branchId) => {
     try {
-        const response = await axios.get(`${API_URL}/Company`, {
+        const response = await api.get(`/Company`, {
             params: {
                 branch: branchId,
             },
@@ -39,8 +39,8 @@ export const getCompanyByBranch = async (branchId) => {
  */
 export const getCompanyById = async (companyId) => {
     try {
-        const response = await axios.get(
-            `${API_URL}/Company/${companyId}`
+        const response = await api.get(
+            `/Company/${companyId}`
         );
 
         return {
@@ -67,7 +67,7 @@ export const getCompanyById = async (companyId) => {
  */
 export const createCompany = async (companyData) => {
     try {
-        const response = await axios.post(`${API_URL}/Company`, {
+        const response = await api.post(`/Company`, {
             companyName: companyData.companyName,
             vatNo: companyData.vatNo,
             address: companyData.address,
@@ -115,8 +115,8 @@ export const createCompany = async (companyData) => {
  */
 export const updateCompany = async (companyId, companyData) => {
     try {
-        const response = await axios.put(
-            `${API_URL}/Company/${companyId}`,
+        const response = await api.put(
+            `/Company/${companyId}`,
             {
                 companyName: companyData.companyName,
                 vatNo: companyData.vatNo,
@@ -166,8 +166,8 @@ export const updateCompany = async (companyId, companyData) => {
  */
 export const deleteCompany = async (companyId) => {
     try {
-        const response = await axios.delete(
-            `${API_URL}/${companyId}`
+        const response = await api.delete(
+            `/${companyId}`
         );
 
         return {

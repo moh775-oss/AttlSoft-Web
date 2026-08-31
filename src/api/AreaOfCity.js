@@ -1,10 +1,10 @@
-import axios from 'axios';
+import api from './api';
 import { API_URL } from '@/config/api';
 
 // جلب المناطق
 export const fetchAreas = async () => {
   try {
-    const response = await axios.get(`${API_URL}/AreaOfCity`);
+    const response = await api.get(`/AreaOfCity`);
     const data = response.data?.data || response.data || [];
 
     if (!Array.isArray(data)) {
@@ -31,7 +31,7 @@ export const fetchAreas = async () => {
 // جلب مناطق حسب الدولة
 export const fetchAreasByCountry = async (countryId) => {
   try {
-    const response = await axios.get(`${API_URL}/AreaOfCity/country/${countryId}`);
+    const response = await api.get(`/AreaOfCity/country/${countryId}`);
     const data = response.data?.data || response.data || [];
 
     if (!Array.isArray(data)) {
@@ -58,7 +58,7 @@ export const fetchAreasByCountry = async (countryId) => {
 // جلب مناطق حسب المدينة
 export const fetchAreasByCity = async (cityId) => {
   try {
-    const response = await axios.get(`${API_URL}/AreaOfCity/city/${cityId}`);
+    const response = await api.get(`/AreaOfCity/city/${cityId}`);
     const data = response.data?.data || response.data || [];
 
     if (!Array.isArray(data)) {
@@ -86,7 +86,7 @@ export const fetchAreasByCity = async (cityId) => {
 
 export const addArea = async (areaData) => {
    try {
-        const response = await axios.post(`${API_URL}/AreaOfCity`, {
+        const response = await api.post(`/AreaOfCity`, {
             countryId: areaData.countryId ?? 0,
             cityId: areaData.cityId ?? 0,
             areaName: areaData.areaName,
@@ -114,8 +114,8 @@ export const addArea = async (areaData) => {
 // تحديث منطقة 
 export const updateArea = async (id, values) => {
     try {
-        const response = await axios.put(
-            `${API_URL}/AreaOfCity/${id}`,
+        const response = await api.put(
+            `/AreaOfCity/${id}`,
             {
                 countryId: values.countryId ?? 0,
                 cityId: values.cityId ?? 0,
@@ -146,8 +146,8 @@ export const updateArea = async (id, values) => {
 // حذف منطقة 
 export const deleteArea = async (id) => {
    try {
-        const response = await axios.delete(
-            `${API_URL}/AreaOfCity/${id}`
+        const response = await api.delete(
+            `/AreaOfCity/${id}`
         );
 
         return {

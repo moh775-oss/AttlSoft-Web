@@ -1,11 +1,11 @@
 // src/api/branch.js
-import axios from 'axios';
+import api from './api';
 import { API_URL } from '@/config/api';
 
 // جلب الفروع
 export const fetchBranches = async () => {
   try {
-    const response = await axios.get(`${API_URL}/Branch`);
+    const response = await api.get(`/Branch`);
     
     
     const data = response.data?.data || response.data || [];
@@ -38,8 +38,8 @@ export const fetchBranches = async () => {
  */
 export const getBranchById = async (branchId) => {
     try {
-        const response = await axios.get(
-            `${API_URL}/Branch/${branchId}`
+        const response = await api.get(
+            `/Branch/${branchId}`
         );
 
         return {
@@ -62,7 +62,7 @@ export const getBranchById = async (branchId) => {
 // إضافة فرع
 export const addBranch = async (branchData) => {
    try {
-        const response = await axios.post(`${API_URL}/Branch`, {
+        const response = await api.post(`/Branch`, {
             branchName: branchData.branchName,
             branchAddress: branchData.branchAddress,
             branchPhone: branchData.branchPhone,
@@ -94,8 +94,8 @@ export const addBranch = async (branchData) => {
 // تحديث فرع
 export const updateBranch = async (id, branchData) => {
    try {
-        const response = await axios.put(
-            `${API_URL}/Branch/${id}`,
+        const response = await api.put(
+            `/Branch/${id}`,
             {
                 branchName: branchData.branchName,
                 branchAddress: branchData.branchAddress,
@@ -128,8 +128,8 @@ export const updateBranch = async (id, branchData) => {
 // حذف فرع
 export const deleteBranch = async (id, userId = 1) => {
   try {
-        const response = await axios.delete(
-            `${API_URL}/${branchId}`
+        const response = await api.delete(
+            `/${branchId}`
         );
 
         return {

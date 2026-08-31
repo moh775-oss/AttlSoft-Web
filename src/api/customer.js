@@ -1,10 +1,10 @@
-import axios from 'axios';
+import api from './api';
 import { API_URL } from '@/config/api';
 
 
 export const fetchCustomers=async()=>{
 try{
-const {data}=await axios.get(`${API_URL}/Customer`);
+const {data}=await api.get(`${API_URL}/Customer`);
 
 return data.data.map(cust=>({
 id:cust.customerId,
@@ -43,7 +43,7 @@ export const addCustomer=async(customerData)=>{
  try {
 
 
-        const response = await axios.post(
+        const response = await api.post(
             `${API_URL}/Customer`,
             {
                  cus_Name: customerData.name,
@@ -88,7 +88,7 @@ export const addCustomer=async(customerData)=>{
 export const updateCustomer=async(id,customerData)=>{
  try {
     
-        const response = await axios.put(
+        const response = await api.put(
             `${API_URL}/Customer`,
             {
                   cus_Name: customerData.name,
@@ -138,7 +138,7 @@ branch:1
 //api/deleteCustomer
 export const deleteCustomer=async(id,BranchId=2,UserId=2)=>{
  try {
-        const response = await axios.delete(
+        const response = await api.delete(
             `${API_URL}/Customer?id=${id}&BranchId=${BranchId}&UserId=${UserId}`
         );
 

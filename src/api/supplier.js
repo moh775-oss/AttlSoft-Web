@@ -4,7 +4,7 @@ import { API_URL } from '@/config/api';
 
 
 export const fetchSuppliers = async () => {
-  const { data } = await axios.get(`${API_URL}/Importer`);
+  const { data } = await api.get(`${API_URL}/Importer`);
 
   return data.data.map(item => ({
     id: item.importerId,
@@ -39,7 +39,7 @@ export const fetchSuppliers = async () => {
 export const addSupplier = async (importerData) => {
    try {
     console.log(importerData);
-        const response = await axios.post(
+        const response = await api.post(
             `${API_URL}/Importer`,
             {
                 impName: importerData.name,
@@ -83,7 +83,7 @@ export const addSupplier = async (importerData) => {
 export const updateSupplier = async (id, importerData) => {
   try {
     console.log(importerData);
-        const response = await axios.put(
+        const response = await api.put(
             `${API_URL}/Importer?ID_IM=${id}`,
             {
                 impName: importerData.name,
@@ -126,7 +126,7 @@ export const updateSupplier = async (id, importerData) => {
 // حذف مورد
 export const deleteSupplier = async (id, branchId = 1, userId = 1) => {
   try {
-        const response = await axios.delete(
+        const response = await api.delete(
             `${API_URL}/Importer?id=${id}&BranchId=${branchId}&UserId=${userId}`
         );
 

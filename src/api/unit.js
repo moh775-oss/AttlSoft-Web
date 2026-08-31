@@ -1,10 +1,10 @@
-import axios from 'axios';
+import api from './api';
 import { API_URL } from '@/config/api';
 
 // جلب الوحدات
 export const fetchUnits = async () => {
   try {
-    const { data } = await axios.get(`${API_URL}/Unit/get`);
+    const { data } = await api.get(`/Unit/get`);
     
     if (!Array.isArray(data)) {
       return [];
@@ -34,8 +34,8 @@ export const addUnit = async (values) => {
   };
 
   try {
-    const { data } = await axios.post(
-      `${API_URL}/Unit/addUnit`,
+    const { data } = await api.post(
+      `/Unit/addUnit`,
       params,
 
     );
@@ -55,8 +55,8 @@ export const updateUnit = async (id, values) => {
   };
 
   try {
-    const { data } = await axios.put(
-      `${API_URL}/Unit/PutUnit?id=${id}`,
+    const { data } = await api.put(
+      `/Unit/PutUnit?id=${id}`,
       params,
       
     );
@@ -70,8 +70,8 @@ export const updateUnit = async (id, values) => {
 // حذف وحدة
 export const deleteUnit = async (id, branchId = 1, userId = 1) => {
   try {
-    const { data } = await axios.delete(
-      `${API_URL}/Unit/deleteUnit?id=${id}&Branch=${branchId}&UserId=${userId}`
+    const { data } = await api.delete(
+      `/Unit/deleteUnit?id=${id}&Branch=${branchId}&UserId=${userId}`
     );
     return data;
   } catch (error) {

@@ -1,10 +1,10 @@
-import axios from 'axios';
+import api from './api';
 import { API_URL } from '@/config/api';
 
 // جلب المدن
 export const fetchCities = async () => {
   try {
-    const response = await axios.get(`${API_URL}/City`);
+    const response = await api.get(`/City`);
     const data = response.data?.data || response.data || [];
 
     if (!Array.isArray(data)) {
@@ -30,7 +30,7 @@ export const fetchCities = async () => {
 // جلب مدن حسب الدولة
 export const fetchCitiesByCountry = async (countryId) => {
   try {
-    const response = await axios.get(`${API_URL}/City/country/${countryId}`);
+    const response = await api.get(`/City/country/${countryId}`);
     const data = response.data?.data || response.data || [];
 
     if (!Array.isArray(data)) {
@@ -56,7 +56,7 @@ export const fetchCitiesByCountry = async (countryId) => {
 // إضافة مدينة
 export const addCity = async (cityData) => {
   try {
-        const response = await axios.post(`${API_URL}/city`, {
+        const response = await api.post(`/city`, {
             cityName: cityData.cityName,
             cityNameEn: cityData.cityNameEn,
             countryId: cityData.countryId ?? 0,
@@ -85,8 +85,8 @@ export const addCity = async (cityData) => {
 // تحديث مدينة
 export const updateCity = async (id, values) => {
     try {
-        const response = await axios.put(
-            `${API_URL}/City/${id}`,
+        const response = await api.put(
+            `/City/${id}`,
             {
                 cityName: values.cityName,
                 cityNameEn: values.cityNameEn,
@@ -114,8 +114,8 @@ export const updateCity = async (id, values) => {
 // حذف مدينة
 export const deleteCity = async (id) => {
    try {
-        const response = await axios.delete(
-            `${API_URL}/city/${id}`
+        const response = await api.delete(
+            `/city/${id}`
         );
 
         return {
@@ -145,8 +145,8 @@ export const deleteCity = async (id) => {
  */
 export const getCitiesByCountry = async (countryId) => {
     try {
-        const response = await axios.get(
-            `${API_URL}/country/${countryId}`
+        const response = await api.get(
+            `/country/${countryId}`
         );
 
         return {

@@ -9,7 +9,7 @@ import { API_URL } from '@/config/api';
 
 export const fetchUsers = async () => {
     try {
-        const response = await axios.get(`${API_URL}/Users`);
+        const response = await api.get(`/Users`);
         
         // استخراج البيانات
         const data = response.data?.data || response.data || [];
@@ -87,7 +87,7 @@ export const fetchUsers = async () => {
  */
 export const createUser = async (userData) => {
     try {
-        const response = await axios.post(`${API_URL}/Users`, {
+        const response = await api.post(`/Users`, {
             userName: userData.userName,
             userPassWord: userData.userPassWord,
             userType: userData.userType,
@@ -168,8 +168,8 @@ export const createUser = async (userData) => {
  */
 export const getUserById = async (userId) => {
     try {
-        const response = await axios.get(
-            `${API_URL}/Users/${userId}`
+        const response = await api.get(
+            `/Users/${userId}`
         );
 
         return {
@@ -196,8 +196,8 @@ export const getUserById = async (userId) => {
  */
 export const updateUser = async (userId, userData) => {
     try {
-        const response = await axios.put(
-            `${API_URL}/Users/${userId}`,
+        const response = await api.put(
+            `/Users/${userId}`,
             {
                 userName: userData.userName,
                 userPassWord: userData.userPassWord,
@@ -280,8 +280,8 @@ export const updateUser = async (userId, userData) => {
  */
 export const deleteUser = async (userId) => {
     try {
-        const response = await axios.delete(
-            `${API_URL}/Users/${userId}`
+        const response = await api.delete(
+            `/Users/${userId}`
         );
 
         return {
@@ -311,8 +311,8 @@ export const deleteUser = async (userId) => {
  */
 export const getUsersByBranch = async (branchId) => {
     try {
-        const response = await axios.get(
-            `${API_URL}/Users/${branchId}`
+        const response = await api.get(
+            `/Users/${branchId}`
         );
 
         return {

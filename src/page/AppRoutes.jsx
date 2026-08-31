@@ -1,6 +1,8 @@
+// src/page/AppRoutes.jsx
 import { Routes, Route } from 'react-router-dom';
 import HomePage from './HomePage';
 import LoginPage from '@/page/Auth/login.jsx';
+import RegisterPage from '@/page/Auth/Register.jsx';
 import ProtectedRoute from '@/components/ProtectedRoute';
 
 import CategoryHome from './inventory/categories/index.jsx';
@@ -23,9 +25,11 @@ import UserForm from './system/Users/UserForm.jsx';
 export default function AppRoutes() {
   return (
     <Routes>
-
+      {/* صفحات عامة - بدون حماية */}
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
 
+      {/* صفحات محمية - تتطلب تسجيل دخول */}
       <Route path="/" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
       
       <Route path="/inventory/setup/categories" element={<ProtectedRoute><CategoryHome /></ProtectedRoute>} />

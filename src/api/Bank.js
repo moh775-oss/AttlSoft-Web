@@ -1,5 +1,5 @@
 // src/api/bank.js
-import axios from 'axios';
+import api from './api';
 import { API_URL } from '@/config/api';
 
 // جلب البنوك
@@ -7,11 +7,11 @@ import { API_URL } from '@/config/api';
 
 export const fetchBanks = async () => {
   try {
-    const response = await axios.get(`${API_URL}/Bank`);
+    const response = await api.get(`/Bank`);
     
     // التحقق من وجود data في الاستجابة
     const data = response.data?.data || response.data || [];
-    
+    4
     if (!Array.isArray(data)) {
       return [];
     }
@@ -41,8 +41,8 @@ export const fetchBanks = async () => {
 export const addBank = async (bankData) => {
   try {
     console.log(bankData);
-        const response = await axios.post(
-            `${API_URL}/Bank`,
+        const response = await api.post(
+            `/Bank`,
             {
                 bankName: bankData.bankName,
                 branchName: bankData.branchName,
@@ -73,8 +73,8 @@ export const addBank = async (bankData) => {
 // تحديث بنك
 export const updateBank = async (id, bankData) => {
   try {
-        const response = await axios.put(
-            `${API_URL}/Bank/${id}`,
+        const response = await api.put(
+            `/Bank/${id}`,
             {
                  bankName: bankData.bankName,
                 branchName: bankData.branchName,
@@ -105,8 +105,8 @@ export const updateBank = async (id, bankData) => {
 // حذف بنك
 export const deleteBank = async (id) => {
   try {
-        const response = await axios.delete(
-            `${API_URL}/Bank/${id}`
+        const response = await api.delete(
+            `/Bank/${id}`
         );
 
         return {

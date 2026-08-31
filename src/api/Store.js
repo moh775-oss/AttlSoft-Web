@@ -1,12 +1,12 @@
 
-import axios from 'axios';
+import api from './api';
 import { API_URL } from '@/config/api';
 import { fetchBranches } from './Branch';
 // جلب المخازن
 export const fetchStore = async () => {
   try {
-     const response = await axios.get(
-            `${API_URL}/store`
+     const response = await api.get(
+            `/store`
         );
 
         const data = response.data?.data || response.data || [];
@@ -52,8 +52,8 @@ export const fetchStore = async () => {
  */
 export const getStoreById = async (storeId) => {
     try {
-        const response = await axios.get(
-            `${API_URL}/store/${storeId}`
+        const response = await api.get(
+            `/store/${storeId}`
         );
 
         return {
@@ -80,8 +80,8 @@ export const getStoreById = async (storeId) => {
  */
 export const getStoresByBranch = async (branchId) => {
     try {
-        const response = await axios.get(
-            `${API_URL}/store/branch/${branchId}`
+        const response = await api.get(
+            `/store/branch/${branchId}`
         );
 
         return {
@@ -106,7 +106,7 @@ export const getStoresByBranch = async (branchId) => {
 // إضافة مخزن
 export const addStore = async (storeData) => {
    try {
-        const response = await axios.post(`${API_URL}/store`, {
+        const response = await api.post(`/store`, {
             storeName: storeData.storeName,
             storePhone: storeData.storePhone,
             storeAddress: storeData.storeAddress,
@@ -139,8 +139,8 @@ export const addStore = async (storeData) => {
 // تحديث مخزن
 export const updateStore = async (id, storeData) => {
   try {
-        const response = await axios.put(
-            `${API_URL}/store/${id}`,
+        const response = await api.put(
+            `/store/${id}`,
             {
                 storeName: storeData.storeName,
                 storePhone: storeData.storePhone,
@@ -175,8 +175,8 @@ export const updateStore = async (id, storeData) => {
 // حذف مخزن
 export const deleteStore = async (id) => {
    try {
-        const response = await axios.delete(
-            `${API_URL}/store/${id}`
+        const response = await api.delete(
+            `/store/${id}`
         );
 
         return {
