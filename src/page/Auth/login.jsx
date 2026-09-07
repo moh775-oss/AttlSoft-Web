@@ -8,7 +8,7 @@ import { fetchBranches } from '@/api/Branch';
 import { logins } from '@/api/login';
 import { useTranslation } from 'react-i18next';
 import notify from '@/utils/notify';
-import './Login.css';
+import './login.css';
 import logo from '@/assets/logo.png';
 
 const LoginPage = () => {
