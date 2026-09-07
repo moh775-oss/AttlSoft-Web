@@ -27,7 +27,7 @@ export default function HomePage() {
   const { t, i18n } = useTranslation();
   
   const isRightToLeft = i18n.language === 'ar';
-  const isHomePage = location.pathname === '/';
+  const isHomePage = location.pathname === '/home';
    const { userId, branchId, token, username } = useAuth();
   const {  branchName,    companyName  } = useApp();
 

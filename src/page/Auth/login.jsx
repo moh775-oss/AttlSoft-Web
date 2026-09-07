@@ -1,25 +1,27 @@
-// src/page/Auth/index.jsx
+// src/page/Auth/login.jsx
 import { useState, useEffect } from 'react';
-import { Form, Input, Button, Select } from 'antd';
-import { UserOutlined, LockOutlined, BankOutlined, LoginOutlined, WhatsAppOutlined, PhoneOutlined, GlobalOutlined } from '@ant-design/icons';
+import { Form, Input, Button, Select, Checkbox } from 'antd';
+import { MailOutlined, LockOutlined, PhoneOutlined } from '@ant-design/icons';
 import { useAuth } from '@/context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { fetchBranches } from '@/api/Branch';
-import { getTenants } from '@/api/Tenants';
 import { logins } from '@/api/login';
+import { useTranslation } from 'react-i18next';
 import notify from '@/utils/notify';
-import './login.css';
+import './Login.css';
 import logo from '@/assets/logo.png';
-import saudiVision from '@/assets/vision.jpeg';
 
 const LoginPage = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [branches, setBranches] = useState([]);
   const [loadingBranches, setLoadingBranches] = useState(false);
-  const [tenants, setTenants] = useState([]);
+  const [loginMethod, setLoginMethod] = useState('email');
+  const [rememberMe, setRememberMe] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
 
   useEffect(() => {
     const loadBranches = async () => {
@@ -36,48 +38,31 @@ const LoginPage = () => {
     loadBranches();
   }, []);
 
-  useEffect(() => {
-    const loadTenants = async () => {
-      try {
-        const result = await getTenants();
-        if (result.success) {
-          setTenants(result.data || []);
-        }
-      } catch (error) {
-        console.error('Error loading tenants:', error);
-      }
-    };
-    loadTenants();
-  }, []);
+  const handleLanguageChange = (lang) => {
+    i18n.changeLanguage(lang);
+  };
 
-  const handleTenantBlur = (e) => {
-    const value = e.target.value;
-    if (value) {
-      const tenant = tenants.find(t => t.tenantKey === value);
-      if (tenant) {
-        form.setFieldsValue({
-          tenantKey: tenant.tenantKey,
-          companyName: tenant.companyName,
-        });
-      } else {
-        form.setFieldsValue({
-          companyName: '',
-        });
-        notify.error('لا يوجد شركة بهذا الرقم');
-      }
+  const onFinishStep1 = async (values) => {
+    setLoading(true);
+    try {
+      setTimeout(() => {
+        setCurrentStep(2);
+        setLoading(false);
+      }, 500);
+    } catch (error) {
+      notify.error('حدث خطأ');
+      setLoading(false);
     }
   };
 
-  const onFinish = async (values) => {
+  const onFinishStep2 = async (values) => {
     setLoading(true);
     try {
-      const tenantKey = values.tenantKey;
-      
       const response = await logins(
         values.username,
         values.password,
         values.branch,
-        tenantKey
+        values.tenantKey
       );
 
       if (response.success && response.data?.token) {
@@ -88,7 +73,6 @@ const LoginPage = () => {
           fullname: data.fullname,
           userType: data.usertype,
           token: data.token,
-          tenantKey: tenantKey,
         }, {
           branchId: values.branch,
         }, data.token);
@@ -99,7 +83,6 @@ const LoginPage = () => {
         notify.error(response.message || 'فشل تسجيل الدخول');
       }
     } catch (error) {
-      console.error('Login error:', error);
       notify.error('حدث خطأ أثناء تسجيل الدخول');
     } finally {
       setLoading(false);
@@ -109,155 +92,156 @@ const LoginPage = () => {
   return (
     <div className="login-page">
       <div className="login-card">
-        <div className="login-card-right">
-          <div className="login-form-wrapper">
-            <div className="login-header">
-              <div className="login-icon-box">
-                <LoginOutlined className="login-icon" />
-              </div>
-              <h1>تسجيل الدخول</h1>
-              <p>ليس لديك حساب؟ <Link to="/register" className="login-register-link">إنشاء مؤسسة جديدة</Link></p>
+        <div className="login-header-section">
+          <img src={logo} alt="Logo" className="login-logo" />
+          <h1>{t('login')}</h1>
+          <p>{t('welcomeBack')}</p>
+        </div>
+
+        {currentStep === 1 ? (
+          <Form
+            form={form}
+            name="login_step1"
+            onFinish={onFinishStep1}
+            layout="vertical"
+            className="login-form"
+          >
+            <div className="login-method-tabs">
+              <Button 
+                type={loginMethod === 'email' ? 'primary' : 'default'}
+                onClick={() => setLoginMethod('email')}
+                className="method-btn"
+                block
+              >
+                <MailOutlined /> {t('email')}
+              </Button>
+              <Button 
+                type={loginMethod === 'phone' ? 'primary' : 'default'}
+                onClick={() => setLoginMethod('phone')}
+                className="method-btn"
+                block
+              >
+                <PhoneOutlined /> {t('phone')}
+              </Button>
             </div>
 
-            <Form
-              form={form}
-              name="login"
-              onFinish={onFinish}
-              layout="vertical"
-              size="large"
-              className="login-form"
-            >
-              <div className="grid grid-cols-2 gap-4">
+            {loginMethod === 'email' ? (
+              <>
                 <Form.Item
-                  name="tenantKey"
-                  label="رقم الشركة"
-                  rules={[{ required: true, message: 'الرجاء إدخال رقم الشركة' }]}
+                  name="email"
+                  label={t('email')}
+                  rules={[
+                    { required: true, message: t('pleaseEnterEmail') },
+                    { type: 'email', message: t('pleaseEnterValidEmail') }
+                  ]}
                 >
-                  <Input
-                    placeholder="أدخل رقم الشركة"
-                    className="login-input"
-                    size="large"
-                    onBlur={handleTenantBlur}
-                    onPressEnter={() => form.submit()}
-                  />
+                  <Input prefix={<MailOutlined />} placeholder={t('enterEmail')} className="login-input" />
                 </Form.Item>
 
                 <Form.Item
-                  name="companyName"
-                  label="اسم الشركة"
+                  name="password"
+                  label={t('password')}
+                  rules={[{ required: true, message: t('pleaseEnterPassword') }]}
                 >
-                  <Input
-                    placeholder="اسم الشركة"
-                    className="login-input"
-                    size="large"
-                    disabled
-                  />
+                  <Input.Password prefix={<LockOutlined />} placeholder={t('pleaseEnterPassword')} className="login-input" />
                 </Form.Item>
-              </div>
-
+              </>
+            ) : (
               <Form.Item
-                name="branch"
-                label="الفرع"
-                rules={[{ required: false, message: 'الرجاء اختيار الفرع' }]}
+                name="phone"
+                label={t('phone')}
+                rules={[{ required: true, message: t('phoneRequired') }]}
               >
-                <Select
-                  placeholder="اختر الفرع"
-                  loading={loadingBranches}
-                  suffixIcon={<BankOutlined />}
-                  options={branches.map(branch => ({ value: branch.id, label: branch.name }))}
-                  showSearch
-                  optionFilterProp="label"
-                  className="login-select"
-                  size="large"
-                />
+                <Input prefix={<PhoneOutlined />} placeholder={t('phoneRequired')} className="login-input" />
               </Form.Item>
+            )}
 
-              <Form.Item
-                name="username"
-                label="اسم المستخدم"
-                rules={[
-                  { required: true, message: 'الرجاء إدخال اسم المستخدم' },
-                  { min: 3, message: 'اسم المستخدم يجب أن يكون 3 أحرف على الأقل' }
-                ]}
-              >
-                <Input
-                  prefix={<UserOutlined />}
-                  placeholder="أدخل اسم المستخدم"
-                  className="login-input"
-                  size="large"
-                />
-              </Form.Item>
-
-              <Form.Item
-                name="password"
-                label="كلمة المرور"
-                rules={[
-                  { required: true, message: 'الرجاء إدخال كلمة المرور' },
-                  { min: 3, message: 'كلمة المرور يجب أن تكون 3 أحرف على الأقل' }
-                ]}
-              >
-                <Input.Password
-                  prefix={<LockOutlined />}
-                  placeholder="أدخل كلمة المرور"
-                  className="login-input"
-                  size="large"
-                />
-              </Form.Item>
-
-              <Form.Item>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  loading={loading}
-                  block
-                  className="login-btn"
+            <div className="login-options">
+              <Checkbox checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)}>
+                {t('remember_me')}
+              </Checkbox>
+              <div className="login-language">
+                <Button 
+                  type={i18n.language === 'ar' ? 'primary' : 'text'} 
+                  onClick={() => handleLanguageChange('ar')}
+                  className="lang-btn"
                 >
-                  {loading ? 'جاري تسجيل الدخول...' : 'تسجيل الدخول'}
+                  عربي
                 </Button>
-              </Form.Item>
-            </Form>
-
-            <div className="login-footer-text">
-              <p> جميع الحقوق محفوظة 2026 © أتل سوفت</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="login-card-left">
-          <div className="login-card-left-bg">
-            <div className="login-images-wrapper">
-              <div className="login-logo-box">
-                <img src={logo} alt="Company Logo" className="login-logo" />
-              </div>
-              <h1 className="login-company-name">
-                <span>شركة</span>
-                <span className="brand-blue">اتل</span>
-                <span className="brand-yellow">سوفت</span>
-              </h1>
-              <div className="login-divider">
-                <span className="login-divider-line" />
-              </div>
-              <div className="login-vision-box">
-                <img src={saudiVision} alt="Saudi Vision 2030" className="login-vision" />
-                <p className="login-vision-text">رؤية المملكة العربية السعودية 2030</p>
-              </div>
-              <div className="login-social-links">
-                <a href="https://wa.me/966555713183" target="_blank" rel="noopener noreferrer" className="login-social-link">
-                  <WhatsAppOutlined className="social-icon" />
-                  واتساب
-                </a>
-                <a href="tel:+966555713183" className="login-social-link">
-                  <PhoneOutlined className="social-icon" />
-                  اتصال
-                </a>
-                <a href="https://attlsoft.com/" target="_blank" rel="noopener noreferrer" className="login-social-link">
-                  <GlobalOutlined className="social-icon" />
-                  الموقع
-                </a>
+                <Button 
+                  type={i18n.language === 'en' ? 'primary' : 'text'} 
+                  onClick={() => handleLanguageChange('en')}
+                  className="lang-btn"
+                >
+                  English
+                </Button>
               </div>
             </div>
-          </div>
-        </div>
+
+            <Form.Item>
+              <Button type="primary" htmlType="submit" loading={loading} block className="login-btn">
+                {t('next')}
+              </Button>
+            </Form.Item>
+
+            <div className="login-footer">
+  <span>{t('noAccount')}</span>
+  <Link to="/register">{t('createAccount')}</Link>
+</div>
+          </Form>
+        ) : (
+          <Form
+            form={form}
+            name="login_step2"
+            onFinish={onFinishStep2}
+            layout="vertical"
+            className="login-form"
+          >
+            <Form.Item
+              name="branch"
+              label={t('branch')}
+              rules={[{ required: true, message: t('pleaseSelectBranch') }]}
+            >
+              <Select
+                placeholder={t('selectBranch')}
+                loading={loadingBranches}
+                className="login-select"
+                options={branches.map(branch => ({ value: branch.id, label: branch.name }))}
+                showSearch
+                optionFilterProp="label"
+              />
+            </Form.Item>
+
+            <Form.Item
+              name="fiscalYear"
+              label={t('fiscalYear')}
+              rules={[{ required: true, message: t('pleaseSelectFiscalYear') }]}
+            >
+              <Select
+                placeholder={t('selectFiscalYear')}
+                className="login-select"
+                options={[
+                  { value: 2024, label: '2024' },
+                  { value: 2025, label: '2025' },
+                  { value: 2026, label: '2026' },
+                ]}
+              />
+            </Form.Item>
+
+            <Form.Item name="tenantKey" hidden>
+              <Input />
+            </Form.Item>
+
+            <div className="login-step-nav">
+              <Button onClick={() => setCurrentStep(1)} className="back-btn">
+                {t('back')}
+              </Button>
+              <Button type="primary" htmlType="submit" loading={loading} className="login-btn">
+                {t('login')}
+              </Button>
+            </div>
+          </Form>
+        )}
       </div>
     </div>
   );

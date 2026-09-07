@@ -102,7 +102,7 @@ export default function ERPTopNav() {
       key: 'home',
       icon: <HomeOutlined />,
       label: t('home'),
-      onClick: () => { navigate('/'); setDrawerVisible(false); }
+      onClick: () => { navigate('/home'); setDrawerVisible(false); }
     },
     {
       label: t('setup'),
@@ -114,7 +114,7 @@ export default function ERPTopNav() {
           { label: t('cities'), key: '/setup/general/cities' },
           { label: t('areas'), key: '/setup/general/areas' },
         ]},
-        { label: t('companyInfo'), key: 'setup/company' },
+        { label: t('companyInfo'), key: '/setup/company' },
         { label: t('branches'), key: '/setup/branches' },
         { label: t('manageBanks'), key: '/setup/banks' },
         { label: t('safes'), key: '/setup/safes' },

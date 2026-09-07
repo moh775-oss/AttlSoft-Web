@@ -4,13 +4,11 @@ body {
   font-family: 'Cairo', sans-serif;
   background: var(--color-bgPrimary);
   transition: background-color 0.3s ease;
-  overflow: auto !important; 
-  
+  overflow: auto !important;
 }
 
 body.home-page-body {
-  overflow: hidden !important; 
-  
+  overflow: hidden !important;
 }
 
 .app-container {
@@ -25,6 +23,11 @@ body.home-page-body {
   padding-bottom: 70px !important;
 }
 
+body.home-page-body .app-container {
+  min-height: 100vh;
+  overflow: hidden !important;
+}
+
 .app-content {
   flex: 1;
   padding: 5px 10px;
@@ -32,19 +35,20 @@ body.home-page-body {
   background: var(--color-bgPrimary);
   transition: background-color 0.3s ease;
   overflow-x: hidden;
-
 }
 
-/* ===== الصفحة الرئيسية ===== */
+body.home-page-body .app-content {
+  overflow: hidden !important;
+}
+
+/* الصفحة الرئيسية */
+
 .home-page {
-  margin: 0 auto;
+  margin: 5px auto 0;
   width: 100%;
   background: var(--color-bgPrimary);
-  overflow-x: hidden;
-  height: 100vh;
   overflow: hidden;
-  margin-top: 5px !important;
-
+  height: 100vh;
 }
 
 .main-row {
@@ -70,7 +74,8 @@ body.home-page-body {
   order: 1 !important;
 }
 
-/* ===== صور الرؤية ===== */
+/* صور الرؤية */
+
 .images-container {
   width: 100%;
   display: flex;
@@ -101,7 +106,8 @@ body.home-page-body {
   box-shadow: var(--color-shadowMd);
 }
 
-/* ===== البطاقات (Cards) ===== */
+/* البطاقات */
+
 .cards-grid {
   margin: 0 !important;
 }
@@ -117,7 +123,6 @@ body.home-page-body {
   overflow: hidden;
 }
 
-/* الخط العلوي للبطاقة */
 .mini-card::before {
   content: '';
   position: absolute;
@@ -153,7 +158,6 @@ body.home-page-body {
   width: 100%;
 }
 
-/* أيقونة البطاقة */
 .mini-card-icon {
   font-size: 30px;
   display: flex;
@@ -180,7 +184,6 @@ body.home-page-body {
   transform: scale(1.1);
 }
 
-/* عنوان البطاقة */
 .mini-card-title {
   font-size: 20px !important;
   font-weight: 700 !important;
@@ -193,7 +196,8 @@ body.home-page-body {
   color: var(--color-primary);
 }
 
-/* ===== شريط الرؤية المتحرك (Ticker) ===== */
+/* شريط الرؤية المتحرك */
+
 .vision-ticker {
   background: var(--color-bgCard);
   margin-bottom: 24px;
@@ -205,7 +209,6 @@ body.home-page-body {
   transition: all 0.3s ease;
 }
 
-/* الشريط العلوي الملون */
 .vision-ticker::before {
   content: '';
   position: absolute;
@@ -213,7 +216,15 @@ body.home-page-body {
   left: 0;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, var(--color-primary), #722ed1, #13c2c2, #52c41a, #fa8c16, #eb2f96);
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    #722ed1,
+    #13c2c2,
+    #52c41a,
+    #fa8c16,
+    #eb2f96
+  );
   background-size: 300% 100%;
   animation: gradientFlow 8s ease infinite;
 }
@@ -226,7 +237,6 @@ body.home-page-body {
   flex-wrap: nowrap;
 }
 
-/* شعار الشركة */
 .ticker-logo {
   flex-shrink: 0;
 }
@@ -247,7 +257,6 @@ body.home-page-body {
   border-radius: 8px;
 }
 
-/* النص المتحرك */
 .ticker-content {
   flex: 1;
   min-width: 0;
@@ -286,7 +295,6 @@ body.home-page-body {
   transition: all 0.3s ease;
 }
 
-/* رقم الدعم */
 .ticker-support {
   flex-shrink: 0;
   display: flex;
@@ -312,11 +320,11 @@ body.home-page-body {
   display: inline-block;
 }
 
-/* ===== تنسيق الكاردات في الـ Grid ===== */
+/* تنسيق الكاردات في Grid */
+
 .cards-grid .ant-col {
   display: flex;
   align-items: stretch;
-
 }
 
 .cards-grid .ant-card {
@@ -330,10 +338,10 @@ body.home-page-body {
   align-items: center;
   justify-content: center;
   padding: 16px 10px !important;
-  box-shadow: #eb2f96;
 }
 
-/* ===== سكرول بار مخصص حسب الثيم ===== */
+/* سكرول بار */
+
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -353,288 +361,296 @@ body.home-page-body {
   background: var(--color-primary);
 }
 
-/* ===== أنيميشن الشريط العلوي ===== */
+/* أنيميشن الشريط العلوي */
+
 @keyframes gradientFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-/* ========================================
-   RESPONSIVE DESIGN
-   ======================================== */
+/* شاشات كبيرة */
 
-/* شاشات كبيرة (992px - 1000px) */
 @media (min-width: 992px) and (max-width: 1000px) {
   .app-content {
     padding: 20px;
   }
-  
+
   .vision-image {
     height: 180px;
   }
-  
+
   .mini-card-icon {
     width: 55px;
     height: 55px;
   }
-  
+
   .mini-card-icon img {
     width: 45px;
     height: 45px;
   }
-  
+
   .mini-card-title {
     font-size: 18px !important;
   }
 }
 
-/* شاشات متوسطة (768px - 991px) */
+/* شاشات متوسطة */
+
 @media (max-width: 991px) {
   [dir="ltr"] .images-col,
   [dir="rtl"] .images-col {
     order: 2 !important;
   }
-  
+
   [dir="ltr"] .cards-col,
   [dir="rtl"] .cards-col {
     order: 1 !important;
   }
-  
+
   .app-content {
     padding: 20px;
   }
-  
+
   .images-container {
     flex-direction: row;
     gap: 16px;
   }
-  
+
   .vision-image {
     flex: 1;
     height: 160px;
   }
 }
 
-/* شاشات صغيرة (576px - 767px) */
+/* شاشات صغيرة */
+
 @media (max-width: 767px) {
   .app-content {
     padding: 16px;
     margin-top: 60px;
   }
-  
+
   .images-container {
     flex-direction: column;
     gap: 16px;
   }
-  
+
   .vision-image {
     height: 150px;
   }
-  
+
   .mini-card-icon {
     width: 50px;
     height: 50px;
   }
-  
+
   .mini-card-icon img {
     width: 40px;
     height: 40px;
   }
-  
+
   .mini-card-title {
     font-size: 17px !important;
   }
-  
+
   .vision-ticker {
     padding: 8px 14px;
   }
-  
+
   .ticker-container {
     gap: 8px;
   }
-  
+
   .logo-mini {
     width: 35px;
     height: 35px;
   }
-  
+
   .logo-mini img {
     max-height: 30px;
   }
-  
+
   .animated-text {
     font-size: 14px;
     padding: 5px 14px;
   }
-  
+
   .ticker-support {
     padding: 5px 12px;
   }
-  
+
   .support-number {
     font-size: 12px;
   }
 }
 
-/* شاشات صغيرة جداً (480px - 575px) */
+/* شاشات صغيرة جداً */
+
 @media (max-width: 575px) {
   .app-content {
     padding: 12px;
   }
-  
+
   .vision-image {
     height: 140px;
   }
-  
+
   .mini-card-icon {
     width: 48px;
     height: 48px;
   }
-  
+
   .mini-card-icon img {
     width: 38px;
     height: 38px;
   }
-  
+
   .mini-card-title {
     font-size: 16px !important;
   }
-  
+
   .vision-ticker {
     padding: 8px 12px;
   }
-  
+
   .logo-mini {
     width: 32px;
     height: 32px;
   }
-  
+
   .logo-mini img {
     max-height: 28px;
   }
-  
+
   .animated-text {
     font-size: 13px;
     padding: 5px 12px;
   }
-  
+
   .ticker-support {
     padding: 5px 10px;
   }
-  
+
   .ticker-support .anticon {
     display: none;
   }
-  
+
   .support-number {
     font-size: 11px;
   }
 }
 
-/* شاشات موبايل صغيرة (400px - 479px) */
+/* شاشات موبايل صغيرة */
+
 @media (max-width: 479px) {
   .app-content {
     padding: 10px;
   }
-  
+
   .vision-image {
     height: 130px;
   }
-  
+
   .mini-card-icon {
     width: 45px;
     height: 45px;
   }
-  
+
   .mini-card-icon img {
     width: 35px;
     height: 35px;
   }
-  
+
   .mini-card-title {
     font-size: 15px !important;
   }
-  
+
   .vision-ticker {
     padding: 6px 10px;
   }
-  
+
   .logo-mini {
     width: 30px;
     height: 30px;
   }
-  
+
   .logo-mini img {
     max-height: 26px;
   }
-  
+
   .animated-text {
     font-size: 12px;
     padding: 4px 10px;
   }
-  
+
   .support-number {
     font-size: 10px;
   }
 }
 
-/* شاشات موبايل صغيرة جداً (0 - 399px) */
+/* شاشات موبايل صغيرة جداً */
+
 @media (max-width: 399px) {
   .app-content {
     padding: 8px;
   }
-  
+
   .vision-image {
     height: 110px;
   }
-  
+
   .mini-card-icon {
     width: 42px;
     height: 42px;
   }
-  
+
   .mini-card-icon img {
     width: 32px;
     height: 32px;
   }
-  
+
   .mini-card-title {
     font-size: 14px !important;
   }
-  
+
   .vision-ticker {
     padding: 5px 8px;
   }
-  
+
   .logo-mini {
     width: 28px;
     height: 28px;
   }
-  
+
   .logo-mini img {
     max-height: 24px;
   }
-  
+
   .animated-text {
     font-size: 11px;
     padding: 4px 8px;
   }
-  
+
   .ticker-support {
     padding: 4px 8px;
   }
-  
+
   .support-number {
     font-size: 9px;
   }
 }
 
-/* ========================================
-   دعم الوضع الليلي (Dark Mode) - إضافات خاصة
-   ======================================== */
+/* Dark Mode */
 
-/* الوضع الليلي للبطاقات */
 .dark-home .mini-card {
   border-color: var(--color-primary) !important;
 }
@@ -656,15 +672,14 @@ body.home-page-body {
   border-color: var(--color-borderPrimary);
 }
 
-/* ===== تحسينات إضافية ===== */
 * {
-  transition: background-color 0.2s ease, 
-              border-color 0.2s ease, 
-              color 0.2s ease,
-              box-shadow 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-/* تحسين الصور في الوضع الليلي */
 .dark-home .vision-image img {
   filter: brightness(0.9);
 }
@@ -673,15 +688,18 @@ body.home-page-body {
   filter: brightness(0.9);
 }
 
-/* الشريط السفلي */
 .bottom-navbar {
   transition: all 0.3s ease;
 }
-
 
 @media (max-width: 576px) {
   .bottom-navbar {
     padding: 0 15px !important;
     height: 58px !important;
   }
+}
+
+body.home-page-body {
+  background: red !important;
+  overflow: hidden !important;
 }

@@ -30,7 +30,7 @@ export default function AppRoutes() {
       <Route path="/register" element={<RegisterPage />} />
 
       {/* صفحات محمية - تتطلب تسجيل دخول */}
-      <Route path="/" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
+      <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
       
       <Route path="/inventory/setup/categories" element={<ProtectedRoute><CategoryHome /></ProtectedRoute>} />
       
