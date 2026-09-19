@@ -11,7 +11,6 @@ export const logins = async (userName, password, branch, tenantKey) => {
     };
 
     const response = await api.post(`/auth/login`, payload);
-
     const data = response.data;
 
     if (data?.token) {

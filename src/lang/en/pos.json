@@ -1,0 +1,12 @@
+{
+  "posPoints": "POS Points",
+  "posPointsReport": "POS Points Report",
+  "addPos": "Add POS Point",
+  "editPos": "Edit POS Point",
+  "posName": "POS Name",
+  "enterPosName": "Enter POS name",
+  "pleaseEnterPosName": "Please enter POS name",
+  "pleaseSelectStore": "Please select store",
+  "selectStore": "Select store",
+  "noStoresFound": "No stores found for this branch"
+}

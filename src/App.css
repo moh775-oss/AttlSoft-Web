@@ -19,7 +19,7 @@ body.home-page-body {
   flex-direction: column;
   transition: background-color 0.3s ease;
   overflow-x: hidden;
-  padding-top: 5px !important;
+  padding-top: 70px !important;
   padding-bottom: 70px !important;
 }
 

@@ -1,0 +1,13 @@
+{
+  
+  "posPoints": "نقاط البيع",
+  "posPointsReport": "تقرير نقاط البيع",
+  "addPos": "إضافة نقطة بيع",
+  "editPos": "تعديل نقطة بيع",
+  "posName": "اسم نقطة البيع",
+  "enterPosName": "أدخل اسم نقطة البيع",
+  "pleaseEnterPosName": "الرجاء إدخال اسم نقطة البيع",
+  "pleaseSelectStore": "الرجاء اختيار المخزن",
+  "selectStore": "اختر المخزن",
+  "noStoresFound": "لا توجد مخازن لهذا الفرع"
+}

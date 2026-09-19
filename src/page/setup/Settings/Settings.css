@@ -1,0 +1,109 @@
+
+.settings-page {
+  padding: 16px;
+  margin-top: 70px !important;
+}
+
+.settings-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.settings-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.settings-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.settings-tabs .ant-tabs-nav {
+  margin-bottom: 20px;
+}
+
+.settings-tabs .ant-tabs-nav-wrap {
+  flex-wrap: wrap;
+}
+
+.settings-tabs .ant-tabs-nav-list {
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.settings-tabs .ant-tabs-tab {
+  font-weight: 500;
+  padding: 8px 14px;
+  font-size: 13px;
+  border-radius: 8px;
+  margin: 0 !important;
+}
+
+.settings-tabs .ant-form-item {
+  margin-bottom: 12px;
+}
+
+.settings-tabs .ant-form-item-label {
+  padding-bottom: 4px;
+}
+
+.settings-tabs .ant-form-item-label > label {
+  font-size: 13px;
+  font-weight: 500;
+  height: auto;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.settings-tabs .ant-divider {
+  margin: 16px 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.settings-tabs .ant-switch {
+  min-width: 44px;
+}
+
+.settings-tabs .w-full {
+  width: 100%;
+}
+
+.settings-tabs .mb-4 {
+  margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+  .settings-page {
+    padding: 10px;
+  }
+
+  .settings-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .settings-tabs .ant-tabs-tab {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .settings-tabs .ant-tabs-nav-list {
+    gap: 2px;
+  }
+}

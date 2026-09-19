@@ -1,0 +1,179 @@
+/* src/page/system/Permissions/Permissions.css */
+.permissions-page {
+  padding: 16px;
+  height: calc(100vh - 120px);
+  margin: 10px auto;
+}
+
+.permissions-container {
+  height: 100%;
+}
+
+.permissions-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.permissions-card .ant-card-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.permissions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.users-search {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--color-borderCard);
+}
+
+.users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.user-item:hover {
+  background: color-mix(in srgb, var(--primary-color) 8%, transparent);
+}
+
+.user-item-active {
+  background: color-mix(in srgb, var(--primary-color) 12%, transparent);
+  border-right: 3px solid var(--primary-color);
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-textPrimary);
+}
+
+.user-type {
+  font-size: 11px;
+  color: var(--color-textSecondary);
+}
+
+.permissions-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+.permissions-tree {
+  font-size: 13px;
+}
+
+.permissions-tree .ant-tree-treenode {
+  padding: 4px 0;
+}
+
+.permission-node {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 4px 0;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.permission-parent-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.permission-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-textPrimary);
+  min-width: 180px;
+}
+
+.permission-switches {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.permission-switch-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.permission-tag {
+  font-size: 10px;
+  padding: 0 6px;
+  margin: 0;
+  border-radius: 4px;
+  line-height: 18px;
+}
+
+@media (max-width: 768px) {
+  .permissions-page {
+    padding: 10px;
+    height: auto;
+  }
+
+  .permissions-container {
+    height: auto;
+  }
+
+  .permissions-container > .ant-col + .ant-col {
+    margin-top: 20px;
+  }
+
+  .permission-node {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .permission-switches {
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .permission-name {
+    min-width: auto;
+  }
+}

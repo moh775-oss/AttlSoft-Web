@@ -89,8 +89,18 @@ const LoginPage = () => {
     }
   };
 
+  // Particles array
+  const particles = Array.from({ length: 6 }, (_, i) => i + 1);
+
   return (
     <div className="login-page">
+      {/* Animated Particles */}
+      <div className="particles">
+        {particles.map((num) => (
+          <div key={num} className={`particle particle-${num}`} />
+        ))}
+      </div>
+
       <div className="login-card">
         <div className="login-header-section">
           <img src={logo} alt="Logo" className="login-logo" />
@@ -131,8 +141,8 @@ const LoginPage = () => {
                   name="email"
                   label={t('email')}
                   rules={[
-                    { required: true, message: t('pleaseEnterEmail') },
-                    { type: 'email', message: t('pleaseEnterValidEmail') }
+                    { required: true, message: t('emailRequired') },
+                    { type: 'email', message: t('emailInvalid') }
                   ]}
                 >
                   <Input prefix={<MailOutlined />} placeholder={t('enterEmail')} className="login-input" />
@@ -156,10 +166,17 @@ const LoginPage = () => {
               </Form.Item>
             )}
 
-            <div className="login-options">
-              <Checkbox checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)}>
-                {t('remember_me')}
-              </Checkbox>
+            <div className="login-options" style={{ direction: 'ltr' }}>
+              <div style={{ display: 'flex', alignItems: 'center', direction: 'ltr' }}>
+                <Checkbox 
+                  checked={rememberMe} 
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                >
+                  <span style={{ direction: 'rtl', display: 'inline-block' }}>
+                    {t('remember_me')}
+                  </span>
+                </Checkbox>
+              </div>
               <div className="login-language">
                 <Button 
                   type={i18n.language === 'ar' ? 'primary' : 'text'} 
@@ -185,9 +202,9 @@ const LoginPage = () => {
             </Form.Item>
 
             <div className="login-footer">
-  <span>{t('noAccount')}</span>
-  <Link to="/register">{t('createAccount')}</Link>
-</div>
+              <span>{t('noAccount')}</span>
+              <Link to="/register">{t('createAccount')}</Link>
+            </div>
           </Form>
         ) : (
           <Form

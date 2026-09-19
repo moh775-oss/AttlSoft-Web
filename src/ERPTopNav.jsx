@@ -211,6 +211,15 @@ export default function ERPTopNav() {
       ],
     },
     {
+      label: t('posPoints'),
+      key: 'pos',
+      icon: <ShopOutlined />,
+      children: [
+        { label: t('posPoints'), key: '/pos/posPoints' },
+        { label: t('posPointsReport'), key: '/pos/reports/pos-points' },
+      ]
+    },
+    {
       label: t('purchase'),
       key: 'purchase',
       icon: <ShoppingCartOutlined />,

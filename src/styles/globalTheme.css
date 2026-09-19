@@ -1012,6 +1012,18 @@ button[color="pink"]:hover {
   border-color: var(--primary-color) !important;
 }
 
+.ant-checkbox-inner {
+  direction: ltr !important;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner::after {
+  transform: rotate(45deg) scale(1) translate(-50%, -50%) !important;
+  left: 35% !important;
+  top: 45% !important;
+  right: auto !important;
+  bottom: auto !important;
+}
+
 /* ===== Radio ===== */
 .ant-radio .ant-radio-inner {
   width: 18px;

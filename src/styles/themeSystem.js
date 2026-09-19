@@ -1,5 +1,5 @@
 const baseColors = {
-  // الألوان الرئيسية
+  // الألوان الرئيسية  
   primary: '#1890ff',
   primaryDark: '#177ddc',
   primaryLight: '#40a9ff',

@@ -19,6 +19,12 @@ import arSales from "./lang/ar/sales.json";
 import enLanguage from "./lang/en/lang.json";
 import arLanguage from "./lang/ar/lang.json";
 
+import enSettings from "./lang/en/settings.json";
+import arSettings from "./lang/ar/settings.json";
+
+import enPos from "./lang/en/pos.json";
+import arPos from "./lang/ar/pos.json";
+
 // اللغة المحفوظة
 const savedLanguage = localStorage.getItem("language") || "ar";
 
@@ -32,6 +38,8 @@ i18n.use(initReactI18next).init({
         ...enPurchese,
         ...enSales,
         ...enLanguage,
+        ...enSettings,
+        ...enPos,
       },
     },
     ar: {
@@ -42,6 +50,8 @@ i18n.use(initReactI18next).init({
         ...arPurchese,
         ...arSales,
         ...arLanguage,
+        ...arSettings,
+        ...arPos,
       },
     },
   },
