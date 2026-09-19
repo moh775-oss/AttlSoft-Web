@@ -7,7 +7,7 @@ import { fetchTaxes } from '@/api/Tax';
 import { fetchSafes } from '@/api/Safe';
 import { fetchStore } from '@/api/Store';
 import { fetchUnits } from '@/api/unit';
-import { fetchCategories } from '@/api/Categorie';
+import { fetchCategories } from '@/api/categorie';
 import { useAuth } from '@/context/AuthContext';
 import { useTranslate } from '@/hooks/useTranslate';
 import notify from '@/utils/notify';
