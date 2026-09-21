@@ -1,0 +1,479 @@
+/* src/page/inventory/Items/Items.css */
+.items-page { padding: 12px; }
+
+.items-toolbar { margin-bottom: 12px; border-radius: 12px; }
+
+.items-form-card,
+.items-side-card,
+.items-table-card { border-radius: 12px; }
+
+/* كارد المعلومات الأساسية */
+.info-card {
+  border: 1.5px solid #e6f7ff;
+  background: linear-gradient(135deg, #ffffff 0%, #fafcff 100%);
+  border-radius: 12px;
+}
+
+.info-card .ant-card-head {
+  min-height: 40px;
+  border-bottom: 1px solid #e6f7ff;
+  background: #f6fbff;
+  border-radius: 12px 12px 0 0;
+}
+
+.info-card .ant-card-head-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary-color);
+  padding: 8px 0;
+}
+
+/* كارد التسعير */
+.pricing-card {
+  border: 1.5px solid #fff7e6;
+  background: linear-gradient(135deg, #ffffff 0%, #fffdf7 100%);
+  border-radius: 12px;
+  height: 100%;
+}
+
+.pricing-card .ant-card-head {
+  min-height: 40px;
+  border-bottom: 1px solid #fff1d0;
+  background: #fffbf0;
+  border-radius: 12px 12px 0 0;
+}
+
+.pricing-card .ant-card-head-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #d48806;
+  padding: 8px 0;
+}
+
+.pricing-card .ant-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: calc(100% - 40px);
+}
+
+.pricing-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.price-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.price-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+  min-width: 90px;
+}
+
+.price-field .ant-form-item {
+  flex: 1;
+  margin-bottom: 0 !important;
+}
+
+/* كارد الحسابات */
+.calc-card {
+  background: linear-gradient(135deg, #f0f9ff 0%, #f6ffed 100%);
+  border: 1.5px solid #91d5ff;
+  border-radius: 12px;
+  height: 100%;
+}
+
+.calc-card .ant-card-head {
+  min-height: 40px;
+  border-bottom: 1px solid #bae7ff;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 12px 12px 0 0;
+}
+
+.calc-card .ant-card-head-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary-color);
+  padding: 8px 0;
+}
+
+.calc-card .ant-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: calc(100% - 40px);
+}
+
+.calc-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.calc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 13px;
+}
+
+.calc-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #555;
+  font-weight: 600;
+}
+
+.calc-value {
+  font-weight: 800;
+  font-size: 16px;
+  font-family: 'Cairo', monospace;
+}
+
+.calc-green { color: #52c41a; }
+.calc-blue { color: #1890ff; }
+.calc-purple { color: #722ed1; }
+
+.calc-row-highlight {
+  background: #fff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-top: 4px;
+  box-shadow: 0 2px 8px rgba(114, 46, 209, 0.08);
+}
+
+/* أزرار التفاصيل */
+.detail-buttons {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0;
+  justify-content: flex-start;
+}
+
+.detail-section {
+  margin-top: 12px;
+  padding: 10px;
+  background: #fafafa;
+  border-radius: 10px;
+  border: 1px dashed #e0e0e0;
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* جدول الوحدات */
+.unit-table-wrapper {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid #d9f7f7;
+  background: #fff;
+}
+
+.unit-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.unit-table thead { background: #e6fffb; }
+.unit-table th { padding: 8px 6px; font-weight: 700; color: #08979c; text-align: center; border-bottom: 1px solid #b5f5ec; white-space: nowrap; }
+.unit-table td { padding: 6px; border-bottom: 1px solid #e6fffb; text-align: center; vertical-align: middle; }
+.unit-table tr:last-child td { border-bottom: none; }
+.unit-table .ant-input-number,
+.unit-table .ant-select,
+.unit-table .ant-input-affix-wrapper { width: 100%; }
+
+/* الصورة */
+.image-section { text-align: center; }
+.image-box { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.item-image { width: 100%; max-width: 200px; height: 200px; object-fit: contain; border-radius: 12px; border: 1px solid #eee; background: #fafafa; padding: 6px; }
+.image-actions { display: flex; gap: 6px; }
+.image-upload-placeholder { border: 2px dashed #d9d9d9; border-radius: 12px; padding: 40px 16px; cursor: pointer; transition: all 0.2s; background: #fafafa; }
+.image-upload-placeholder:hover { border-color: var(--primary-color); background: #f0f8ff; }
+.image-upload-placeholder p { margin: 8px 0 0; font-size: 12px; color: #888; }
+
+/* القائمة الجانبية */
+.side-switch-list { display: flex; flex-direction: column; gap: 4px; }
+.side-switch-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; border-radius: 8px; background: #fafafa; transition: background 0.2s; }
+.side-switch-item:hover { background: #f0f8ff; }
+.side-switch-label { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #333; }
+.side-field { padding: 8px 10px; border-radius: 8px; background: #fafafa; display: flex; flex-direction: column; gap: 6px; }
+
+/* التفاصيل */
+.barcode-details-list { display: flex; flex-direction: column; gap: 8px; }
+.barcode-detail-card { border: 1px solid #ffe7ba; background: #fffaf0; border-radius: 10px; }
+.field-inline { display: flex; align-items: center; gap: 4px; }
+.field-label { font-size: 11px; font-weight: 600; color: #555; white-space: nowrap; min-width: 52px; }
+.field-input { flex: 1; }
+.empty-hint { text-align: center; padding: 14px; color: #999; font-size: 12px; background: #fff; border-radius: 8px; border: 1px dashed #ddd; }
+
+.scanner-box { text-align: center; padding: 10px 0; }
+.scanner-video { width: 100%; height: 300px; background: #000; border-radius: 10px; object-fit: cover; }
+.scanner-hint { color: #097f94; font-size: 13px; margin-top: 8px; }
+.print-preview { text-align: center; padding: 16px 0; }
+.w-full { width: 100%; }
+
+.center-text input,
+.center-text .ant-input-number-input { text-align: center !important; }
+
+.items-form-card .ant-form-item { margin-bottom: 4px; }
+.items-form-card .ant-form-item-label { padding-bottom: 2px; }
+.items-form-card .ant-form-item-label > label { font-size: 12px; font-weight: 600; height: auto; }
+
+/* ============================================
+   ✅ الحقول مع الأيقونات جنبها (خارج الحقل تماماً)
+   ============================================ */
+.input-with-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.input-with-actions .ant-input-affix-wrapper,
+.input-with-actions .ant-input {
+  flex: 1;
+}
+
+.field-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+/* أيقونات نظيفة بدون بوردر ولا خلفية */
+.icon-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 26px !important;
+  height: 26px !important;
+  min-width: 26px !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 6px !important;
+  transition: all 0.15s ease;
+}
+
+.icon-btn:hover {
+  background: #f0f0f0 !important;
+  transform: scale(1.1);
+}
+
+.icon-btn .anticon {
+  font-size: 16px !important;
+}
+
+.icon-btn.scan-btn .anticon { color: #1890ff !important; }
+.icon-btn.print-btn .anticon { color: #ff4d4f !important; }
+
+/* ===== مودال الطباعة ===== */
+.print-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.print-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  background: #f6fbff;
+  border-radius: 10px;
+  border: 1px solid #d6eaff;
+  flex-wrap: wrap;
+}
+
+.print-controls label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+
+.print-preview {
+  text-align: center;
+  padding: 10px 0;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px dashed #ddd;
+}
+
+.print-preview .print-type {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #888;
+  font-weight: 600;
+}
+
+/* ===== ورقة الملصقات للطباعة ===== */
+.label-sheet {
+  display: grid;
+  gap: 4mm;
+  padding: 6mm;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-height: 320px;
+  overflow-y: auto;
+  margin-top: 8px;
+}
+
+.label-sheet.grid-1 { grid-template-columns: 1fr; }
+.label-sheet.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.label-sheet.grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+.label-item {
+  border: 1px dashed #e0e0e0;
+  border-radius: 6px;
+  padding: 6px 4px;
+  text-align: center;
+  background: #fff;
+  page-break-inside: avoid;
+}
+
+.label-item .label-name {
+  font-size: 10px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.label-item .label-barcode svg {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 42px;
+}
+
+.label-item .label-price {
+  font-size: 11px;
+  font-weight: 800;
+  color: #d4380d;
+  margin-top: 2px;
+}
+
+/* عند الطباعة الفعلية */
+@media print {
+  body * { visibility: hidden; }
+  .label-sheet, .label-sheet * { visibility: visible; }
+  .label-sheet {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    max-height: none;
+    overflow: visible;
+    border: none;
+    padding: 4mm;
+    gap: 3mm;
+  }
+  .label-item { border: none; }
+}
+
+@media (max-width: 768px) {
+  .items-page { padding: 8px; }
+  .field-label { min-width: 46px; font-size: 10px; }
+  .item-image { max-width: 160px; height: 160px; }
+  .detail-buttons { flex-direction: column; }
+  .price-field { flex-direction: column; align-items: flex-start; }
+  .price-label { min-width: auto; }
+}
+
+/* ===== مودال الطباعة ===== */
+.print-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.print-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  background: #f6fbff;
+  border-radius: 10px;
+  border: 1px solid #d6eaff;
+  flex-wrap: wrap;
+}
+
+.print-controls label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.print-preview {
+  text-align: center;
+  padding: 10px 0;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px dashed #ddd;
+}
+
+.print-preview .print-type {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #888;
+  font-weight: 600;
+}
+
+.print-preview .print-type small {
+  color: #1890ff;
+  font-size: 11px;
+}
+
+/* معاينة ملصق واحد */
+.label-preview-single {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.label-preview-single .label-item {
+  width: 220px;
+  border: 1px solid #d6eaff;
+  background: #fff;
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+}
+
+.label-item .label-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.label-item .label-barcode svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.label-item .label-price {
+  font-size: 12px;
+  font-weight: 800;
+  color: #d4380d;
+  margin-top: 4px;
+}

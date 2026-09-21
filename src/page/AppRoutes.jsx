@@ -24,6 +24,7 @@ import UserForm from './system/Users/UserForm.jsx';
 import PermissionsPage from './system/Permissions/index.jsx';
 import SettingsPage from './setup/Settings/index.jsx';
 import PosPointsPage from './pos/PosPoints/index.jsx';
+import ItemsPage from './inventory/Items/index.jsx';
 
 export default function AppRoutes() {
   return (
@@ -37,7 +38,7 @@ export default function AppRoutes() {
       <Route path="/pos/posPoints" element={<PosPointsPage />} />
 
       <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
-
+      <Route path="/inventory/setup/items" element={<ItemsPage />  }/>
       <Route path="/inventory/setup/categories" element={<ProtectedRoute><CategoryHome /></ProtectedRoute>} />
       <Route path="/purchase/setup/suppliers" element={<ProtectedRoute><SuppliersPage /></ProtectedRoute>} />
       <Route path="/sales/setup/customers" element={<ProtectedRoute><CustomersPage /></ProtectedRoute>} />

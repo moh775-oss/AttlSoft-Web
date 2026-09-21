@@ -1,6 +1,6 @@
 /* src/page/system/Permissions/Permissions.css */
 .permissions-page {
-  padding: 16px;
+  padding: 10px;
   height: calc(100vh - 120px);
   margin: 10px auto;
 }
